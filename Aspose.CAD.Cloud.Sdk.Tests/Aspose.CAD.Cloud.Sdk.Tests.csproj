@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>    
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="TestResults\**" />
+    <EmbeddedResource Remove="TestResults\**" />
+    <None Remove="TestResults\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="StyleCop.Cache" />
+  </ItemGroup> 
+  <ItemGroup>
+    <PackageReference Include="NMock3" version="3.5.44" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Aspose.Storage-Cloud" Version="18.3" />
+    <PackageReference Include="NUnit" Version="3.0.0" />
+    <PackageReference Include="StyleCop.MSBuild" Version="5.0.0" />
+  </ItemGroup> 
+  <ItemGroup>
+    <ProjectReference Include="..\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj" />
+  </ItemGroup>  
+</Project>
