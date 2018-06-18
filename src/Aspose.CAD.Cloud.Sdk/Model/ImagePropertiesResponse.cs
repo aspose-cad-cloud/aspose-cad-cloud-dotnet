@@ -39,16 +39,6 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   public class ImagePropertiesResponse : SaaSposeResponse 
   {                       
         /// <summary>
-        /// Gets or sets height of image.
-        /// </summary>  
-        public string Height { get; set; }
-
-        /// <summary>
-        /// Gets or sets width of image.
-        /// </summary>  
-        public string Width { get; set; }
-
-        /// <summary>
         /// Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -56,8 +46,6 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         {
           var sb = new StringBuilder();
           sb.Append("class ImagePropertiesResponse {\n");
-          sb.Append("  Height: ").Append(this.Height).Append("\n");
-          sb.Append("  Width: ").Append(this.Width).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

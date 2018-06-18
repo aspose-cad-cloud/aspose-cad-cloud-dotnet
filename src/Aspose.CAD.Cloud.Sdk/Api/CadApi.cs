@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="CadApi.cs">
+// <copyright company="Aspose" file="CADApi.cs">
 //   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
@@ -36,7 +36,7 @@ namespace Aspose.CAD.Cloud.Sdk
     /// <summary>
     /// Aspose.CAD for Cloud API.
     /// </summary>
-    public class CadApi
+    public class CADApi
     {                 
         #region Fields
 
@@ -55,7 +55,7 @@ namespace Aspose.CAD.Cloud.Sdk
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CadApi"/> class.
+        /// Initializes a new instance of the <see cref="CADApi"/> class.
         /// </summary>
         /// <param name="appKey">
         /// The app key.
@@ -63,13 +63,13 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <param name="appSid">
         /// The app SID.
         /// </param>
-        public CadApi(string appKey, string appSid)
+        public CADApi(string appKey, string appSid)
             : this(new Configuration { AppKey = appKey, AppSid = appSid })
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CadApi"/> class.
+        /// Initializes a new instance of the <see cref="CADApi"/> class.
         /// </summary>
         /// <param name="appKey">
         /// The app key.
@@ -80,13 +80,13 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <param name="baseUrl">
         /// The base URL.
         /// </param>
-        public CadApi(string appKey, string appSid, string baseUrl)
+        public CADApi(string appKey, string appSid, string baseUrl)
             : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl })
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CadApi"/> class.
+        /// Initializes a new instance of the <see cref="CADApi"/> class.
         /// </summary>
         /// <param name="appKey">
         /// The app key.
@@ -100,13 +100,13 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <param name="apiVersion">
         /// API version.
         /// </param>
-        public CadApi(string appKey, string appSid, string baseUrl, string apiVersion)
+        public CADApi(string appKey, string appSid, string baseUrl, string apiVersion)
             : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl, ApiVersion = apiVersion })
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CadApi"/> class.
+        /// Initializes a new instance of the <see cref="CADApi"/> class.
         /// </summary>
         /// <param name="appKey">
         /// The app key.
@@ -123,13 +123,13 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <param name="debug">
         /// If debug mode is enabled.
         /// </param>
-        public CadApi(string appKey, string appSid, string baseUrl, string apiVersion, bool debug)
+        public CADApi(string appKey, string appSid, string baseUrl, string apiVersion, bool debug)
             : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl, ApiVersion = apiVersion, DebugMode = debug })
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CadApi"/> class.
+        /// Initializes a new instance of the <see cref="CADApi"/> class.
         /// </summary>
         /// <param name="appKey">
         /// The app key.
@@ -149,16 +149,16 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <param name="debug">
         /// If debug mode is enabled.
         /// </param>
-        public CadApi(string appKey, string appSid, string baseUrl, string apiVersion, AuthType authType, bool debug)
+        public CADApi(string appKey, string appSid, string baseUrl, string apiVersion, AuthType authType, bool debug)
             : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl, ApiVersion = apiVersion, AuthType = authType, DebugMode = debug })
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CadApi"/> class.
+        /// Initializes a new instance of the <see cref="CADApi"/> class.
         /// </summary>    
         /// <param name="configuration">Configuration settings</param>
-        private CadApi(Configuration configuration)
+        private CADApi(Configuration configuration)
         {
             this.configuration = configuration;
 
@@ -471,10 +471,10 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream PostChangeImageScale(PostChangeImageScaleRequest request)
         {
-            // verify the required parameter 'document' is set
-            if (request.document == null) 
+            // verify the required parameter 'drawingData' is set
+            if (request.drawingData == null) 
             {
-                throw new ApiException(400, "Missing required parameter 'document' when calling PostChangeImageScale");
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PostChangeImageScale");
             }
 
             // verify the required parameter 'format' is set
@@ -505,12 +505,12 @@ namespace Aspose.CAD.Cloud.Sdk
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "newWidth", request.newWidth);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "newHeight", request.newHeight);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.storage);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.outPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.storage);
             
-            if (request.document != null) 
+            if (request.drawingData != null) 
             {
-                formParams.Add("document", this.apiInvoker.ToFileInfo(request.document, "document"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.drawingData, "drawingData"));
             }
             try 
             {                               
@@ -556,10 +556,10 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream PostImageRotateFlip(PostImageRotateFlipRequest request)
         {
-            // verify the required parameter 'document' is set
-            if (request.document == null) 
+            // verify the required parameter 'drawingData' is set
+            if (request.drawingData == null) 
             {
-                throw new ApiException(400, "Missing required parameter 'document' when calling PostImageRotateFlip");
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PostImageRotateFlip");
             }
 
             // verify the required parameter 'format' is set
@@ -583,12 +583,11 @@ namespace Aspose.CAD.Cloud.Sdk
 			var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "method", request.method);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.storage);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.outPath);
             
-            if (request.document != null) 
+            if (request.drawingData != null) 
             {
-                formParams.Add("document", this.apiInvoker.ToFileInfo(request.document, "document"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.drawingData, "drawingData"));
             }
             try 
             {                               
@@ -634,10 +633,10 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream PostImageSaveAs(PostImageSaveAsRequest request)
         {
-            // verify the required parameter 'document' is set
-            if (request.document == null) 
+            // verify the required parameter 'drawingData' is set
+            if (request.drawingData == null) 
             {
-                throw new ApiException(400, "Missing required parameter 'document' when calling PostImageSaveAs");
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PostImageSaveAs");
             }
 
             // verify the required parameter 'format' is set
@@ -654,13 +653,13 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace("/?", "?");
 			var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
-            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.storage);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "rasterOptions", request.rasterOptions);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.outPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.storage);
             
-            if (request.document != null) 
+            if (request.drawingData != null) 
             {
-                formParams.Add("document", this.apiInvoker.ToFileInfo(request.document, "document"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.drawingData, "drawingData"));
             }
             try 
             {                               

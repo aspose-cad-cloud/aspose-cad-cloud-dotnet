@@ -29,7 +29,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.CADApi.PostImageSaveAs" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.CadApi.PostImageSaveAs" /> operation.
   /// </summary>  
   public class PostImageSaveAsRequest  
   {
@@ -43,34 +43,29 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="PostImageSaveAsRequest"/> class.
         /// </summary>
-        /// <param name="document">Drawing to convert</param>
+        /// <param name="drawingData">Input drawing</param>
         /// <param name="format">Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.</param>
-        /// <param name="storage">File storage, which has to be used.</param>
         /// <param name="rasterOptions">The raster options as Base64 string.</param>
         /// <param name="outPath">Path to updated file, if this is empty, response contains streamed image.</param>
-        public PostImageSaveAsRequest(System.IO.Stream document, string format, string storage = null, string rasterOptions = null, string outPath = null)             
+        /// <param name="storage">Your Aspose Cloud Storage name.</param>
+        public PostImageSaveAsRequest(System.IO.Stream drawingData, string format, string rasterOptions = null, string outPath = null, string storage = null)             
         {
-            this.document = document;
+            this.drawingData = drawingData;
             this.format = format;
-            this.storage = storage;
             this.rasterOptions = rasterOptions;
             this.outPath = outPath;
+            this.storage = storage;
         }
 		
         /// <summary>
-        /// Drawing to convert
+        /// Input drawing
         /// </summary>  
-        public System.IO.Stream document { get; set; }
+        public System.IO.Stream drawingData { get; set; }
 
         /// <summary>
         /// Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.
         /// </summary>  
         public string format { get; set; }
-
-        /// <summary>
-        /// File storage, which has to be used.
-        /// </summary>  
-        public string storage { get; set; }
 
         /// <summary>
         /// The raster options as Base64 string.
@@ -81,5 +76,10 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// Path to updated file, if this is empty, response contains streamed image.
         /// </summary>  
         public string outPath { get; set; }
+
+        /// <summary>
+        /// Your Aspose Cloud Storage name.
+        /// </summary>  
+        public string storage { get; set; }
   }
 }

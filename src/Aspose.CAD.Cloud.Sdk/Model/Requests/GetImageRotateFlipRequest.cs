@@ -29,7 +29,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.CADApi.GetImageRotateFlip" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.CadApi.GetImageRotateFlip" /> operation.
   /// </summary>  
   public class GetImageRotateFlipRequest  
   {

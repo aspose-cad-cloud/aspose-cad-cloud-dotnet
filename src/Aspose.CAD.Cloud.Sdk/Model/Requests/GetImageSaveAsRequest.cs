@@ -29,7 +29,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.CADApi.GetImageSaveAs" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.CadApi.GetImageSaveAs" /> operation.
   /// </summary>  
   public class GetImageSaveAsRequest  
   {

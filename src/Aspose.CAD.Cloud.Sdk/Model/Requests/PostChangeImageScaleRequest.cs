@@ -29,7 +29,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.CADApi.PostChangeImageScale" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.CadApi.PostChangeImageScale" /> operation.
   /// </summary>  
   public class PostChangeImageScaleRequest  
   {
@@ -43,26 +43,26 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="PostChangeImageScaleRequest"/> class.
         /// </summary>
-        /// <param name="document">Drawing to convert</param>
+        /// <param name="drawingData">Input drawing</param>
         /// <param name="format">Output file format. Valid formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.</param>
         /// <param name="newWidth">New width of the scaled image.</param>
         /// <param name="newHeight">New height of the scaled image.</param>
-        /// <param name="storage">File storage, which has to be used.</param>
         /// <param name="outPath">Path to updated file, if this is empty, response contains streamed image. </param>
-        public PostChangeImageScaleRequest(System.IO.Stream document, string format, int? newWidth, int? newHeight, string storage = null, string outPath = null)             
+        /// <param name="storage">Your Aspose Cloud Storage name.</param>
+        public PostChangeImageScaleRequest(System.IO.Stream drawingData, string format, int? newWidth, int? newHeight, string outPath = null, string storage = null)             
         {
-            this.document = document;
+            this.drawingData = drawingData;
             this.format = format;
             this.newWidth = newWidth;
             this.newHeight = newHeight;
-            this.storage = storage;
             this.outPath = outPath;
+            this.storage = storage;
         }
 		
         /// <summary>
-        /// Drawing to convert
+        /// Input drawing
         /// </summary>  
-        public System.IO.Stream document { get; set; }
+        public System.IO.Stream drawingData { get; set; }
 
         /// <summary>
         /// Output file format. Valid formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.
@@ -80,13 +80,13 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         public int? newHeight { get; set; }
 
         /// <summary>
-        /// File storage, which has to be used.
-        /// </summary>  
-        public string storage { get; set; }
-
-        /// <summary>
         /// Path to updated file, if this is empty, response contains streamed image. 
         /// </summary>  
         public string outPath { get; set; }
+
+        /// <summary>
+        /// Your Aspose Cloud Storage name.
+        /// </summary>  
+        public string storage { get; set; }
   }
 }

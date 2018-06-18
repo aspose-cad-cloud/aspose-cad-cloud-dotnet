@@ -29,7 +29,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.CADApi.PostImageRotateFlip" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.CadApi.PostImageRotateFlip" /> operation.
   /// </summary>  
   public class PostImageRotateFlipRequest  
   {
@@ -43,24 +43,22 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="PostImageRotateFlipRequest"/> class.
         /// </summary>
-        /// <param name="document">Drawing to convert</param>
+        /// <param name="drawingData">Input drawing</param>
         /// <param name="format">Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.</param>
         /// <param name="method">Rotate and flip method. Valid methods: Rotate180FlipNone,  Rotate180FlipX, Rotate180FlipXY, Rotate180FlipY, Rotate270FlipNone, Rotate270FlipX, Rotate270FlipXY, Rotate270FlipY, Rotate90FlipNone, Rotate90FlipX, Rotate90FlipXY, Rotate90FlipY, RotateNoneFlipNone, RotateNoneFlipX, RotateNoneFlipXY, RotateNoneFlipY.</param>
-        /// <param name="storage">File storage, which has to be used.</param>
         /// <param name="outPath">Path to updated file, if this is empty, response contains streamed image.</param>
-        public PostImageRotateFlipRequest(System.IO.Stream document, string format, string method, string storage = null, string outPath = null)             
+        public PostImageRotateFlipRequest(System.IO.Stream drawingData, string format, string method, string outPath = null)             
         {
-            this.document = document;
+            this.drawingData = drawingData;
             this.format = format;
             this.method = method;
-            this.storage = storage;
             this.outPath = outPath;
         }
 		
         /// <summary>
-        /// Drawing to convert
+        /// Input drawing
         /// </summary>  
-        public System.IO.Stream document { get; set; }
+        public System.IO.Stream drawingData { get; set; }
 
         /// <summary>
         /// Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.
@@ -71,11 +69,6 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// Rotate and flip method. Valid methods: Rotate180FlipNone,  Rotate180FlipX, Rotate180FlipXY, Rotate180FlipY, Rotate270FlipNone, Rotate270FlipX, Rotate270FlipXY, Rotate270FlipY, Rotate90FlipNone, Rotate90FlipX, Rotate90FlipXY, Rotate90FlipY, RotateNoneFlipNone, RotateNoneFlipX, RotateNoneFlipXY, RotateNoneFlipY.
         /// </summary>  
         public string method { get; set; }
-
-        /// <summary>
-        /// File storage, which has to be used.
-        /// </summary>  
-        public string storage { get; set; }
 
         /// <summary>
         /// Path to updated file, if this is empty, response contains streamed image.

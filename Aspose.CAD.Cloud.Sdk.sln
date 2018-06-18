@@ -1,8 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk", "src\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj", "{94B991A9-1973-4C13-9EA3-22A76D893CAD}"
+# Visual Studio 2012
+VisualStudioVersion = 12.0.0.0
+MinimumVisualStudioVersion = 10.0.0.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk", "src\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj", "{03856CCB-E4B6-422B-9F11-5802F662080D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk.Test", "src\Aspose.CAD.Cloud.Sdk.Test\Aspose.CAD.Cloud.Sdk.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{94B991A9-1973-4C13-9EA3-22A76D893CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94B991A9-1973-4C13-9EA3-22A76D893CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94B991A9-1973-4C13-9EA3-22A76D893CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94B991A9-1973-4C13-9EA3-22A76D893CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03856CCB-E4B6-422B-9F11-5802F662080D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03856CCB-E4B6-422B-9F11-5802F662080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03856CCB-E4B6-422B-9F11-5802F662080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03856CCB-E4B6-422B-9F11-5802F662080D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
