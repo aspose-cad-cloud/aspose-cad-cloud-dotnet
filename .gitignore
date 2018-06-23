@@ -186,3 +186,6 @@ $RECYCLE.BIN/
 
 /.swagger-codegen
 .swagger-codegen-ignore
+/TestData/serverAccess.json
+
+.vs/

@@ -1,8 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-VisualStudioVersion = 12.0.0.0
-MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk", "src\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj", "{03856CCB-E4B6-422B-9F11-5802F662080D}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk", "src\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj", "{D8ACD405-80CB-41C2-8594-129083D2751D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk.Test", "src\Aspose.CAD.Cloud.Sdk.Test\Aspose.CAD.Cloud.Sdk.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{03856CCB-E4B6-422B-9F11-5802F662080D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03856CCB-E4B6-422B-9F11-5802F662080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03856CCB-E4B6-422B-9F11-5802F662080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03856CCB-E4B6-422B-9F11-5802F662080D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1BF05746-9EE5-411B-863C-FC187F44746D}
 	EndGlobalSection
 EndGlobal

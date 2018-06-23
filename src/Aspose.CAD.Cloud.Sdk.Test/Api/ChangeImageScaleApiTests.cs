@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="SaveAsApiTests.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="ResizeApiTests.cs">
+//   Copyright (c) 2018 Aspose.Imaging for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,14 +29,15 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 	using System.Collections.Generic;
 	using NUnit.Framework;
 
+	using Aspose.CAD.Cloud.Sdk.Model;
 	using Aspose.CAD.Cloud.Sdk.Model.Requests;
 	using Aspose.CAD.Cloud.Sdk.Test.Base;
 
     /// <summary>
-    ///  Class for testing SaveAsApi
+    ///  Class for testing ResizeApi
     /// </summary>
     [TestFixture]
-    public class SaveAsApiTests : ApiTester
+    public class ChangeImageScaleApiTests : ApiTester
     {
         /// <summary>
         /// Setup before each unit test
@@ -58,10 +59,10 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Performs SaveAs (export to another format) operation test with GET method, taking input data from storage.
+        /// Test GetImageResize
         /// </summary>
         /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
-        /// <param name="saveResultToStorage">If resulting image should be saved to storage</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", false)]
         [TestCase(".dwg", true)]
@@ -75,9 +76,11 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".ifc", false)]
         [TestCase(".dwf", true)]
         [TestCase(".dwf", false)]
-        public void GetImageSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void GetImageResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
+            int? newWidth = 100;
+            int? newHeight = 150;
             string cloudFolder = CloudTestFolder;
             string storage = DefaultStorage;
             string outName = null;
@@ -104,17 +107,17 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}.{format}";
+                    outName = $"{name}_resize.{format}";
 
                     this.TestRawGetRequest(
-                        $"Input image: {name}; Output format: {format}",
+                        $"Input image: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
                         name,
                         outName,
-                        "Common",
+                        "Resize",
                         delegate (string fileName, string folder, string outPath)
                         {
-                            var request = new GetImageSaveAsRequest(fileName, format, folder, storage, null, outPath);
-                            return CadApi.GetImageSaveAs(request);
+                            var request = new GetChangeImageScaleRequest(fileName, format, newWidth, newHeight, folder, storage, outPath);
+                            return CadApi.GetChangeImageScale(request);
                         },
                         cloudFolder,
                         storage);
@@ -123,10 +126,10 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Performs SaveAs (export to another format) operation test with POST method, sending input data in request stream.
+        /// Test PostImageResize
         /// </summary>
         /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
-        /// <param name="saveResultToStorage">If resulting image should be saved to storage</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", false)]
         [TestCase(".dwg", true)]
@@ -140,9 +143,11 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".ifc", false)]
         [TestCase(".dwf", true)]
         [TestCase(".dwf", false)]
-        public void PostImageSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void PostImageResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
+            int? newWidth = 100;
+            int? newHeight = 150;
             string folder = CloudTestFolder;
             string storage = DefaultStorage;
             string outName = null;
@@ -169,18 +174,17 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}.{format}";
+                    outName = $"{name}_resize.{format}";
 
                     this.TestRawPostRequest(
-                        $"Input image: {name}; Output format: {format}",
+                        $"Input image: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
                         name,
                         outName,
-                        "Common",
+                        "Resize",
                         delegate (Stream inputStream, string outPath)
                         {
-                            var request =
-                                new PostImageSaveAsRequest(inputStream, format, outPath, storage);
-                            return CadApi.PostImageSaveAs(request);
+                            var request = new PostChangeImageScaleRequest(inputStream, format, newWidth, newHeight, outPath, storage);
+                            return CadApi.PostChangeImageScale(request);
                         },
                         folder,
                         storage);

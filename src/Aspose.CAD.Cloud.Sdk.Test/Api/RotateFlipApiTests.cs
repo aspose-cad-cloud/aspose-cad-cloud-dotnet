@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="SaveAsApiTests.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="RotateFlipApiTests.cs">
+//   Copyright (c) 2018 Aspose.Imaging for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,21 +23,30 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Aspose.CAD.Cloud.Sdk.Model;
+using Aspose.CAD.Cloud.Sdk.Model.Requests;
+using Aspose.CAD.Cloud.Sdk.Test.Base;
+
 namespace Aspose.CAD.Cloud.Sdk.Test.Api
 {
-	using System.IO;
-	using System.Collections.Generic;
-	using NUnit.Framework;
-
-	using Aspose.CAD.Cloud.Sdk.Model.Requests;
-	using Aspose.CAD.Cloud.Sdk.Test.Base;
+    using System;
+    using System.IO;
+    using System.Collections.Generic;
+    using NUnit.Framework;
 
     /// <summary>
-    ///  Class for testing SaveAsApi
+    ///  Class for testing RotateFlipApi
     /// </summary>
     [TestFixture]
-    public class SaveAsApiTests : ApiTester
+    public class RotateFlipApiTests : ApiTester
     {
+        private readonly string[] _rotateFlipMethods = new[]
+        {
+            "Rotate180FlipNone", "Rotate180FlipX", "Rotate180FlipXY", "Rotate180FlipY", "Rotate270FlipNone", "Rotate270FlipX",
+            "Rotate270FlipXY", "Rotate270FlipY", "Rotate90FlipNone", "Rotate90FlipX", "Rotate90FlipXY", "Rotate90FlipY",
+            "RotateNoneFlipNone", "RotateNoneFlipX", "RotateNoneFlipXY", "RotateNoneFlipY"
+        };
+
         /// <summary>
         /// Setup before each unit test
         /// </summary>
@@ -58,10 +67,10 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Performs SaveAs (export to another format) operation test with GET method, taking input data from storage.
+        /// Test GetImageRotateFlip
         /// </summary>
         /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
-        /// <param name="saveResultToStorage">If resulting image should be saved to storage</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", false)]
         [TestCase(".dwg", true)]
@@ -75,7 +84,10 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".ifc", false)]
         [TestCase(".dwf", true)]
         [TestCase(".dwf", false)]
-        public void GetImageSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void GetImageRotateFlipTest(
+            string formatExtension, 
+            bool saveResultToStorage,
+            params string[] additionalExportFormats)
         {
             string name = null;
             string cloudFolder = CloudTestFolder;
@@ -104,29 +116,32 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}.{format}";
+                    foreach (var method in _rotateFlipMethods)
+                    {
+                        outName = $"{name}_{method}.{format}";
 
-                    this.TestRawGetRequest(
-                        $"Input image: {name}; Output format: {format}",
-                        name,
-                        outName,
-                        "Common",
-                        delegate (string fileName, string folder, string outPath)
-                        {
-                            var request = new GetImageSaveAsRequest(fileName, format, folder, storage, null, outPath);
-                            return CadApi.GetImageSaveAs(request);
-                        },
-                        cloudFolder,
-                        storage);
+                        this.TestRawGetRequest(
+                            $"Input image: {name}; Output format: {format}; Method: {method}",
+                            name,
+                            outName,
+                            "RotateFlip",
+                            delegate (string fileName, string folder, string outPath)
+                            {
+                                var request = new GetImageRotateFlipRequest(fileName, format, method, folder, storage, outPath);
+                                return CadApi.GetImageRotateFlip(request);
+                            },
+                            cloudFolder,
+                            storage);
+                    }
                 }
             }
         }
 
         /// <summary>
-        /// Performs SaveAs (export to another format) operation test with POST method, sending input data in request stream.
+        /// Test PostImageRotateFlip
         /// </summary>
         /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
-        /// <param name="saveResultToStorage">If resulting image should be saved to storage</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", false)]
         [TestCase(".dwg", true)]
@@ -140,7 +155,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".ifc", false)]
         [TestCase(".dwf", true)]
         [TestCase(".dwf", false)]
-        public void PostImageSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void PostImageRotateFlipTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             string folder = CloudTestFolder;
@@ -169,21 +184,23 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}.{format}";
+                    foreach (var method in _rotateFlipMethods)
+                    {
+                        outName = $"{name}_{method}.{format}";
 
-                    this.TestRawPostRequest(
-                        $"Input image: {name}; Output format: {format}",
-                        name,
-                        outName,
-                        "Common",
-                        delegate (Stream inputStream, string outPath)
-                        {
-                            var request =
-                                new PostImageSaveAsRequest(inputStream, format, outPath, storage);
-                            return CadApi.PostImageSaveAs(request);
-                        },
-                        folder,
-                        storage);
+                        this.TestRawPostRequest(
+                            $"Input image: {name}; Output format: {format}; Method: {method}",
+                            name,
+                            outName,
+                            "RotateFlip",
+                            delegate (Stream inputStream, string outPath)
+                            {
+                                var request = new PostImageRotateFlipRequest(inputStream, format, method, outPath);
+                                return CadApi.PostImageRotateFlip(request);
+                            },
+                            folder,
+                            storage);
+                    }
                 }
             }
         }

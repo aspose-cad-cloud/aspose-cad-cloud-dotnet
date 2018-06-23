@@ -24,7 +24,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using Aspose.CAD.Cloud.Sdk.Model.Requests;
 using Aspose.CAD.Cloud.Sdk.Test.Base;
@@ -76,9 +78,19 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         protected const string LocalTestFolder = "..\\..\\..\\..\\TestData\\";
 
         /// <summary>
+        /// The local test folder
+        /// </summary>
+        protected const string LocalReferenceFolder = "..\\..\\..\\..\\ReferenceData\\";
+
+        /// <summary>
         /// The cloud test folder
         /// </summary>
         protected const string CloudTestFolder = "CloudTestDotNet";
+
+        /// <summary>
+        /// The cloud test source file sub folder
+        /// </summary>
+        protected const string CloudTestSourceSubFolder = "Common";
 
         /// <summary>
         /// The cloud references folder
@@ -88,7 +100,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <summary>
         /// The default storage
         /// </summary>
-        protected const string DefaultStorage = "CAD-QA";
+        protected const string DefaultStorage = "DefaultStorage";
 
         /// <summary>
         /// The size difference division
@@ -104,7 +116,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <summary>
         /// Aspose.CAD API
         /// </summary>
-        protected CadApi CadApi;
+        protected CADApi CadApi;
 
         /// <summary>
         /// Aspose.Storage API
@@ -123,8 +135,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             "gif",
             "png",
             "j2k",
-            "png",
-            "wmf"
+            "wmf",
+            "pdf"
         };
 
         #endregion
@@ -142,8 +154,9 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// Typical GET request delegate that accepts image file name from Storage.
         /// </summary>
         /// <param name="fileName">File name of the image.</param>
+        /// <param name="folder">Folder of the image.</param>
         /// <returns></returns>
-        protected delegate Stream GetRequestInvokerDelegate(string fileName, string outPath);
+        protected delegate Stream GetRequestInvokerDelegate(string fileName, string folder, string outPath);
 
         /// <summary>
         /// Typical POST request delegate that accepts input image stream.
@@ -151,6 +164,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <param name="inputStream">The input image stream.</param>
         /// <returns></returns>
         protected delegate Stream PostRequestInvokerDelegate(Stream inputStream, string outPath);
+
+        /// <summary>
+        /// Custom response validator delegate
+        /// </summary>
+        /// <typeparam name="T">response type</typeparam>
+        /// <param name="response">typed response</param>
+        /// <param name="referenceInfo">etalon file info</param>
+        protected delegate void ResponseValidatorDelegate<T>(T response, FilesList.StorageFileInfo referenceInfo);
 
         #endregion
 
@@ -207,51 +228,69 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 }
             }
 
-            CadApi = new CadApi(appKey, appSid, baseUrl, apiVersion, authType, debug);
+            CadApi = new CADApi(appKey, appSid, baseUrl, apiVersion, authType, debug);
             StorageApi = new StorageApi(appKey, appSid, baseUrl + apiVersion);
+
+#if GENERATE_TESTS_AND_REFERENCES
+            UploadInputTestFiles(false);
+#endif
+
             InputTestFiles = FetchInputTestFilesInfo();
         }
 
-        /// <summary>
-        /// Tests the typical GET request.
-        /// </summary>
-        /// <param name="testMethodName">Name of the test method.</param>
-        /// <param name="saveResultToStorage">if set to <c>true</c> [save result to storage].</param>
-        /// <param name="parametersLine">The parameters line.</param>
-        /// <param name="inputFileName">Name of the input file.</param>
-        /// <param name="resultFileName">Name of the result file.</param>
-        /// <param name="localSubfolder">The local subfolder.</param>
-        /// <param name="requestInvoker">The request invoker.</param>
-        /// <param name="propertiesTester">The properties tester.</param>
-        /// <param name="folder">The folder.</param>
-        /// <param name="storage">The storage.</param>
-        protected void TestGetRequest(string testMethodName, bool saveResultToStorage, string parametersLine, string inputFileName, string resultFileName, string localSubfolder,
-            GetRequestInvokerDelegate requestInvoker, PropertiesTesterDelegate propertiesTester, string folder = CloudTestFolder, string storage = DefaultStorage)
+        private void EnsureDirectiryExists(string directoryPath, string storage)
         {
-            this.TestRequest(testMethodName, saveResultToStorage, parametersLine, inputFileName, resultFileName, localSubfolder,
-                () => this.ObtainGetResponseLength(inputFileName, saveResultToStorage ? $"{folder}/{resultFileName}" : null, requestInvoker),
-                propertiesTester, folder, storage);
+            ResponseMessage filesResponse = StorageApi.GetListFiles(directoryPath, storage);
+            if (filesResponse == null)
+            {
+                StorageApi.PutCreateFolder(directoryPath, storage, storage);
+            }
         }
 
-        /// <summary>
-        /// Tests the typical POST request.
-        /// </summary>
-        /// <param name="testMethodName">Name of the test method.</param>
-        /// <param name="saveResultToStorage">if set to <c>true</c> [save result to storage].</param>
-        /// <param name="parametersLine">The parameters line.</param>
-        /// <param name="inputFileName">Name of the input file.</param>
-        /// <param name="resultFileName">Name of the result file.</param>
-        /// <param name="localSubfolder">The local subfolder.</param>
-        /// <param name="requestInvoker">The request invoker.</param>
-        /// <param name="propertiesTester">The properties tester.</param>
-        /// <param name="folder">The folder.</param>
-        /// <param name="storage">The storage.</param>
-        protected void TestPostRequest(string testMethodName, bool saveResultToStorage, string parametersLine, string inputFileName, string resultFileName, string localSubfolder,
-            PostRequestInvokerDelegate requestInvoker, PropertiesTesterDelegate propertiesTester, string folder = CloudTestFolder, string storage = DefaultStorage)
+        private void UploadInputTestFiles(bool forceOverride = false)
         {
-            this.TestRequest(testMethodName, saveResultToStorage, parametersLine, inputFileName, resultFileName, localSubfolder,
-                () => this.ObtainPostResponseLength(folder + "/" + inputFileName, saveResultToStorage ? $"{folder}/{resultFileName}" : null, storage, requestInvoker),
-                propertiesTester, folder, storage);
+            EnsureFilesExists(CloudTestFolder, DefaultStorage, LocalTestFolder, forceOverride);
+            EnsureFilesExists(CloudReferencesFolder, DefaultStorage, LocalReferenceFolder, forceOverride);
+        }
+
+        private void EnsureFilesExists(string cloudFolder, string storage, string localFolder, bool forceOverride)
+        {
+            EnsureDirectiryExists(cloudFolder, storage);
+            ResponseMessage filesResponse = StorageApi.GetListFiles(cloudFolder, storage);
+
+            Assert.AreEqual(filesResponse.Code, (int)HttpStatusCode.OK);
+            string responseFilesString = Encoding.UTF8.GetString(filesResponse.ResponseStream);
+            List<FilesList.StorageFileInfo> files = JsonConvert.DeserializeObject<FilesList>(responseFilesString).Files;
+
+            // skip files placed on root level!
+            foreach (var dir in Directory.GetDirectories(Path.GetFullPath(localFolder)))
+            {
+                var dirInfo = new DirectoryInfo(dir);
+                var cloudSubFolder = cloudFolder + "/" + dirInfo.Name;
+                EnsureDirectiryExists(cloudSubFolder, storage);
+
+                foreach (var file in Directory.GetFiles(Path.GetFullPath(dir), "*.*", SearchOption.TopDirectoryOnly))
+                {
+                    var fileInfo = new FileInfo(file);
+                    var putInputFile = forceOverride;
+                    if (CheckFileExistsOnCloud(fileInfo.Name, files))
+                    {
+                        if (forceOverride)
+                        {
+                            StorageApi.DeleteFile(fileInfo.Name, "", storage);
+                        }
+                    }
+                    else
+                    {
+                        putInputFile = true;
+                    }
+
+                    if (putInputFile)
+                    {
+                        StorageApi.PutCreate(cloudSubFolder + "/" + fileInfo.Name, "", storage, File.ReadAllBytes(fileInfo.FullName));
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -275,10 +314,11 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// Checks if input file exists.
         /// </summary>
         /// <param name="inputFileName">Name of the input file.</param>
+        /// <param name="cloudFileInfos">cloud files metadata</param>
         /// <returns></returns>
-        protected bool CheckInputFileExists(string inputFileName)
+        protected bool CheckFileExistsOnCloud(string inputFileName, ICollection<FilesList.StorageFileInfo> cloudFileInfos)
         {
-            foreach (FilesList.StorageFileInfo storageFileInfo in InputTestFiles)
+            foreach (FilesList.StorageFileInfo storageFileInfo in cloudFileInfos)
             {
                 if (storageFileInfo.Name == inputFileName)
                 {
@@ -296,8 +336,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <param name="fileName">Name of the file.</param>
         /// <param name="storage">The storage.</param>
         /// <returns></returns>
-        protected FilesList.StorageFileInfo GetStorageFileInfo(string folder, string fileName,
-            string storage)
+        protected FilesList.StorageFileInfo GetStorageFileInfo(string folder, string fileName, string storage)
         {
             ResponseMessage fileListResponse = StorageApi.GetListFiles(folder, storage);
             FilesList references = JsonConvert.DeserializeObject<FilesList>(Encoding.UTF8.GetString(fileListResponse.ResponseStream));
@@ -317,35 +356,13 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// Fetches the input test files info.
         /// </summary>
         /// <returns></returns>
-        private List<FilesList.StorageFileInfo> FetchInputTestFilesInfo()
+        private List<FilesList.StorageFileInfo> FetchInputTestFilesInfo(string folder = "Common")
         {
-            ResponseMessage filesResponse = StorageApi.GetListFiles(CloudTestFolder, DefaultStorage);
+            ResponseMessage filesResponse = StorageApi.GetListFiles(CloudTestFolder + "/" + folder, DefaultStorage);
             Assert.AreEqual(filesResponse.Code, (int)HttpStatusCode.OK);
             string responseString = Encoding.UTF8.GetString(filesResponse.ResponseStream);
             var filesList = JsonConvert.DeserializeObject<FilesList>(responseString);
             return filesList.Files;
-        }
-
-
-        /// <summary>
-        /// Obtains the length of the typical GET request response.
-        /// </summary>
-        /// <param name="inputFileName">Name of the input file.</param>
-        /// <param name="requestInvoker">The request invoker.</param>
-        /// <param name="outPath">The output path to save the result.</param>
-        /// <returns></returns>
-        private long ObtainGetResponseLength(string inputFileName, string outPath, GetRequestInvokerDelegate requestInvoker)
-        {
-            using (var response = requestInvoker.Invoke(inputFileName, outPath))
-            {
-                if (string.IsNullOrEmpty(outPath))
-                {
-                    Assert.NotNull(response);
-                    return response.Length;
-                }
-
-                return 0;
-            }
         }
 
         /// <summary>
@@ -376,45 +393,182 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Tests the typical request.
+        /// Tests the typical GET request.
         /// </summary>
-        /// <param name="testMethodName">Name of the test method.</param>
-        /// <param name="saveResultToStorage">if set to <c>true</c> [save result to storage].</param>
+        /// <param name="parametersLine">The parameters line.</param>
+        /// <param name="inputFileName">Name of the input file.</param>
+        /// <param name="resultFileName">Name of the result file.</param>
+        /// <param name="subfolder">The subfolder for both reference and input file.</param>
+        /// <param name="requestInvoker">The invoke request function that returns response length.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="storage">The storage.</param>
+        protected void TestRawGetRequest(
+            string parametersLine, 
+            string inputFileName, 
+            string resultFileName, 
+            string subfolder,
+            GetRequestInvokerDelegate requestInvoker,
+            string folder = CloudTestFolder, 
+            string storage = DefaultStorage)
+        {
+            TestRequestInternal(
+                parametersLine, 
+                inputFileName, 
+                resultFileName,
+                subfolder,
+                () =>
+                {
+                    var outPath = !string.IsNullOrEmpty(resultFileName) ? $"{folder}/{subfolder}/{resultFileName}" : null;
+                    var stream = requestInvoker.Invoke($"{inputFileName}", $"{folder}/{CloudTestSourceSubFolder}", outPath);
+                    return stream;
+                },
+                (stream, refInfo) =>
+                {
+                    long referenceLength = refInfo.Size;
+                    CheckSizeDiff(referenceLength, stream.Length);
+                },
+                folder,
+                storage);
+        }
+
+        /// <summary>
+        /// Tests the typical GET request.
+        /// </summary>
         /// <param name="parametersLine">The parameters line.</param>
         /// <param name="inputFileName">Name of the input file.</param>
         /// <param name="resultFileName">Name of the result file.</param>
         /// <param name="referenceSubfolder">The result reference subfolder.</param>
         /// <param name="invokeRequestFunc">The invoke request function that returns response length.</param>
-        /// <param name="propertiesTester">The properties tester.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="storage">The storage.</param>
-        private void TestRequest(string testMethodName, bool saveResultToStorage, string parametersLine, string inputFileName, string resultFileName, string referenceSubfolder,
-            Func<long> invokeRequestFunc, PropertiesTesterDelegate propertiesTester, string folder = CloudTestFolder, string storage = DefaultStorage)
+        protected void TestRawPostRequest(
+            string parametersLine,
+            string inputFileName,
+            string resultFileName,
+            string referenceSubfolder,
+            PostRequestInvokerDelegate invokeRequestFunc,
+            string folder = CloudTestFolder,
+            string storage = DefaultStorage)
         {
-            Console.WriteLine(testMethodName);
+            TestRequestInternal(
+                parametersLine,
+                inputFileName,
+                resultFileName,
+                referenceSubfolder,
+                () =>
+                {
+                    using (var fs = File.OpenRead(Path.Combine(Path.Combine(LocalTestFolder, CloudTestSourceSubFolder), inputFileName)))
+                    {
+                        var stream = invokeRequestFunc.Invoke(fs, !string.IsNullOrEmpty(resultFileName) ? $"{folder}/{resultFileName}" : null);
+                        return stream;
+                    }
+                },
+                (stream, refInfo) =>
+                {
+                    long referenceLength = refInfo.Size;
+                    CheckSizeDiff(referenceLength, stream.Length);
+                },
+                folder,
+                storage);
+        }
 
-            if (!CheckInputFileExists(inputFileName))
+        /// <summary>
+        /// Tests the typical request.
+        /// </summary>
+        /// <param name="parametersLine">The parameters line.</param>
+        /// <param name="inputFileName">Name of the input file.</param>
+        /// <param name="invokeRequestFunc">The invoke request function that returns response length.</param>
+        /// <param name="customResponseTester">The response tester.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="storage">The storage.</param>
+        protected void TestRequestWithTypedResponse<T>(
+            string parametersLine,
+            string inputFileName,
+            Func<T> invokeRequestFunc,
+            ResponseValidatorDelegate<T> customResponseTester,
+            string folder = CloudTestFolder,
+            string storage = DefaultStorage)
+        {
+            TestRequestInternal(
+                parametersLine,
+                inputFileName,
+                null,
+                null,
+                () =>
+                {
+                    var response = invokeRequestFunc.Invoke();
+                    return response;
+                },
+                customResponseTester,
+                folder,
+                storage);
+        }
+
+        /// <summary>
+        /// Tests the typical request.
+        /// </summary>
+        /// <param name="parametersLine">The parameters line.</param>
+        /// <param name="inputFileName">Name of the input file.</param>
+        /// <param name="resultFileName">Name of the result file.</param>
+        /// <param name="subfolder">The subfolder for reference and output file.</param>
+        /// <param name="invokeRequestFunc">The invoke request function that returns response length.</param>
+        /// <param name="customResponseTester">The response tester.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="storage">The storage.</param>
+        private void TestRequestInternal<T>(
+            string parametersLine, 
+            string inputFileName, 
+            string resultFileName, 
+            string subfolder,
+            Func<T> invokeRequestFunc, 
+            ResponseValidatorDelegate<T> customResponseTester,
+            string folder = CloudTestFolder, 
+            string storage = DefaultStorage)
+        {
+            Console.WriteLine(GetCallerMethodName());
+
+            if (!CheckFileExistsOnCloud(inputFileName, InputTestFiles))
             {
                 throw new ArgumentException(
-                    $"Input file {inputFileName} doesn't exist in the specified storage folder: {folder}. Please, upload it first.");
+                    $"Input file {inputFileName} doesn't exist in the specified storage folder: {folder}/{subfolder}. Please, upload it first.");
             }
 
             bool passed = false;
             string outPath = null;
-            string referencePath = CloudReferencesFolder + "/" + referenceSubfolder;
-
+            string referencePath = CloudReferencesFolder + "/" + subfolder;
+            var saveResultToStorage = !string.IsNullOrEmpty(resultFileName);
             try
             {
                 Console.WriteLine(parametersLine);
 
                 if (saveResultToStorage)
                 {
-                    outPath = folder + "/" + resultFileName;
+                    outPath = folder + "/" + subfolder + "/" + resultFileName;
 
                     // remove output file from the storage (if exists)
                     if (StorageApi.GetIsExist(outPath, "", storage).FileExist.IsExist)
                     {
                         StorageApi.DeleteFile(outPath, "", storage);
+                    }
+                }
+
+                var response = invokeRequestFunc.Invoke();
+
+#if GENERATE_TESTS_AND_REFERENCES
+                var download = StorageApi.GetDownload(outPath, "", storage);
+                if (!StorageApi.GetIsExist(referencePath + "/" + resultFileName, "", storage).FileExist.IsExist)
+                {
+                    StorageApi.PutCreate(referencePath + "/" + resultFileName, "", storage, download.ResponseStream);
+                }
+#endif
+
+                if (saveResultToStorage)
+                {
+                    FilesList.StorageFileInfo resultInfo = GetStorageFileInfo(folder + "/" + subfolder, resultFileName, storage);
+                    if (resultInfo == null)
+                    {
+                        throw new ArgumentException(
+                            $"Result file {resultFileName} doesn't exist in the specified storage folder: {folder}. Result isn't present in the storage by an unknown reason.");
                     }
                 }
 
@@ -425,35 +579,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         $"Reference result file {resultFileName} doesn't exist in the specified storage folder: {referencePath}. Please, upload it first.");
                 }
 
-                long referenceLength = referenceInfo.Size;
-
-                long responseLength = invokeRequestFunc.Invoke();
-
-                if (saveResultToStorage)
-                {
-                    FilesList.StorageFileInfo resultInfo = GetStorageFileInfo(folder, resultFileName, storage);
-                    if (resultInfo == null)
-                    {
-                        throw new ArgumentException(
-                            $"Result file {resultFileName} doesn't exist in the specified storage folder: {folder}. Result isn't present in the storage by an unknown reason.");
-                    }
-
-                    this.CheckSizeDiff(referenceLength, resultInfo.Size);
-
-                    ImagePropertiesResponse resultProperties =
-                        CadApi.GetImageProperties(new GetImagePropertiesRequest(resultFileName, folder, storage));
-                    Assert.NotNull(resultProperties);
-                    ImagePropertiesResponse originalProperties =
-                        CadApi.GetImageProperties(new GetImagePropertiesRequest(inputFileName, folder, storage));
-                    Assert.NotNull(originalProperties);
-
-                    propertiesTester?.Invoke(originalProperties, resultProperties);
-                }
-                else
-                {
-                    // check resulting image from response stream
-                    this.CheckSizeDiff(referenceLength, responseLength);
-                }
+                // check resulting image from response stream
+                customResponseTester?.Invoke(response, referenceInfo);
 
                 passed = true;
             }
@@ -478,6 +605,21 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             }
         }
 
-        #endregion
+        private static string GetCallerMethodName()
+        {
+            StackTrace st = new StackTrace();
+            var frameNumber = 1;
+            while (true)
+            {
+                var sf = st.GetFrame(frameNumber++);
+                var typeName = sf.GetMethod().DeclaringType.Name;
+                if (typeName != typeof(ApiTester).Name)
+                {
+                    return sf.GetMethod().Name;
+                }
+            }
+        }
+
+#endregion
     }
 }
