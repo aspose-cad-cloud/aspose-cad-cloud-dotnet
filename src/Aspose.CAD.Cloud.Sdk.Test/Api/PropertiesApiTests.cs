@@ -23,9 +23,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Net;
 using Aspose.CAD.Cloud.Sdk.Model;
 using Aspose.CAD.Cloud.Sdk.Model.Requests;
+using Aspose.CAD.Cloud.Sdk.Test.Base;
 
 namespace Aspose.CAD.Cloud.Sdk.Test.Api
 {
@@ -59,36 +61,47 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test GetImageBmp
-        /// <param name="saveResultToStorage">If result should be saved to storage</param>
+        /// Test Get properties
         /// </summary>
-        [TestCase(true)]
-        [TestCase(false)]
-        public void GetImagePropertiesTest(bool saveResultToStorage)
+        [TestCase(".dwg")]
+        [TestCase(".dxf")]
+        [TestCase(".dgn")]
+        [TestCase(".stl")]
+        [TestCase(".ifc")]
+        [TestCase(".dwf")]
+        public void GetImagePropertiesTest(string formatExtension)
         {
-            string name = "Nikon_D90_Camera.dgn";
-            int? bitsPerPixel = 32;
-            var size = 1000l;
-            int? horizontalResolution = 300;
-            int? verticalResolution = 300;
+            string name = null;
             string folder = CloudTestFolder;
             string storage = DefaultStorage;
 
-            this.TestRequestWithTypedResponse(
-                $"Input image: {name}; Bits per pixel: {bitsPerPixel}; Horizontal resolution: {horizontalResolution}; Vertical resolution: {verticalResolution}",
-                name,
-                delegate()
+            foreach (FilesList.StorageFileInfo inputFile in InputTestFiles)
+            {
+                if (inputFile.Name.EndsWith(formatExtension))
                 {
-                    var request = new GetImagePropertiesRequest(name, folder, storage);
-                    var properties = CadApi.GetImageProperties(request);
-                    return properties;
-                },
-                (response, refInfo) =>
+                    name = inputFile.Name;
+                }
+                else
                 {
-                    Assert.AreEqual(response.Code, HttpStatusCode.OK);
-                },
-                folder,
-                storage);
+                    continue;
+                }
+
+                this.TestRequestWithTypedResponse(
+                    $"Input image: {name};",
+                    name,
+                    delegate ()
+                    {
+                        var request = new GetImagePropertiesRequest(name, folder, storage);
+                        var properties = CadApi.GetImageProperties(request);
+                        return properties;
+                    },
+                    (response, refInfo) =>
+                    {
+                        Assert.AreEqual(response.Code, HttpStatusCode.OK);
+                    },
+                    folder,
+                    storage);
+            }
         }
     }
 }

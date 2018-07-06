@@ -110,7 +110,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         $"Input image: {name}; Output format: {format}",
                         name,
                         outName,
-                        "Common",
                         delegate (string fileName, string folder, string outPath)
                         {
                             var request = new GetImageSaveAsRequest(fileName, format, folder, storage, null, outPath);
@@ -130,16 +129,16 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", false)]
         [TestCase(".dwg", true)]
-        [TestCase(".dxf", true)]
         [TestCase(".dxf", false)]
-        [TestCase(".dgn", true)]
+        [TestCase(".dxf", true)]
         [TestCase(".dgn", false)]
-        [TestCase(".stl", true)]
+        [TestCase(".dgn", true)]
         [TestCase(".stl", false)]
-        [TestCase(".ifc", true)]
+        [TestCase(".stl", true)]
         [TestCase(".ifc", false)]
-        [TestCase(".dwf", true)]
+        [TestCase(".ifc", true)]
         [TestCase(".dwf", false)]
+        [TestCase(".dwf", true)]
         public void PostImageSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
@@ -175,11 +174,9 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         $"Input image: {name}; Output format: {format}",
                         name,
                         outName,
-                        "Common",
                         delegate (Stream inputStream, string outPath)
                         {
-                            var request =
-                                new PostImageSaveAsRequest(inputStream, format, outPath, storage);
+                            var request = new PostImageSaveAsRequest(inputStream, format, null, outPath, storage);
                             return CadApi.PostImageSaveAs(request);
                         },
                         folder,

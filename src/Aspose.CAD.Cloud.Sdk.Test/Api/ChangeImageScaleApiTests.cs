@@ -64,18 +64,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
         /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
-        [TestCase(".dwg", false)]
         [TestCase(".dwg", true)]
-        [TestCase(".dxf", true)]
-        [TestCase(".dxf", false)]
-        [TestCase(".dgn", true)]
-        [TestCase(".dgn", false)]
-        [TestCase(".stl", true)]
-        [TestCase(".stl", false)]
-        [TestCase(".ifc", true)]
-        [TestCase(".ifc", false)]
-        [TestCase(".dwf", true)]
-        [TestCase(".dwf", false)]
         public void GetImageResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
@@ -113,7 +102,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         $"Input image: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
                         name,
                         outName,
-                        "Resize",
                         delegate (string fileName, string folder, string outPath)
                         {
                             var request = new GetChangeImageScaleRequest(fileName, format, newWidth, newHeight, folder, storage, outPath);
@@ -121,6 +109,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         },
                         cloudFolder,
                         storage);
+
+                    break;
                 }
             }
         }
@@ -131,18 +121,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
         /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
-        [TestCase(".dwg", false)]
-        [TestCase(".dwg", true)]
         [TestCase(".dxf", true)]
-        [TestCase(".dxf", false)]
-        [TestCase(".dgn", true)]
-        [TestCase(".dgn", false)]
-        [TestCase(".stl", true)]
-        [TestCase(".stl", false)]
-        [TestCase(".ifc", true)]
-        [TestCase(".ifc", false)]
-        [TestCase(".dwf", true)]
-        [TestCase(".dwf", false)]
         public void PostImageResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
@@ -180,7 +159,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         $"Input image: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
                         name,
                         outName,
-                        "Resize",
                         delegate (Stream inputStream, string outPath)
                         {
                             var request = new PostChangeImageScaleRequest(inputStream, format, newWidth, newHeight, outPath, storage);
@@ -188,6 +166,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         },
                         folder,
                         storage);
+
+                    break;
                 }
             }
         }
