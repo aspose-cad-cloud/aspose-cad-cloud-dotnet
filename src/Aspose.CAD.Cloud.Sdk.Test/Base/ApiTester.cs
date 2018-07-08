@@ -178,7 +178,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <value>
         ///   <c>true</c> if resulting images should be removed from cloud storage; otherwise, <c>false</c>.
         /// </value>
-        public bool RemoveResult { get; set; } = false;
+        public bool RemoveResult { get; set; } = true;
 
         /// <summary>
         /// Gets or sets a value indicating whether [automatic recover reference] (i.e. if resulting images of failed tests are considered as new valid references).
@@ -187,7 +187,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <value>
         ///   <c>true</c> if [automatic recover reference]; otherwise, <c>false</c>.
         /// </value>
-        public bool AutoRecoverReference { get; set; } = true;
+        public bool AutoRecoverReference { get; set; } = false;
 
         #endregion
 
