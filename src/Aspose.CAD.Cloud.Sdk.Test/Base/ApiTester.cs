@@ -88,11 +88,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         protected const string CloudTestFolder = "CloudTestDotNet";
 
         /// <summary>
-        /// Rewrite etalons on tests execution
-        /// </summary>
-        protected const bool RewriteEtalons = false;
-
-        /// <summary>
         /// The cloud references folder
         /// </summary>
         protected const string CloudReferencesFolder = "CloudTestDotNetReferences";
@@ -183,7 +178,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <value>
         ///   <c>true</c> if resulting images should be removed from cloud storage; otherwise, <c>false</c>.
         /// </value>
-        public bool RemoveResult { get; set; } = true;
+        public bool RemoveResult { get; set; } = false;
 
         /// <summary>
         /// Gets or sets a value indicating whether [automatic recover reference] (i.e. if resulting images of failed tests are considered as new valid references).
@@ -192,7 +187,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <value>
         ///   <c>true</c> if [automatic recover reference]; otherwise, <c>false</c>.
         /// </value>
-        public bool AutoRecoverReference { get; set; } = false;
+        public bool AutoRecoverReference { get; set; } = true;
 
         #endregion
 
@@ -537,7 +532,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 var response = invokeRequestFunc.Invoke();
 
-                if (!string.IsNullOrEmpty(outPath) && RewriteEtalons)
+                if (!string.IsNullOrEmpty(outPath) && AutoRecoverReference)
                 {
                     var download = StorageApi.GetDownload(outPath, "", storage);
                     if (!StorageApi.GetIsExist(referencePath + "/" + resultFileName, "", storage).FileExist.IsExist)
@@ -545,7 +540,9 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         StorageApi.PutCreate(referencePath + "/" + resultFileName, "", storage, download.ResponseStream);
                     }
 
+#if DEBUG
                     File.WriteAllBytes(Path.Combine(LocalReferenceFolder, resultFileName), download.ResponseStream);
+#endif
                 }
 
                 if (saveResultToStorage)
