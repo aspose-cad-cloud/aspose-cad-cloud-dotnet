@@ -12,7 +12,7 @@ OpenAPI spec version: 17.11.0
     
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B28F916E-8A7A-4FE9-85E3-818AFD31EE7B}</ProjectGuid>
+    <ProjectGuid>{0A2BB5E7-8D10-445D-8E3A-823307D0F8E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Aspose.CAD.Cloud.Sdk</RootNamespace>
