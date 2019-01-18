@@ -260,12 +260,15 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             foreach (var file in Directory.GetFiles(Path.GetFullPath(localFolder), "*.*", SearchOption.TopDirectoryOnly))
             {
                 var fileInfo = new FileInfo(file);
+                var fullStorageFileName =
+                    string.IsNullOrEmpty(cloudFolder) ? fileInfo.Name : cloudFolder + "\\" + fileInfo.Name;
+
                 var putInputFile = forceOverride;
                 if (CheckFileExistsOnCloud(fileInfo.Name, files))
                 {
                     if (forceOverride)
                     {
-                        StorageApi.DeleteFile(fileInfo.Name, "", storage);
+                        StorageApi.DeleteFile(fullStorageFileName, "", storage);
                     }
                 }
                 else
@@ -275,7 +278,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 if (putInputFile)
                 {
-                    StorageApi.PutCreate(fileInfo.Name, "", storage, File.ReadAllBytes(fileInfo.FullName));
+                    StorageApi.PutCreate(fullStorageFileName, "", storage, File.ReadAllBytes(fileInfo.FullName));
                 }
             }
         }
