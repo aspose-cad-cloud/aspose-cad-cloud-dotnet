@@ -15,9 +15,9 @@
 The package contains Aspose.CAD for Cloud .NET SDK source code. This SDK allows you to work with Aspose.CAD for Cloud REST APIs in your .NET applications quickly and easily, with zero initial cost.
 
 To use this SDK, you will need App SID and App Key which can be looked up at Aspose Cloud Dashboard (https://dashboard.aspose.cloud/#/apps) (free registration in Aspose Cloud is required for this).</description>
-		<licenseUrl>https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet/blob/master/LICENSE</licenseUrl>
+		<license type="file">LICENSE</license>
         <projectUrl>https://github.com/aspose-cad-cloud</projectUrl>
-        <copyright>Aspose 2002-2018. All Rights Reserved.</copyright>
+        <copyright>Aspose 2002-2019. All Rights Reserved.</copyright>
         <dependencies>
             <dependency id="NewtonSoft.Json" version="10.0.3" />
         </dependencies>
