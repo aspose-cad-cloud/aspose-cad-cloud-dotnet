@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aspose.CAD_Cloud_APIs_Examples
+namespace Aspose.CAD.Cloud.Sdk.Examples
 {
     class CADExamples
     {

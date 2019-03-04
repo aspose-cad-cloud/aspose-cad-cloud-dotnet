@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD Cloud APIs Examples", "Aspose.CAD Cloud APIs Examples\Aspose.CAD Cloud APIs Examples.csproj", "{8C00E0E9-0BE3-4325-B68D-92A3E0177130}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD Cloud APIs Examples", "Aspose.CAD.Cloud.Sdk.Examples\Aspose.CAD Cloud APIs Examples.csproj", "{8C00E0E9-0BE3-4325-B68D-92A3E0177130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
