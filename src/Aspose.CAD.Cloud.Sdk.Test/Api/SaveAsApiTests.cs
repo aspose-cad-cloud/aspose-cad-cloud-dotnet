@@ -60,7 +60,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <summary>
         /// Performs SaveAs (export to another format) operation test with GET method, taking input data from storage.
         /// </summary>
-        /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
+        /// <param name="formatExtension">Format extension to search for input drawings in the test folder</param>
         /// <param name="saveResultToStorage">If resulting image should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", false)]
@@ -75,7 +75,11 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".ifc", false)]
         [TestCase(".dwf", true)]
         [TestCase(".dwf", false)]
-        public void GetImageSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        [TestCase(".cf2", true)]
+        [TestCase(".cf2", false)]
+        [TestCase(".dwt", true)]
+        [TestCase(".dwt", false)]
+        public void GetDrawingSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             string cloudFolder = CloudTestFolder;
@@ -107,13 +111,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                     outName = $"{name}.{format}";
 
                     this.TestRawGetRequest(
-                        $"Input image: {name}; Output format: {format}",
+                        $"Input drawing: {name}; Output format: {format}",
                         name,
                         outName,
-                        delegate (string fileName, string folder, string outPath)
+                        saveResultToStorage,
+                        delegate (string outPath)
                         {
-                            var request = new GetImageSaveAsRequest(fileName, format, folder, storage, null, outPath);
-                            return CadApi.GetImageSaveAs(request);
+                            var request = new GetDrawingSaveAsRequest(name, format, cloudFolder, outPath, storage);
+                            return CadApi.GetDrawingSaveAs(request);
                         },
                         cloudFolder,
                         storage);
@@ -124,7 +129,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <summary>
         /// Performs SaveAs (export to another format) operation test with POST method, sending input data in request stream.
         /// </summary>
-        /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
+        /// <param name="formatExtension">Format extension to search for input drawings in the test folder</param>
         /// <param name="saveResultToStorage">If resulting image should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", false)]
@@ -139,7 +144,11 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".ifc", true)]
         [TestCase(".dwf", false)]
         [TestCase(".dwf", true)]
-        public void PostImageSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        [TestCase(".cf2", true)]
+        [TestCase(".cf2", false)]
+        [TestCase(".dwt", true)]
+        [TestCase(".dwt", false)]
+        public void PostDrawingSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             string folder = CloudTestFolder;
@@ -171,13 +180,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                     outName = $"{name}.{format}";
 
                     this.TestRawPostRequest(
-                        $"Input image: {name}; Output format: {format}",
+                        $"input drawing: {name}; Output format: {format}",
                         name,
                         outName,
+                        saveResultToStorage,
                         delegate (Stream inputStream, string outPath)
                         {
-                            var request = new PostImageSaveAsRequest(inputStream, format, null, outPath, storage);
-                            return CadApi.PostImageSaveAs(request);
+                            var request = new PostDrawingSaveAsRequest(inputStream, format, outPath, storage);
+                            return CadApi.PostDrawingSaveAs(request);
                         },
                         folder,
                         storage);

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="AuthType.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="StlProperties.cs">
+//   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,21 +23,31 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk
+namespace Aspose.CAD.Cloud.Sdk.Model 
 {
-    /// <summary>
-    /// Supported types of authentification.
-    /// </summary>
-    public enum AuthType
-    {
-        /// <summary>
-        /// OAuth2.0
-        /// </summary>
-        OAuth2 = 0,
+  using System;  
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Runtime.Serialization;
+  using System.Text;
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Converters;
 
+  /// <summary>
+  /// Represents information about STL drawing.
+  /// </summary>  
+  public class StlProperties 
+  {                       
         /// <summary>
-        /// Authentification with signing of url.
+        /// Get the string presentation of the object
         /// </summary>
-        RequestSignature = 1
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()  
+        {
+          var sb = new StringBuilder();
+          sb.Append("class StlProperties {\n");
+          sb.Append("}\n");
+          return sb.ToString();
+        }
     }
 }

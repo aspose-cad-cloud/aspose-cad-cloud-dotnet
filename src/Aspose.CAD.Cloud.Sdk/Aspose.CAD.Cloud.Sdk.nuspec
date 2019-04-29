@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Aspose.CAD-Cloud</id>
-        <title>Aspose.CAD for Cloud</title>
-        <version>17.11</version>
+        <title>Aspose.CAD Cloud</title>
+        <version>19.9</version>
         <authors>Denis Demenko</authors>
         <owners>Aspose</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>

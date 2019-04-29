@@ -28,7 +28,6 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
     using System;
     using System.IO;
     using System.Net;
-
     using Aspose.CAD.Cloud.Sdk.Model;
 
     internal class ApiExceptionRequestHandler : IRequestHandler
@@ -52,30 +51,28 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
 
         private void ThrowApiException(HttpWebResponse webResponse, Stream resultStream)
         {
-            throw new ApiException((int)webResponse.StatusCode, webResponse.StatusDescription);
+            Exception resutException;
+            try
+            {
+                resultStream.Position = 0;
+                using (var responseReader = new StreamReader(resultStream))
+                {
+                    var responseData = responseReader.ReadToEnd();
+                    var errorResponse = (CadApiErrorResponse)SerializationHelper.Deserialize(responseData, typeof(CadApiErrorResponse));
+                    if (string.IsNullOrEmpty(errorResponse.Message))
+                    {
+                        errorResponse.Message = responseData;
+                    }
 
-            //Exception resutException;
-            //try
-            //{
-            //    resultStream.Position = 0;
-            //    using (var responseReader = new StreamReader(resultStream))
-            //    {                    
-            //        var responseData = responseReader.ReadToEnd();
-            //        var errorResponse = (CadApiErrorResponse)SerializationHelper.Deserialize(responseData, typeof(CadApiErrorResponse));
-            //        if (string.IsNullOrEmpty(errorResponse.Message))
-            //        {
-            //            errorResponse.Message = responseData;
-            //        }
+                    resutException = new ApiException((int)webResponse.StatusCode, errorResponse.Message);
+                }
+            }
+            catch (Exception)
+            {
+                throw new ApiException((int)webResponse.StatusCode, webResponse.StatusDescription);
+            }
 
-            //        resutException = new ApiException((int)webResponse.StatusCode, errorResponse.Message);
-            //    }
-            //}          
-            //catch (Exception)
-            //{
-            //    throw new ApiException((int)webResponse.StatusCode, webResponse.StatusDescription);
-            //}
-
-            //throw resutException;
+            throw resutException;
         }
     }
 }

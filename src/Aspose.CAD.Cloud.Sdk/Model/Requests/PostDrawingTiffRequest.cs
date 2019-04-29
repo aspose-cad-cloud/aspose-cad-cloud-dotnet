@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PostImageSaveAsRequest.cs">
+// <copyright company="Aspose" file="PostDrawingTiffRequest.cs">
 //   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
@@ -27,57 +27,57 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostImageSaveAs" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostDrawingTiff" /> operation.
   /// </summary>  
-  public class PostImageSaveAsRequest  
+  public class PostDrawingTiffRequest  
   {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PostImageSaveAsRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingTiffRequest"/> class.
         /// </summary>        
-        public PostImageSaveAsRequest()
+        public PostDrawingTiffRequest()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PostImageSaveAsRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingTiffRequest"/> class.
         /// </summary>
-        /// <param name="drawingData">Input drawing</param>
-        /// <param name="format">Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.</param>
-        /// <param name="rasterOptions">The raster options as Base64 string.</param>
-        /// <param name="outPath">Path to updated file, if this is empty, response contains streamed image.</param>
+        /// <param name="name">Filename of an input drawing on a storage.</param>
+        /// <param name="options">Export TIFF options passed as a JSON on a request body.</param>
+        /// <param name="folder">Folder with a drawing to process.</param>
+        /// <param name="outPath">Path to updated file (if this is empty, response contains streamed file).</param>
         /// <param name="storage">Your Aspose Cloud Storage name.</param>
-        public PostImageSaveAsRequest(System.IO.Stream drawingData, string format, string rasterOptions = null, string outPath = null, string storage = null)             
+        public PostDrawingTiffRequest(string name, TiffOptionsDTO options, string folder = null, string outPath = null, string storage = null)             
         {
-            this.drawingData = drawingData;
-            this.format = format;
-            this.rasterOptions = rasterOptions;
-            this.outPath = outPath;
-            this.storage = storage;
+            this.Name = name;
+            this.Options = options;
+            this.Folder = folder;
+            this.OutPath = outPath;
+            this.Storage = storage;
         }
 
         /// <summary>
-        /// Input drawing
+        /// Filename of an input drawing on a storage.
         /// </summary>  
-        public System.IO.Stream drawingData { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.
+        /// Export TIFF options passed as a JSON on a request body.
         /// </summary>  
-        public string format { get; set; }
+        public TiffOptionsDTO Options { get; set; }
 
         /// <summary>
-        /// The raster options as Base64 string.
+        /// Folder with a drawing to process.
         /// </summary>  
-        public string rasterOptions { get; set; }
+        public string Folder { get; set; }
 
         /// <summary>
-        /// Path to updated file, if this is empty, response contains streamed image.
+        /// Path to updated file (if this is empty, response contains streamed file).
         /// </summary>  
-        public string outPath { get; set; }
+        public string OutPath { get; set; }
 
         /// <summary>
         /// Your Aspose Cloud Storage name.
         /// </summary>  
-        public string storage { get; set; }
+        public string Storage { get; set; }
   }
 }

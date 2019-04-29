@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="ImagePropertiesResponse.cs">
+// <copyright company="Aspose" file="SvgOptionsDTO.cs">
 //   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
@@ -34,10 +34,53 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Represents properties of the image.
+  /// Export options for SVG format
   /// </summary>  
-  public class ImagePropertiesResponse : SaaSposeResponse 
+  public class SvgOptionsDTO : DrawingOptionsBaseDTO 
   {                       
+        /// <summary>
+        /// Color type
+        /// </summary>
+        /// <value>Color type</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ColorTypeEnum
+        { 
+            /// <summary>
+            /// Enum Grayscale for "Grayscale"
+            /// </summary>            
+            Grayscale,
+            
+            /// <summary>
+            /// Enum YCbCr for "YCbCr"
+            /// </summary>            
+            YCbCr,
+            
+            /// <summary>
+            /// Enum Cmyk for "Cmyk"
+            /// </summary>            
+            Cmyk,
+            
+            /// <summary>
+            /// Enum Ycck for "Ycck"
+            /// </summary>            
+            Ycck,
+            
+            /// <summary>
+            /// Enum Rgb for "Rgb"
+            /// </summary>            
+            Rgb            
+        }
+
+        /// <summary>
+        /// Color type
+        /// </summary>
+        public ColorTypeEnum? ColorType { get; set; }
+
+        /// <summary>
+        /// Render text as shapes
+        /// </summary>  
+        public bool? TextAsShapes { get; set; }
+
         /// <summary>
         /// Get the string presentation of the object
         /// </summary>
@@ -45,7 +88,9 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class ImagePropertiesResponse {\n");
+          sb.Append("class SvgOptionsDTO {\n");
+          sb.Append("  ColorType: ").Append(this.ColorType).Append("\n");
+          sb.Append("  TextAsShapes: ").Append(this.TextAsShapes).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

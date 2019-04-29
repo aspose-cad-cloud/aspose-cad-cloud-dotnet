@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="GetImagePropertiesRequest.cs">
+// <copyright company="Aspose" file="ResolutionSetting.cs">
 //   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
@@ -22,48 +22,44 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
+
+namespace Aspose.CAD.Cloud.Sdk.Model 
 {
-  using Aspose.CAD.Cloud.Sdk.Model; 
+  using System;  
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Runtime.Serialization;
+  using System.Text;
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.GetImageProperties" /> operation.
+  /// The resolution setting for image save options.
   /// </summary>  
-  public class GetImagePropertiesRequest  
-  {
+  public class ResolutionSetting 
+  {                       
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetImagePropertiesRequest"/> class.
-        /// </summary>        
-        public GetImagePropertiesRequest()
-        {
-        }
+        /// Gets or sets the horizontal resolution.
+        /// </summary>  
+        public double? HorizontalResolution { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetImagePropertiesRequest"/> class.
+        /// Gets or sets the vertical resolution.
+        /// </summary>  
+        public double? VerticalResolution { get; set; }
+
+        /// <summary>
+        /// Get the string presentation of the object
         /// </summary>
-        /// <param name="name">The image name.</param>
-        /// <param name="folder">Original drawing folder.</param>
-        /// <param name="storage">File storage, which has to be used.</param>
-        public GetImagePropertiesRequest(string name, string folder = null, string storage = null)             
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()  
         {
-            this.name = name;
-            this.folder = folder;
-            this.storage = storage;
+          var sb = new StringBuilder();
+          sb.Append("class ResolutionSetting {\n");
+          sb.Append("  HorizontalResolution: ").Append(this.HorizontalResolution).Append("\n");
+          sb.Append("  VerticalResolution: ").Append(this.VerticalResolution).Append("\n");
+          sb.Append("}\n");
+          return sb.ToString();
         }
-
-        /// <summary>
-        /// The image name.
-        /// </summary>  
-        public string name { get; set; }
-
-        /// <summary>
-        /// Original drawing folder.
-        /// </summary>  
-        public string folder { get; set; }
-
-        /// <summary>
-        /// File storage, which has to be used.
-        /// </summary>  
-        public string storage { get; set; }
-  }
+    }
 }

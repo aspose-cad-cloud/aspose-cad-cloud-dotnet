@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="RotateFlipApiTests.cs">
-//   Copyright (c) 2018 Aspose.Imaging for Cloud
+//   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -67,11 +67,12 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test GetImageRotateFlip
+        /// Test GetDrawingRotateFlip
         /// </summary>
-        /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
+        /// <param name="formatExtension">Format extension to search for input drawings in the test folder</param>
         /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
+        [TestCase(".dwg", false)]
         [TestCase(".dxf", true)]
         public void GetImageRotateFlipTest(
             string formatExtension, 
@@ -110,13 +111,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         outName = $"{name}_{method}.{format}";
 
                         this.TestRawGetRequest(
-                            $"Input image: {name}; Output format: {format}; Method: {method}",
+                            $"input drawing: {name}; Output format: {format}; Method: {method}",
                             name,
                             outName,
-                            delegate (string fileName, string folder, string outPath)
+                            saveResultToStorage,
+                            delegate (string outPath)
                             {
-                                var request = new GetImageRotateFlipRequest(fileName, format, method, folder, storage, outPath);
-                                return CadApi.GetImageRotateFlip(request);
+                                var request = new GetDrawingRotateFlipRequest(name, format, method, cloudFolder, outPath, storage);
+                                return CadApi.GetDrawingRotateFlip(request);
                             },
                             cloudFolder,
                             storage);
@@ -128,13 +130,13 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test PostImageRotateFlip
+        /// Test PutDrawingRotateFlip
         /// </summary>
-        /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
+        /// <param name="formatExtension">Format extension to search for input drawings in the test folder</param>
         /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
         [TestCase(".dwg", true)]
-        public void PostImageRotateFlipTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void PostDrawingRotateFlipTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             string folder = CloudTestFolder;
@@ -168,13 +170,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                         outName = $"{name}_{method}.{format}";
 
                         this.TestRawPostRequest(
-                            $"Input image: {name}; Output format: {format}; Method: {method}",
+                            $"input drawing: {name}; Output format: {format}; Method: {method}",
                             name,
                             outName,
+                            saveResultToStorage,
                             delegate (Stream inputStream, string outPath)
                             {
-                                var request = new PostImageRotateFlipRequest(inputStream, format, method, outPath);
-                                return CadApi.PostImageRotateFlip(request);
+                                var request = new PostDrawingRotateFlipRequest(inputStream, format, method, outPath, storage);
+                                return CadApi.PostDrawingRotateFlip(request);
                             },
                             folder,
                             storage);

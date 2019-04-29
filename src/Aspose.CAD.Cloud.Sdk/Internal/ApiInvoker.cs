@@ -33,6 +33,7 @@ namespace Aspose.CAD.Cloud.Sdk
     using System.Reflection;
 #endif
     using System.Text;
+    using Newtonsoft.Json;
 
     internal class ApiInvoker
     {        
@@ -40,6 +41,10 @@ namespace Aspose.CAD.Cloud.Sdk
         private const string AsposeClientVersionHeaderName = "x-aspose-client-version";
         private readonly Dictionary<string, string> defaultHeaderMap = new Dictionary<string, string>();
         private readonly List<IRequestHandler> requestHandlers; 
+        private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
     
         public ApiInvoker(List<IRequestHandler> requestHandlers)
         {
@@ -80,11 +85,21 @@ namespace Aspose.CAD.Cloud.Sdk
         {
             // TODO: add contenttype
             return new FileInfo { Name = paramName, FileContent = StreamHelper.ReadAsBytes(stream) };
-        }                 
+        }
+
+        public FileInfo ToJsonFileInfo(object data, string paramName)
+        {
+            return new FileInfo
+            {
+                Name = paramName,
+                FileContent = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data, this.jsonSettings)),
+                MimeType = "application/json"
+            };
+        }
 
         private static byte[] GetMultipartFormData(Dictionary<string, object> postParameters, string boundary)
         {
-            // TOOD: stream is not disposed
+            // TODO: stream is not disposed
             Stream formDataStream = new MemoryStream();
             bool needsClrf = false;
 
@@ -145,27 +160,7 @@ namespace Aspose.CAD.Cloud.Sdk
             {
                 foreach (var param in postParameters)
                 {
-                    if (param.Value is FileInfo)
-                    {
-                        var fileInfo = (FileInfo)param.Value;
-
-                        // Write the file data directly to the Stream, rather than serializing it to a string.
-                        formDataStream.Write(fileInfo.FileContent, 0, fileInfo.FileContent.Length);
-                    }
-                    else
-                    {
-                        string postData;
-                        if (!(param.Value is string))
-                        {
-                            postData = SerializationHelper.Serialize(param.Value);
-                        }
-                        else
-                        {
-                            postData = (string)param.Value;
-                        }
-
-                        formDataStream.Write(Encoding.UTF8.GetBytes(postData), 0, Encoding.UTF8.GetByteCount(postData));
-                    }
+                    PopulateDataStream(formDataStream, param.Value);
                 }
             }
 
@@ -176,6 +171,31 @@ namespace Aspose.CAD.Cloud.Sdk
             formDataStream.Dispose();
 
             return formData;
+        }
+
+        private static void PopulateDataStream(Stream formDataStream, object data)
+        {
+            if (data is FileInfo)
+            {
+                var fileInfo = (FileInfo)data;
+
+                // Write the file data directly to the Stream, rather than serializing it to a string.
+                formDataStream.Write(fileInfo.FileContent, 0, fileInfo.FileContent.Length);
+            }
+            else
+            {
+                string postData;
+                if (!(data is string))
+                {
+                    postData = SerializationHelper.Serialize(data);
+                }
+                else
+                {
+                    postData = (string)data;
+                }
+
+                formDataStream.Write(Encoding.UTF8.GetBytes(postData), 0, Encoding.UTF8.GetByteCount(postData));
+            }
         }
 
         private void AddDefaultHeader(string key, string value)
@@ -210,17 +230,17 @@ namespace Aspose.CAD.Cloud.Sdk
             WebRequest request;
             try
             {
-                request = this.PrepareRequest(path, method, formParams, headerParams, body, contentType);
+                request = this.PrepareRequest(path, method, formParams, headerParams, body, contentType, false);
                 return this.ReadResponse(request, binaryResponse);
             }
             catch (NeedRepeatRequestException)
             {
-                request = this.PrepareRequest(path, method, formParams, headerParams, body, contentType);
+                request = this.PrepareRequest(path, method, formParams, headerParams, body, contentType, false);
                 return this.ReadResponse(request, binaryResponse);               
             }            
         }       
         
-        private WebRequest PrepareRequest(string path, string method, Dictionary<string, object> formParams, Dictionary<string, string> headerParams, string body, string contentType)
+        private WebRequest PrepareRequest(string path, string method, Dictionary<string, object> formParams, Dictionary<string, string> headerParams, string body, string contentType, bool forceMultipart)
         {
             var client = WebRequest.Create(path);
             client.Method = method;
@@ -228,16 +248,23 @@ namespace Aspose.CAD.Cloud.Sdk
             byte[] formData = null;
             if (formParams.Count > 0)
             {
-                if (formParams.Count > 1)
+                if (formParams.Count > 1 || forceMultipart)
                 {
-                    string formDataBoundary = "Somthing";
+                    string formDataBoundary = "Something";
                     client.ContentType = "multipart/form-data; boundary=" + formDataBoundary;
                     formData = GetMultipartFormData(formParams, formDataBoundary);
                 }
                 else
                 {
-                    client.ContentType = "multipart/form-data";
-                    formData = GetMultipartFormData(formParams, string.Empty);
+                    var ms = new MemoryStream();
+                    client.ContentType = "application/octet-stream";
+
+                    var enumerator = formParams.Keys.GetEnumerator();
+                    enumerator.MoveNext();
+                    var key = enumerator.Current;
+
+                    PopulateDataStream(ms, formParams[key]);
+                    formData = ms.ToArray();
                 }                
             }
             else

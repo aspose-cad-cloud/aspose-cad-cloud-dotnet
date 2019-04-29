@@ -1,23 +1,33 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk", "src\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj", "{D8ACD405-80CB-41C2-8594-129083D2751D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aspose.CAD.Cloud.Sdk", "src\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj", "{D8ACD405-80CB-41C2-8594-129083D2751D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspose.CAD.Cloud.Sdk.Test", "src\Aspose.CAD.Cloud.Sdk.Test\Aspose.CAD.Cloud.Sdk.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aspose.CAD.Cloud.Sdk.Test", "src\Aspose.CAD.Cloud.Sdk.Test\Aspose.CAD.Cloud.Sdk.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DEBUG-REGEN|Any CPU = DEBUG-REGEN|Any CPU
+		LOCAL|Any CPU = LOCAL|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D8ACD405-80CB-41C2-8594-129083D2751D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8ACD405-80CB-41C2-8594-129083D2751D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.DEBUG-REGEN|Any CPU.ActiveCfg = DEBUG-REGEN|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.DEBUG-REGEN|Any CPU.Build.0 = DEBUG-REGEN|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.LOCAL|Any CPU.ActiveCfg = LOCAL|Any CPU
+		{D8ACD405-80CB-41C2-8594-129083D2751D}.LOCAL|Any CPU.Build.0 = LOCAL|Any CPU
 		{D8ACD405-80CB-41C2-8594-129083D2751D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8ACD405-80CB-41C2-8594-129083D2751D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.DEBUG-REGEN|Any CPU.ActiveCfg = DEBUG-REGEN|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.DEBUG-REGEN|Any CPU.Build.0 = DEBUG-REGEN|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.LOCAL|Any CPU.ActiveCfg = LOCAL|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.LOCAL|Any CPU.Build.0 = LOCAL|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

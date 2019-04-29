@@ -1,7 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Configurations>Debug;Release;DEBUG-REGEN;LOCAL</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LOCAL|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;LOCAL</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG-REGEN|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE;GENERATE_TESTS_AND_REFERENCES</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="TestResults\**" />
@@ -9,16 +25,25 @@
     <None Remove="TestResults\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="App.config" />
     <None Remove="StyleCop.Cache" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspose.Storage.Core-Cloud" Version="18.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="NMock3" version="3.5.44" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
-    <PackageReference Include="Aspose.Storage-Cloud" Version="18.3" />
-    <PackageReference Include="NUnit" Version="3.0.0" />
-    <PackageReference Include="StyleCop.MSBuild" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <!--<PackageReference Include="Aspose.Storage-Cloud" Version="18.3" />-->
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj" />
   </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy  &quot;..\..\TestData&quot; $(OutDir)TestData\ /K /D /H /Y /s" />
+  </Target>
 </Project>

@@ -23,22 +23,21 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Net;
-using Aspose.CAD.Cloud.Sdk;
-using Aspose.CAD.Cloud.Sdk.Model;
-using Aspose.CAD.Cloud.Sdk;
-using System.Reflection;
-using Newtonsoft.Json;
-using Aspose.Storage.Cloud.Sdk.Api;
-using Aspose.Storage.Cloud.Sdk.Model;
-
 namespace Aspose.CAD.Cloud.Sdk.Test.Model
 {
+    using System;
+    using System.IO;
+    using System.Collections.Generic;
+    using System.Net;
+    using Aspose.CAD.Cloud.Sdk;
+    using Aspose.CAD.Cloud.Sdk.Model;
+    using Aspose.CAD.Cloud.Sdk;
+    using System.Reflection;
+    using Aspose.Storage.Cloud.Sdk.Api;
+    using Aspose.Storage.Cloud.Sdk.Model;
+    using Newtonsoft.Json;
+    using NUnit.Framework;
+
     /// <summary>
     ///  Class for testing ImagePropertiesResponse
     /// </summary>

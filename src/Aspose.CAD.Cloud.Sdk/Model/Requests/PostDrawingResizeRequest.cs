@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="GetImageSaveAsRequest.cs">
+// <copyright company="Aspose" file="PostDrawingResizeRequest.cs">
 //   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
@@ -27,64 +27,64 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.GetImageSaveAs" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostDrawingResize" /> operation.
   /// </summary>  
-  public class GetImageSaveAsRequest  
+  public class PostDrawingResizeRequest  
   {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetImageSaveAsRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingResizeRequest"/> class.
         /// </summary>        
-        public GetImageSaveAsRequest()
+        public PostDrawingResizeRequest()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetImageSaveAsRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingResizeRequest"/> class.
         /// </summary>
-        /// <param name="name">Filename of image.</param>
-        /// <param name="format">Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.</param>
-        /// <param name="folder">Original drawing folder.</param>
-        /// <param name="storage">File storage, which has to be used.</param>
-        /// <param name="rasterOptions">The raster options as Base64 string.</param>
-        /// <param name="outPath">Path to updated file, if this is empty, response contains streamed image.</param>
-        public GetImageSaveAsRequest(string name, string format, string folder = null, string storage = null, string rasterOptions = null, string outPath = null)             
+        /// <param name="drawingData">Input drawing</param>
+        /// <param name="outputFormat">Resulting file format.</param>
+        /// <param name="newWidth">New width.</param>
+        /// <param name="newHeight">New height.</param>
+        /// <param name="outPath">Path to updated file (if this is empty, response contains streamed file).</param>
+        /// <param name="storage">Your Aspose Cloud Storage name.</param>
+        public PostDrawingResizeRequest(System.IO.Stream drawingData, string outputFormat, int? newWidth, int? newHeight, string outPath = null, string storage = null)             
         {
-            this.name = name;
-            this.format = format;
-            this.folder = folder;
-            this.storage = storage;
-            this.rasterOptions = rasterOptions;
-            this.outPath = outPath;
+            this.DrawingData = drawingData;
+            this.OutputFormat = outputFormat;
+            this.NewWidth = newWidth;
+            this.NewHeight = newHeight;
+            this.OutPath = outPath;
+            this.Storage = storage;
         }
 
         /// <summary>
-        /// Filename of image.
+        /// Input drawing
         /// </summary>  
-        public string name { get; set; }
+        public System.IO.Stream DrawingData { get; set; }
 
         /// <summary>
-        /// Output file format. Valid Formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.
+        /// Resulting file format.
         /// </summary>  
-        public string format { get; set; }
+        public string OutputFormat { get; set; }
 
         /// <summary>
-        /// Original drawing folder.
+        /// New width.
         /// </summary>  
-        public string folder { get; set; }
+        public int? NewWidth { get; set; }
 
         /// <summary>
-        /// File storage, which has to be used.
+        /// New height.
         /// </summary>  
-        public string storage { get; set; }
+        public int? NewHeight { get; set; }
 
         /// <summary>
-        /// The raster options as Base64 string.
+        /// Path to updated file (if this is empty, response contains streamed file).
         /// </summary>  
-        public string rasterOptions { get; set; }
+        public string OutPath { get; set; }
 
         /// <summary>
-        /// Path to updated file, if this is empty, response contains streamed image.
+        /// Your Aspose Cloud Storage name.
         /// </summary>  
-        public string outPath { get; set; }
+        public string Storage { get; set; }
   }
 }

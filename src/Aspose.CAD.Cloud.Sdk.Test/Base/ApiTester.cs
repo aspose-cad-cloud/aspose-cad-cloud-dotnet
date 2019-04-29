@@ -23,29 +23,23 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
 using Aspose.CAD.Cloud.Sdk.Model;
-using Aspose.CAD.Cloud.Sdk.Model.Requests;
-using Aspose.CAD.Cloud.Sdk.Test.Base;
 using Aspose.Storage.Cloud.Sdk.Api;
 using Aspose.Storage.Cloud.Sdk.Model;
 using Aspose.Storage.Cloud.Sdk.Model.Requests;
-using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace Aspose.CAD.Cloud.Sdk.Test.Api
+namespace Aspose.CAD.Cloud.Sdk.Test.Base
 {
-    using System;
-    using System.IO;
-
-    using Aspose.CAD.Cloud.Sdk;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     /// Base class for API tester
     /// </summary>
@@ -76,12 +70,12 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <summary>
         /// The local test folder
         /// </summary>
-        protected const string LocalTestFolder = "..\\..\\..\\..\\TestData\\";
+        protected const string LocalTestFolder = @"TestData";
 
         /// <summary>
         /// The local test folder
         /// </summary>
-        protected const string LocalReferenceFolder = "..\\..\\..\\..\\ReferenceData\\";
+        protected const string LocalReferenceFolder = @"ReferenceData";
 
         /// <summary>
         /// The cloud test folder
@@ -94,9 +88,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         protected const string CloudReferencesFolder = "CloudTestDotNetReferences";
 
         /// <summary>
+        /// The cloud temp folder
+        /// </summary>
+        protected const string CloudTempFolder = "Temp";
+
+        /// <summary>
         /// The default storage
         /// </summary>
-        protected const string DefaultStorage = "OCR";
+        protected const string DefaultStorage = "CAD-QA";
 
         /// <summary>
         /// The size difference division
@@ -104,6 +103,10 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         protected const long SizeDiffDivision = 20;
 
         #endregion
+
+        protected static string LocalTestFolderFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), LocalTestFolder);
+
+        protected static string LocalReferenceFolderFullPath => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), LocalReferenceFolder);
 
         #region Fields
 
@@ -119,6 +122,32 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// </summary>
         protected StorageApi StorageApi;
 
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether resulting images should be removed from cloud storage.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if resulting images should be removed from cloud storage; otherwise, <c>false</c>.
+        /// </value>
+        public bool RemoveResult { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [automatic recover reference] (i.e. if resulting images of failed tests are considered as new valid references).
+        /// Please, change this value ONLY if you clearly understand the consequences, or it may lead to replacement of the images you need, so they will be lost.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [automatic recover reference]; otherwise, <c>false</c>.
+        /// </value>
+        public bool AutoRecoverReference => bool.Parse(Environment.GetEnvironmentVariable("ReuploadTestData") ?? bool.FalseString);
+
+        /// <summary>
+        /// Forces reference file to be re-uploaded even if exists
+        /// </summary>
+        public bool ForceReferenceOverride => bool.Parse(Environment.GetEnvironmentVariable("UpdateTestData") ?? bool.FalseString);
+
+        #endregion
+
         /// <summary>
         /// The basic export formats
         /// </summary>
@@ -132,7 +161,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             "png",
             "j2k",
             "wmf",
-            "pdf"
+            "pdf",
+            "svg"
         };
 
         #endregion
@@ -144,22 +174,37 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// </summary>
         /// <param name="originalProperties">The original properties.</param>
         /// <param name="resultProperties">The result properties.</param>
-        protected delegate void PropertiesTesterDelegate(ImagePropertiesResponse originalProperties, ImagePropertiesResponse resultProperties);
+        protected delegate void PropertiesTesterDelegate(CadResponse originalProperties, CadResponse resultProperties);
 
         /// <summary>
         /// Typical GET request delegate that accepts image file name from Storage.
         /// </summary>
-        /// <param name="fileName">File name of the image.</param>
-        /// <param name="folder">Folder of the image.</param>
+        /// <param name="fileName">File name of a drawing.</param>
         /// <returns></returns>
-        protected delegate Stream GetRequestInvokerDelegate(string fileName, string folder, string outPath);
+        protected delegate Stream GetRequestInvokerDelegate(string outPath);
 
         /// <summary>
-        /// Typical POST request delegate that accepts input image stream.
+        /// Typical POST request delegate that accepts input drawing stream.
         /// </summary>
-        /// <param name="inputStream">The input image stream.</param>
+        /// <param name="inputStream">The input drawing stream.</param>
         /// <returns></returns>
         protected delegate Stream PostRequestInvokerDelegate(Stream inputStream, string outPath);
+
+        /// <summary>
+        /// POST request delegate that accepts input drawing file name and export options which will be serialized as JSON.
+        /// </summary>
+        /// <param name="fileName">File name of a drawing.</param>
+        /// /// <param name="exportOptions">The export options.</param>
+        /// <returns></returns>
+        protected delegate Stream PostRequestWithOptionsInvokerDelegate<T>(T exportOptions, string outPath) where T: DrawingOptionsBaseDTO;
+
+        /// <summary>
+        /// Typical PUT request delegate that accepts input drawing stream and export options which will be serialized as JSON.
+        /// </summary>
+        /// <param name="inputStream">The input drawing stream.</param>
+        /// /// <param name="exportOptions">The export options.</param>
+        /// <returns></returns>
+        protected delegate Stream PutRequestInvokerDelegate(Stream inputStream, DrawingOptionsBaseDTO exportOptions, string outPath);
 
         /// <summary>
         /// Custom response validator delegate
@@ -167,28 +212,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <typeparam name="T">response type</typeparam>
         /// <param name="response">typed response</param>
         /// <param name="referenceInfo">etalon file info</param>
-        protected delegate void ResponseValidatorDelegate<T>(T response, FileResponse referenceInfo);
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets a value indicating whether resulting images should be removed from cloud storage.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if resulting images should be removed from cloud storage; otherwise, <c>false</c>.
-        /// </value>
-        public bool RemoveResult { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether [automatic recover reference] (i.e. if resulting images of failed tests are considered as new valid references).
-        /// Please, change this value ONLY if you clearly understand the consequences, or it may lead to replacement of the images you need, so they will be lost.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [automatic recover reference]; otherwise, <c>false</c>.
-        /// </value>
-        public bool AutoRecoverReference { get; set; } = false;
+        protected delegate void ResponseValidatorDelegate<T>(T response, Stream resultStream, FileResponse referenceInfo);
 
         #endregion
 
@@ -206,13 +230,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <exception cref="System.ArgumentException">Please, specify valid access data (AppKey, AppSid, Base URL)</exception>
         protected void CreateApiInstances(
             string appKey = AppKey, string appSid = AppSid, string baseUrl = BaseUrl, 
-            Configuration.AvailiableApiVersions apiVersion = Configuration.AvailiableApiVersions.V1, 
-            AuthType authType = AuthType.OAuth2, bool debug = false)
+            Configuration.AvailiableApiVersions apiVersion = Configuration.AvailiableApiVersions.V3, 
+            AuthType authType = AuthType.OAuth2, bool debug = true)
         {
             if (appKey == AppKey || appSid == AppSid || string.IsNullOrEmpty(baseUrl))
             {
-                string serverAccessPath = Path.Combine(LocalTestFolder, ServerAccessFile);
-                FileInfo serverFileInfo = new FileInfo(serverAccessPath);
+                string serverAccessPath = Path.Combine(LocalTestFolderFullPath, ServerAccessFile);
+
+                FileInfo serverFileInfo = new FileInfo( serverAccessPath);
                 if (serverFileInfo.Exists && serverFileInfo.Length > 0)
                 {
                     var accessData = JsonConvert.DeserializeObject<ServerAccessData>(File.ReadAllText(serverAccessPath));
@@ -228,7 +253,12 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
             CadApi = new CadApi(new Configuration()
             {
-                ApiBaseUrl = baseUrl,
+                ApiBaseUrl =
+#if LOCAL
+                    "https://localhost:44350",
+#else
+                    baseUrl,
+#endif
                 AppKey = appKey,
                 AppSid = appSid,
                 AuthType = authType,
@@ -238,15 +268,30 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
             StorageApi = new StorageApi(new Storage.Cloud.Sdk.Configuration()
             {
+                ApiBaseUrl = baseUrl,
+                AppKey = appKey,
+                AppSid = appSid,
                 DebugMode = debug,
                 AuthType = (Storage.Cloud.Sdk.Api.AuthType)(int)authType
             });
 
-#if GENERATE_TESTS_AND_REFERENCES
-            UploadInputTestFiles(false);
-#endif
+            RemoveSigningRequestHandler(StorageApi);
 
-            InputTestFiles = FetchInputTestFilesInfo();
+            UploadInputTestFiles(false);
+
+            InputTestFiles = FetchInputTestFilesInfo().ToList();
+        }
+
+        private void RemoveSigningRequestHandler(StorageApi storageApi)
+        {
+            var apiInvokerField = storageApi.GetType().GetField("apiInvoker", BindingFlags.Instance | BindingFlags.NonPublic);
+            var apiInvoker = apiInvokerField.GetValue(storageApi);
+            var requestHandlersField = apiInvoker.GetType().GetField("requestHandlers", BindingFlags.Instance | BindingFlags.NonPublic);
+            var list = requestHandlersField.GetValue(apiInvoker) as IList;
+            if (list.Count == 4)
+            {
+                list.RemoveAt(list.Count - 1);
+            }
         }
 
         private void EnsureDirectiryExists(string directoryPath, string storage)
@@ -260,8 +305,12 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
         private void UploadInputTestFiles(bool forceOverride = false)
         {
-            EnsureFilesExists(CloudTestFolder, DefaultStorage, LocalTestFolder, forceOverride);
-            EnsureFilesExists(CloudReferencesFolder, DefaultStorage, LocalReferenceFolder, forceOverride);
+            if (ForceReferenceOverride)
+            {
+                Directory.CreateDirectory(LocalReferenceFolderFullPath);
+                EnsureFilesExists(CloudTestFolder, DefaultStorage, LocalTestFolderFullPath, forceOverride);
+                EnsureFilesExists(CloudReferencesFolder, DefaultStorage, LocalReferenceFolderFullPath, forceOverride);
+            }
         }
 
         private void EnsureFilesExists(string cloudFolder, string storage, string localFolder, bool forceOverride)
@@ -274,6 +323,11 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
             foreach (var file in Directory.GetFiles(Path.GetFullPath(localFolder), "*.*", SearchOption.TopDirectoryOnly))
             {
+                if (file.ToLower().EndsWith(".json"))
+                {
+                    continue;
+                }
+
                 var fileInfo = new FileInfo(file);
                 var fullStorageFileName =
                     string.IsNullOrEmpty(cloudFolder) ? fileInfo.Name : cloudFolder + "\\" + fileInfo.Name;
@@ -363,12 +417,45 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// Fetches the input test files info.
         /// </summary>
         /// <returns></returns>
-        private List<FileResponse> FetchInputTestFilesInfo()
+        private IEnumerable<FileResponse> FetchInputTestFilesInfo()
         {
+            if (StorageApi.GetIsExist(
+                    new GetIsExistRequest(CloudTempFolder, null, DefaultStorage)).FileExist.IsExist != true)
+            {
+                StorageApi.PutCreateFolder(new PutCreateFolderRequest(CloudTempFolder, DefaultStorage));
+            }
+
+            if (StorageApi.GetIsExist(
+                    new GetIsExistRequest(CloudTestFolder, null, DefaultStorage)).FileExist.IsExist != true)
+            {
+                StorageApi.PutCreateFolder(new PutCreateFolderRequest(CloudTestFolder, DefaultStorage));
+            }
+
+            if (StorageApi.GetIsExist(
+                    new GetIsExistRequest(CloudReferencesFolder, null, DefaultStorage)).FileExist.IsExist != true)
+            {
+                StorageApi.PutCreateFolder(new PutCreateFolderRequest(CloudReferencesFolder, DefaultStorage));
+            }
+
+#if LOCAL
+            if (!Directory.Exists(LocalReferenceFolderFullPath))
+            {
+                Directory.CreateDirectory(LocalReferenceFolderFullPath);
+            }
+
+            return Directory
+                .EnumerateFiles(LocalTestFolderFullPath, "*.*", SearchOption.TopDirectoryOnly)
+                .Where(x => Path.GetExtension(x) != ".js")
+                .Select(x => Path.GetFileName(x))
+                .Select(x => new FileResponse()
+                {
+                    Name = x
+                });
+#endif
+
             var filesResponse = StorageApi.GetListFiles(new GetListFilesRequest(CloudTestFolder, DefaultStorage));
-            Assert.AreEqual(filesResponse.Code, (int)HttpStatusCode.OK);
             
-            return filesResponse.Files;
+            return filesResponse?.Files;
         }
 
         /// <summary>
@@ -404,6 +491,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <param name="parametersLine">The parameters line.</param>
         /// <param name="inputFileName">Name of the input file.</param>
         /// <param name="resultFileName">Name of the result file.</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="requestInvoker">The invoke request function that returns response length.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="storage">The storage.</param>
@@ -411,6 +499,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             string parametersLine, 
             string inputFileName, 
             string resultFileName, 
+            bool saveResultToStorage,
             GetRequestInvokerDelegate requestInvoker,
             string folder = CloudTestFolder, 
             string storage = DefaultStorage)
@@ -419,13 +508,13 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 parametersLine, 
                 inputFileName, 
                 resultFileName,
+                saveResultToStorage,
                 () =>
                 {
-                    var outPath = !string.IsNullOrEmpty(resultFileName) ? $"{folder}/{resultFileName}" : null;
-                    var stream = requestInvoker.Invoke($"{inputFileName}", $"{folder}", outPath);
+                    var stream = requestInvoker.Invoke(saveResultToStorage ? $"{CloudTempFolder}/{resultFileName}" : null);
                     return stream;
                 },
-                (stream, refInfo) =>
+                (_, stream, refInfo) =>
                 {
                     var referenceLength = refInfo.Size ?? 0;
                     CheckSizeDiff(referenceLength, stream.Length);
@@ -435,11 +524,12 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Tests the typical GET request.
+        /// Tests the typical POST request.
         /// </summary>
         /// <param name="parametersLine">The parameters line.</param>
         /// <param name="inputFileName">Name of the input file.</param>
         /// <param name="resultFileName">Name of the result file.</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="invokeRequestFunc">The invoke request function that returns response length.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="storage">The storage.</param>
@@ -447,6 +537,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             string parametersLine,
             string inputFileName,
             string resultFileName,
+            bool saveResultToStorage,
             PostRequestInvokerDelegate invokeRequestFunc,
             string folder = CloudTestFolder,
             string storage = DefaultStorage)
@@ -455,15 +546,103 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 parametersLine,
                 null,
                 resultFileName,
+                saveResultToStorage,
                 () =>
                 {
-                    using (var fs = File.OpenRead(Path.Combine(LocalTestFolder, inputFileName)))
+                    using (var fs = File.OpenRead(Path.Combine(LocalTestFolderFullPath, inputFileName)))
                     {
-                        var stream = invokeRequestFunc.Invoke(fs, !string.IsNullOrEmpty(resultFileName) ? $"{folder}/{resultFileName}" : null);
+                        var stream = invokeRequestFunc.Invoke(fs, saveResultToStorage ? $"{CloudTempFolder}/{resultFileName}" : null);
                         return stream;
                     }
                 },
-                (stream, refInfo) =>
+                (_, stream, refInfo) =>
+                {
+                    var referenceLength = refInfo.Size ?? 0;
+                    CheckSizeDiff(referenceLength, stream.Length);
+                },
+                folder,
+                storage);
+        }
+
+        /// <summary>
+        /// Tests the typical POST request.
+        /// </summary>
+        /// <param name="parametersLine">The parameters line.</param>
+        /// <param name="inputFileName">Name of the input file.</param>
+        /// <param name="resultFileName">Name of the result file.</param>
+        /// <param name="exportOptions">Export options</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
+        /// <param name="invokeRequestFunc">The invoke request function that returns response length.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="storage">The storage.</param>
+        protected void TestPostWithOptionsRequest<T>(
+            string parametersLine,
+            string inputFileName,
+            string resultFileName,
+            bool saveResultToStorage,
+            T exportOptions,
+            PostRequestWithOptionsInvokerDelegate<T> invokeRequestFunc,
+            string folder = CloudTestFolder,
+            string storage = DefaultStorage) where T: DrawingOptionsBaseDTO
+        {
+            TestRequestInternal(
+                parametersLine,
+                null,
+                resultFileName,
+                saveResultToStorage,
+                () =>
+                {
+                    var stream = invokeRequestFunc.Invoke(exportOptions, saveResultToStorage ? $"{CloudTempFolder}/{resultFileName}" : null);
+                    return stream;
+                },
+                (_, stream, refInfo) =>
+                {
+                    var referenceLength = refInfo.Size ?? 0;
+                    CheckSizeDiff(referenceLength, stream.Length);
+                },
+                folder,
+                storage);
+        }
+
+        /// <summary>
+        /// Tests the typical PUT request.
+        /// </summary>
+        /// <param name="parametersLine">The parameters line.</param>
+        /// <param name="inputFileName">Name of the input file.</param>
+        /// <param name="resultFileName">Name of the result file.</param>
+        /// <param name="exportOptions">Export options</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
+        /// <param name="invokeRequestFunc">The invoke request function that returns response length.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="storage">The storage.</param>
+        protected void TestRawPutRequest(
+            string parametersLine,
+            string inputFileName,
+            string resultFileName,
+            bool saveResultToStorage,
+            DrawingOptionsBaseDTO exportOptions,
+            PutRequestInvokerDelegate invokeRequestFunc,
+            string folder = CloudTestFolder,
+            string storage = DefaultStorage)
+        {
+            TestRequestInternal(
+                parametersLine,
+                null,
+                resultFileName,
+                saveResultToStorage,
+                () =>
+                {
+                    using (var fs = File.OpenRead(Path.Combine(LocalTestFolderFullPath, inputFileName)))
+                    {
+                        var ms = new MemoryStream();
+                        fs.CopyTo(ms);
+                        ms.Seek(0, SeekOrigin.Begin);
+
+                        var stream = invokeRequestFunc.Invoke(ms, exportOptions, saveResultToStorage ? $"{CloudTempFolder}/{resultFileName}" : null);
+                        return stream;
+                    }
+                },
+                (_, stream, refInfo) =>
                 {
                     var referenceLength = refInfo.Size ?? 0;
                     CheckSizeDiff(referenceLength, stream.Length);
@@ -493,6 +672,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 parametersLine,
                 inputFileName,
                 null,
+                false,
                 () =>
                 {
                     var response = invokeRequestFunc.Invoke();
@@ -509,6 +689,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         /// <param name="parametersLine">The parameters line.</param>
         /// <param name="inputFileName">Name of the input file.</param>
         /// <param name="resultFileName">Name of the result file.</param>
+        /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="invokeRequestFunc">The invoke request function that returns response length.</param>
         /// <param name="customResponseTester">The response tester.</param>
         /// <param name="folder">The folder.</param>
@@ -517,6 +698,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             string parametersLine, 
             string inputFileName, 
             string resultFileName, 
+            bool saveResultToStorage,
             Func<T> invokeRequestFunc, 
             ResponseValidatorDelegate<T> customResponseTester,
             string folder = CloudTestFolder, 
@@ -533,14 +715,13 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             bool passed = false;
             string outPath = null;
             string referencePath = CloudReferencesFolder;
-            var saveResultToStorage = !string.IsNullOrEmpty(resultFileName);
             try
             {
                 Console.WriteLine(parametersLine);
 
                 if (saveResultToStorage)
                 {
-                    outPath = folder + "/" + resultFileName;
+                    outPath = CloudTempFolder + "/" + resultFileName;
 
                     // remove output file from the storage (if exists)
                     if (StorageApi.GetIsExist(new GetIsExistRequest(outPath, null, storage)).FileExist.IsExist ?? false)
@@ -551,25 +732,42 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 var response = invokeRequestFunc.Invoke();
 
-                if (!string.IsNullOrEmpty(outPath) && AutoRecoverReference)
+                var download = saveResultToStorage
+                                    ? StorageApi.GetDownload(new GetDownloadRequest(outPath, null, storage))
+                                    : response as Stream;
+
+                if (AutoRecoverReference && download != null)
                 {
-                    var download = StorageApi.GetDownload(new GetDownloadRequest(outPath, null, storage));
+                    var hasToUpload = ForceReferenceOverride;
                     if (!StorageApi.GetIsExist(new GetIsExistRequest(referencePath + "/" + resultFileName, null, storage)).FileExist.IsExist ?? false)
+                    {
+                        hasToUpload = true;
+                    }
+                    else if (ForceReferenceOverride)
+                    {
+                        hasToUpload = true;
+                        StorageApi.DeleteFile(new DeleteFileRequest(referencePath + "/" + resultFileName, null, storage));
+                    }
+
+                    if (hasToUpload)
                     {
                         StorageApi.PutCreate(new PutCreateRequest(referencePath + "/" + resultFileName, download, null, storage));
                     }
 
 #if DEBUG
-                    using (var fs = File.OpenWrite(Path.Combine(LocalReferenceFolder, resultFileName)))
+                    if (!string.IsNullOrEmpty(resultFileName) && download != null)
                     {
-                        download.CopyTo(fs);
+                        using (var fs = File.OpenWrite(Path.Combine(LocalReferenceFolderFullPath, resultFileName)))
+                        {
+                            download.CopyTo(fs);
+                        }
                     }
 #endif
                 }
 
                 if (saveResultToStorage)
                 {
-                    var resultInfo = GetStorageFileInfo(folder, resultFileName, storage);
+                    var resultInfo = GetStorageFileInfo(CloudTempFolder, resultFileName, storage);
                     if (resultInfo == null)
                     {
                         throw new ArgumentException(
@@ -585,7 +783,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 }
 
                 // check resulting image from response stream
-                customResponseTester?.Invoke(response, referenceInfo);
+                customResponseTester?.Invoke(response, download, referenceInfo);
 
                 passed = true;
             }

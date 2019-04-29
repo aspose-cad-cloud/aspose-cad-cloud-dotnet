@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="ResizeApiTests.cs">
-//   Copyright (c) 2018 Aspose.Imaging for Cloud
+//   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,19 +25,17 @@
 
 namespace Aspose.CAD.Cloud.Sdk.Test.Api
 {
-	using System.IO;
-	using System.Collections.Generic;
-	using NUnit.Framework;
-
-	using Aspose.CAD.Cloud.Sdk.Model;
-	using Aspose.CAD.Cloud.Sdk.Model.Requests;
-	using Aspose.CAD.Cloud.Sdk.Test.Base;
+    using Aspose.CAD.Cloud.Sdk.Model.Requests;
+    using Aspose.CAD.Cloud.Sdk.Test.Base;
+    using NUnit.Framework;
+    using System.Collections.Generic;
+    using System.IO;
 
     /// <summary>
     ///  Class for testing ResizeApi
     /// </summary>
     [TestFixture]
-    public class ChangeImageScaleApiTests : ApiTester
+    public class ResizeApiTests : ApiTester
     {
         /// <summary>
         /// Setup before each unit test
@@ -45,7 +43,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [SetUp]
         public void Init()
         {
-			// you can pass your own parameters here
+            // you can pass your own parameters here
             this.CreateApiInstances();
         }
 
@@ -59,13 +57,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test GetImageResize
+        /// Test GetDrawingResize
         /// </summary>
-        /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
+        /// <param name="formatExtension">Format extension to search for input drawings in the test folder</param>
         /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
-        [TestCase(".dwg", true)]
-        public void GetImageResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        [TestCase(".dwg", false)]
+        [TestCase(".dxf", true)]
+        public void GetDrawingResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             int? newWidth = 100;
@@ -99,13 +98,16 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                     outName = $"{name}_resize.{format}";
 
                     this.TestRawGetRequest(
-                        $"Input image: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
+                        $"input drawing: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
                         name,
                         outName,
-                        delegate (string fileName, string folder, string outPath)
+                        saveResultToStorage,
+                        delegate (string outPath)
                         {
-                            var request = new GetChangeImageScaleRequest(fileName, format, newWidth, newHeight, folder, storage, outPath);
-                            return CadApi.GetChangeImageScale(request);
+                            var request = new GetDrawingResizeRequest(name, format, newWidth, newHeight, cloudFolder, outPath, storage);
+
+                            var stream = CadApi.GetDrawingResize(request);
+                            return stream;
                         },
                         cloudFolder,
                         storage);
@@ -116,13 +118,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         }
 
         /// <summary>
-        /// Test PostImageResize
+        /// Test PutDrawingResize
         /// </summary>
-        /// <param name="formatExtension">Format extension to search for input images in the test folder</param>
+        /// <param name="formatExtension">Format extension to search for input drawings in the test folder</param>
         /// <param name="saveResultToStorage">If result should be saved to storage</param>
         /// <param name="additionalExportFormats">Additional formats to export to</param>
+        [TestCase(".dwg", false)]
         [TestCase(".dxf", true)]
-        public void PostImageResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void PostDrawingResizeTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             int? newWidth = 100;
@@ -156,13 +159,14 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                     outName = $"{name}_resize.{format}";
 
                     this.TestRawPostRequest(
-                        $"Input image: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
+                        $"input drawing: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
                         name,
                         outName,
+                        saveResultToStorage,
                         delegate (Stream inputStream, string outPath)
                         {
-                            var request = new PostChangeImageScaleRequest(inputStream, format, newWidth, newHeight, outPath, storage);
-                            return CadApi.PostChangeImageScale(request);
+                            var request = new PostDrawingResizeRequest(inputStream, format, newWidth, newHeight, outPath, storage);
+                            return CadApi.PostDrawingResize(request);
                         },
                         folder,
                         storage);

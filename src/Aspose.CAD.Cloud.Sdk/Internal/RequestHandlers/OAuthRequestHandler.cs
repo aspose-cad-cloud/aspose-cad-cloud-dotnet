@@ -94,7 +94,13 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
         /// </summary>
         private void RefreshToken()
         {
-            var requestUrl = this.configuration.ApiBaseUrl + "/oauth2/token";
+            var baseUrl = this.configuration.ApiBaseUrl;
+            if (baseUrl.StartsWith("http:"))
+            {
+                baseUrl = baseUrl.Replace("http:", "https:");
+            }
+
+            var requestUrl = baseUrl + "/connect/token";
 
             var postData = "grant_type=refresh_token";
             postData += "&refresh_token=" + this.refreshToken;            
@@ -114,7 +120,13 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
 
         private void RequestToken()
         {
-            var requestUrl = this.configuration.ApiBaseUrl + "/oauth2/token";
+            var baseUrl = this.configuration.ApiBaseUrl;
+            if (baseUrl.StartsWith("http:"))
+            {
+                baseUrl = baseUrl.Replace("http:", "https:");
+            }
+
+            var requestUrl = baseUrl + "/connect/token";
 
             var postData = "grant_type=client_credentials";
             postData += "&client_id=" + this.configuration.AppSid;

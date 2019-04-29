@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PostChangeImageScaleRequest.cs">
+// <copyright company="Aspose" file="PostDrawingSvgRequest.cs">
 //   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
@@ -27,64 +27,57 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostChangeImageScale" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostDrawingSvg" /> operation.
   /// </summary>  
-  public class PostChangeImageScaleRequest  
+  public class PostDrawingSvgRequest  
   {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PostChangeImageScaleRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingSvgRequest"/> class.
         /// </summary>        
-        public PostChangeImageScaleRequest()
+        public PostDrawingSvgRequest()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PostChangeImageScaleRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingSvgRequest"/> class.
         /// </summary>
-        /// <param name="drawingData">Input drawing</param>
-        /// <param name="format">Output file format. Valid formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.</param>
-        /// <param name="newWidth">New width of the scaled image.</param>
-        /// <param name="newHeight">New height of the scaled image.</param>
-        /// <param name="outPath">Path to updated file, if this is empty, response contains streamed image. </param>
+        /// <param name="name">Filename of an input drawing on a storage.</param>
+        /// <param name="options">Export SVG options passed as a JSON on a request body.</param>
+        /// <param name="folder">Folder with a drawing to process.</param>
+        /// <param name="outPath">Path to updated file (if this is empty, response contains streamed file).</param>
         /// <param name="storage">Your Aspose Cloud Storage name.</param>
-        public PostChangeImageScaleRequest(System.IO.Stream drawingData, string format, int? newWidth, int? newHeight, string outPath = null, string storage = null)             
+        public PostDrawingSvgRequest(string name, SvgOptionsDTO options, string folder = null, string outPath = null, string storage = null)             
         {
-            this.drawingData = drawingData;
-            this.format = format;
-            this.newWidth = newWidth;
-            this.newHeight = newHeight;
-            this.outPath = outPath;
-            this.storage = storage;
+            this.Name = name;
+            this.Options = options;
+            this.Folder = folder;
+            this.OutPath = outPath;
+            this.Storage = storage;
         }
 
         /// <summary>
-        /// Input drawing
+        /// Filename of an input drawing on a storage.
         /// </summary>  
-        public System.IO.Stream drawingData { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Output file format. Valid formats: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, PDF, WMF.
+        /// Export SVG options passed as a JSON on a request body.
         /// </summary>  
-        public string format { get; set; }
+        public SvgOptionsDTO Options { get; set; }
 
         /// <summary>
-        /// New width of the scaled image.
+        /// Folder with a drawing to process.
         /// </summary>  
-        public int? newWidth { get; set; }
+        public string Folder { get; set; }
 
         /// <summary>
-        /// New height of the scaled image.
+        /// Path to updated file (if this is empty, response contains streamed file).
         /// </summary>  
-        public int? newHeight { get; set; }
-
-        /// <summary>
-        /// Path to updated file, if this is empty, response contains streamed image. 
-        /// </summary>  
-        public string outPath { get; set; }
+        public string OutPath { get; set; }
 
         /// <summary>
         /// Your Aspose Cloud Storage name.
         /// </summary>  
-        public string storage { get; set; }
+        public string Storage { get; set; }
   }
 }

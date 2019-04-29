@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="BmpApiTests.cs">
-//   Copyright (c) 2018 Aspose.Imaging for Cloud
+//   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -87,17 +87,18 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 }
 
                 this.TestRequestWithTypedResponse(
-                    $"Input image: {name};",
+                    $"input drawing: {name};",
                     name,
                     delegate ()
                     {
-                        var request = new GetImagePropertiesRequest(name, folder, storage);
-                        var properties = CadApi.GetImageProperties(request);
+                        var request = new GetDrawingPropertiesRequest(name, folder, storage);
+                        var properties = CadApi.GetDrawingProperties(request);
                         return properties;
                     },
-                    (response, refInfo) =>
+                    (response, result, refInfo) =>
                     {
-                        Assert.AreEqual(response.Code, HttpStatusCode.OK);
+                        Assert.Greater(response.Height, 0);
+                        Assert.Greater(response.Width, 0);
                     },
                     folder,
                     storage);

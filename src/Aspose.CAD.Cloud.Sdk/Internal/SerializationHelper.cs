@@ -58,7 +58,7 @@ namespace Aspose.CAD.Cloud.Sdk
         {
             try
             {
-                throw new ApiException(500, "Server does not return json: '" + json + "'");
+                return JsonConvert.DeserializeObject(json, type);
             }
             catch (IOException e)
             {
