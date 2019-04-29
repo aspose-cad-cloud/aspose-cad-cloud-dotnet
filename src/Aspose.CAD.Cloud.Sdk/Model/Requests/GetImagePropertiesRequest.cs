@@ -1,7 +1,6 @@
-
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="GetImagePropertiesRequest.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+//   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,13 +22,12 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.CadApi.GetImageProperties" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.GetImageProperties" /> operation.
   /// </summary>  
   public class GetImagePropertiesRequest  
   {
@@ -52,7 +50,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
             this.folder = folder;
             this.storage = storage;
         }
-		
+
         /// <summary>
         /// The image name.
         /// </summary>  

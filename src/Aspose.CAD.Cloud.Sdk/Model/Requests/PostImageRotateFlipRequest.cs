@@ -1,7 +1,6 @@
-
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="PostImageRotateFlipRequest.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+//   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,13 +22,12 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.CadApi.PostImageRotateFlip" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostImageRotateFlip" /> operation.
   /// </summary>  
   public class PostImageRotateFlipRequest  
   {
@@ -54,7 +52,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
             this.method = method;
             this.outPath = outPath;
         }
-		
+
         /// <summary>
         /// Input drawing
         /// </summary>  

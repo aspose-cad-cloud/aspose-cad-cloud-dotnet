@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="CADApi.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="CadApi.cs">
+//   Copyright (c) 2018 Aspose.Cad for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,153 +27,48 @@ namespace Aspose.CAD.Cloud.Sdk
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
-    using Aspose.CAD.Cloud.Sdk.Client;
-    using Aspose.CAD.Cloud.Sdk.Client.Internal;
-    using Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers;
     using Aspose.CAD.Cloud.Sdk.Model;
     using Aspose.CAD.Cloud.Sdk.Model.Requests;
+    using Aspose.CAD.Cloud.Sdk.RequestHandlers;
     
     /// <summary>
-    /// Aspose.CAD for Cloud API.
+    /// Aspose.Cad for Cloud API.
     /// </summary>
     public class CADApi
-    {                 
-        #region Fields
-
-        /// <summary>
-        /// The API invoker
-        /// </summary>
+    {        
         private readonly ApiInvoker apiInvoker;
+        private readonly Configuration configuration;     
 
         /// <summary>
-        /// The configuration
+        /// Initializes a new instance of the <see cref="CadApi"/> class.
         /// </summary>
-        private readonly Configuration configuration;
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CADApi"/> class.
-        /// </summary>
-        /// <param name="appKey">
-        /// The app key.
+        /// <param name="apiKey">
+        /// The api Key.
         /// </param>
         /// <param name="appSid">
-        /// The app SID.
+        /// The app Sid.
         /// </param>
-        public CADApi(string appKey, string appSid)
-            : this(new Configuration { AppKey = appKey, AppSid = appSid })
+        public CadApi(string apiKey, string appSid)
+            : this(new Configuration { AppKey = apiKey, AppSid = appSid })
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CADApi"/> class.
-        /// </summary>
-        /// <param name="appKey">
-        /// The app key.
-        /// </param>
-        /// <param name="appSid">
-        /// The app SID.
-        /// </param>
-        /// <param name="baseUrl">
-        /// The base URL.
-        /// </param>
-        public CADApi(string appKey, string appSid, string baseUrl)
-            : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl })
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CADApi"/> class.
-        /// </summary>
-        /// <param name="appKey">
-        /// The app key.
-        /// </param>
-        /// <param name="appSid">
-        /// The app SID.
-        /// </param>
-        /// <param name="baseUrl">
-        /// The base URL.
-        /// </param>
-        /// <param name="apiVersion">
-        /// API version.
-        /// </param>
-        public CADApi(string appKey, string appSid, string baseUrl, string apiVersion)
-            : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl, ApiVersion = apiVersion })
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CADApi"/> class.
-        /// </summary>
-        /// <param name="appKey">
-        /// The app key.
-        /// </param>
-        /// <param name="appSid">
-        /// The app SID.
-        /// </param>
-        /// <param name="baseUrl">
-        /// The base URL. Use <see cref="Configuration.DefaultBaseUrl"/> to set the default base URL.
-        /// </param>
-        /// <param name="apiVersion">
-        /// API version.
-        /// </param>
-        /// <param name="debug">
-        /// If debug mode is enabled.
-        /// </param>
-        public CADApi(string appKey, string appSid, string baseUrl, string apiVersion, bool debug)
-            : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl, ApiVersion = apiVersion, DebugMode = debug })
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CADApi"/> class.
-        /// </summary>
-        /// <param name="appKey">
-        /// The app key.
-        /// </param>
-        /// <param name="appSid">
-        /// The app SID.
-        /// </param>
-        /// <param name="baseUrl">
-        /// The base URL. Use <see cref="Configuration.DefaultBaseUrl"/> to set the default base URL.
-        /// </param>
-        /// <param name="apiVersion">
-        /// API version.
-        /// </param>
-        /// <param name="authType">
-        /// Authentication type.
-        /// </param>
-        /// <param name="debug">
-        /// If debug mode is enabled.
-        /// </param>
-        public CADApi(string appKey, string appSid, string baseUrl, string apiVersion, AuthType authType, bool debug)
-            : this(new Configuration { AppKey = appKey, AppSid = appSid, ApiBaseUrl = baseUrl, ApiVersion = apiVersion, AuthType = authType, DebugMode = debug })
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CADApi"/> class.
+        /// Initializes a new instance of the <see cref="CadApi"/> class.
         /// </summary>    
         /// <param name="configuration">Configuration settings</param>
-        private CADApi(Configuration configuration)
+        public CadApi(Configuration configuration)
         {
             this.configuration = configuration;
-
+            
             var requestHandlers = new List<IRequestHandler>();
             requestHandlers.Add(new OAuthRequestHandler(this.configuration));
             requestHandlers.Add(new DebugLogRequestHandler(this.configuration));
             requestHandlers.Add(new ApiExceptionRequestHandler());
             requestHandlers.Add(new AuthWithSignatureRequestHandler(this.configuration));
             this.apiInvoker = new ApiInvoker(requestHandlers);
-        }
+        }                            
 
-        #endregion
-	
-		#region Methods
-		
         /// <summary>
         /// Change scale of an existing image 
         /// </summary>
@@ -211,7 +106,6 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
                         .Replace("/?", "?");
-			var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.name);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "newWidth", request.newWidth);
@@ -222,29 +116,18 @@ namespace Aspose.CAD.Cloud.Sdk
             
             try 
             {                               
-				var response = this.apiInvoker.InvokeApi(
-                        resourcePath, 
-                        "GET", 
-                        null, 
-                        null, 
-                        formParams);
-				
-				if (response == null)
-				{
-					return null;
-				}
-				
-				object finalResponse;
-				if (typeof(System.IO.Stream) == typeof(System.IO.Stream))
-				{
-					finalResponse = response;
-				}
-				else
-				{
-					finalResponse = SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
-				}
-				
-				return (System.IO.Stream)finalResponse;
+                var response = this.apiInvoker.InvokeApi(
+                    resourcePath, 
+                    "GET", 
+                    null, 
+                    null, 
+                    null);
+                if (response != null)
+                {
+                    return (System.IO.Stream)SerializationHelper.Deserialize(response, typeof(System.IO.Stream));
+                }
+                    
+                return null;
             } 
             catch (ApiException ex) 
             {
@@ -256,7 +139,7 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;                
             }
         }
-		
+
         /// <summary>
         /// Get properties of an image. 
         /// </summary>
@@ -276,36 +159,24 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
                         .Replace("/?", "?");
-			var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.name);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", request.folder);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.storage);
             
             try 
             {                               
-				var response = this.apiInvoker.InvokeApi(
-                        resourcePath, 
-                        "GET", 
-                        null, 
-                        null, 
-                        formParams);
-				
-				if (response == null)
-				{
-					return null;
-				}
-				
-				object finalResponse;
-				if (typeof(ImagePropertiesResponse) == typeof(System.IO.Stream))
-				{
-					finalResponse = response;
-				}
-				else
-				{
-					finalResponse = SerializationHelper.Deserialize<ImagePropertiesResponse>(StreamHelper.ToString(response));
-				}
-				
-				return (ImagePropertiesResponse)finalResponse;
+                var response = this.apiInvoker.InvokeApi(
+                    resourcePath, 
+                    "GET", 
+                    null, 
+                    null, 
+                    null);
+                if (response != null)
+                {
+                    return (ImagePropertiesResponse)SerializationHelper.Deserialize(response, typeof(ImagePropertiesResponse));
+                }
+                    
+                return null;
             } 
             catch (ApiException ex) 
             {
@@ -317,7 +188,7 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;                
             }
         }
-		
+
         /// <summary>
         /// Rotate and flip existing image 
         /// </summary>
@@ -349,7 +220,6 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
                         .Replace("/?", "?");
-			var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.name);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "method", request.method);
@@ -359,29 +229,18 @@ namespace Aspose.CAD.Cloud.Sdk
             
             try 
             {                               
-				var response = this.apiInvoker.InvokeApi(
-                        resourcePath, 
-                        "GET", 
-                        null, 
-                        null, 
-                        formParams);
-				
-				if (response == null)
-				{
-					return null;
-				}
-				
-				object finalResponse;
-				if (typeof(System.IO.Stream) == typeof(System.IO.Stream))
-				{
-					finalResponse = response;
-				}
-				else
-				{
-					finalResponse = SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
-				}
-				
-				return (System.IO.Stream)finalResponse;
+                var response = this.apiInvoker.InvokeApi(
+                    resourcePath, 
+                    "GET", 
+                    null, 
+                    null, 
+                    null);
+                if (response != null)
+                {
+                    return (System.IO.Stream)SerializationHelper.Deserialize(response, typeof(System.IO.Stream));
+                }
+                    
+                return null;
             } 
             catch (ApiException ex) 
             {
@@ -393,7 +252,7 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;                
             }
         }
-		
+
         /// <summary>
         /// Export existing image to another format 
         /// </summary>
@@ -419,7 +278,6 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
                         .Replace("/?", "?");
-			var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.name);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", request.folder);
@@ -429,29 +287,18 @@ namespace Aspose.CAD.Cloud.Sdk
             
             try 
             {                               
-				var response = this.apiInvoker.InvokeApi(
-                        resourcePath, 
-                        "GET", 
-                        null, 
-                        null, 
-                        formParams);
-				
-				if (response == null)
-				{
-					return null;
-				}
-				
-				object finalResponse;
-				if (typeof(System.IO.Stream) == typeof(System.IO.Stream))
-				{
-					finalResponse = response;
-				}
-				else
-				{
-					finalResponse = SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
-				}
-				
-				return (System.IO.Stream)finalResponse;
+                var response = this.apiInvoker.InvokeApi(
+                    resourcePath, 
+                    "GET", 
+                    null, 
+                    null, 
+                    null);
+                if (response != null)
+                {
+                    return (System.IO.Stream)SerializationHelper.Deserialize(response, typeof(System.IO.Stream));
+                }
+                    
+                return null;
             } 
             catch (ApiException ex) 
             {
@@ -463,7 +310,7 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;                
             }
         }
-		
+
         /// <summary>
         /// Change scale of an image from body 
         /// </summary>
@@ -501,7 +348,7 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
                         .Replace("/?", "?");
-			var formParams = new Dictionary<string, object>();
+            var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "newWidth", request.newWidth);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "newHeight", request.newHeight);
@@ -512,31 +359,21 @@ namespace Aspose.CAD.Cloud.Sdk
             {
                 formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.drawingData, "drawingData"));
             }
+            
             try 
             {                               
-				var response = this.apiInvoker.InvokeApi(
-                        resourcePath, 
-                        "POST", 
-                        null, 
-                        null, 
-                        formParams);
-				
-				if (response == null)
-				{
-					return null;
-				}
-				
-				object finalResponse;
-				if (typeof(System.IO.Stream) == typeof(System.IO.Stream))
-				{
-					finalResponse = response;
-				}
-				else
-				{
-					finalResponse = SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
-				}
-				
-				return (System.IO.Stream)finalResponse;
+                var response = this.apiInvoker.InvokeApi(
+                    resourcePath, 
+                    "POST", 
+                    null, 
+                    null, 
+                    formParams);
+                if (response != null)
+                {
+                    return (System.IO.Stream)SerializationHelper.Deserialize(response, typeof(System.IO.Stream));
+                }
+                    
+                return null;
             } 
             catch (ApiException ex) 
             {
@@ -548,7 +385,7 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;                
             }
         }
-		
+
         /// <summary>
         /// Rotate and flip existing image and get it from response. 
         /// </summary>
@@ -580,7 +417,7 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
                         .Replace("/?", "?");
-			var formParams = new Dictionary<string, object>();
+            var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "method", request.method);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.outPath);
@@ -589,31 +426,21 @@ namespace Aspose.CAD.Cloud.Sdk
             {
                 formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.drawingData, "drawingData"));
             }
+            
             try 
             {                               
-				var response = this.apiInvoker.InvokeApi(
-                        resourcePath, 
-                        "POST", 
-                        null, 
-                        null, 
-                        formParams);
-				
-				if (response == null)
-				{
-					return null;
-				}
-				
-				object finalResponse;
-				if (typeof(System.IO.Stream) == typeof(System.IO.Stream))
-				{
-					finalResponse = response;
-				}
-				else
-				{
-					finalResponse = SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
-				}
-				
-				return (System.IO.Stream)finalResponse;
+                var response = this.apiInvoker.InvokeApi(
+                    resourcePath, 
+                    "POST", 
+                    null, 
+                    null, 
+                    formParams);
+                if (response != null)
+                {
+                    return (System.IO.Stream)SerializationHelper.Deserialize(response, typeof(System.IO.Stream));
+                }
+                    
+                return null;
             } 
             catch (ApiException ex) 
             {
@@ -625,7 +452,7 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;                
             }
         }
-		
+
         /// <summary>
         /// Export existing image to another format. Image is passed as request body. 
         /// </summary>
@@ -651,7 +478,7 @@ namespace Aspose.CAD.Cloud.Sdk
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
                         .Replace("/?", "?");
-			var formParams = new Dictionary<string, object>();
+            var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "format", request.format);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "rasterOptions", request.rasterOptions);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.outPath);
@@ -661,31 +488,21 @@ namespace Aspose.CAD.Cloud.Sdk
             {
                 formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.drawingData, "drawingData"));
             }
+            
             try 
             {                               
-				var response = this.apiInvoker.InvokeApi(
-                        resourcePath, 
-                        "POST", 
-                        null, 
-                        null, 
-                        formParams);
-				
-				if (response == null)
-				{
-					return null;
-				}
-				
-				object finalResponse;
-				if (typeof(System.IO.Stream) == typeof(System.IO.Stream))
-				{
-					finalResponse = response;
-				}
-				else
-				{
-					finalResponse = SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
-				}
-				
-				return (System.IO.Stream)finalResponse;
+                var response = this.apiInvoker.InvokeApi(
+                    resourcePath, 
+                    "POST", 
+                    null, 
+                    null, 
+                    formParams);
+                if (response != null)
+                {
+                    return (System.IO.Stream)SerializationHelper.Deserialize(response, typeof(System.IO.Stream));
+                }
+                    
+                return null;
             } 
             catch (ApiException ex) 
             {
@@ -697,7 +514,5 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;                
             }
         }
-		
-		#endregion
     }
 }
