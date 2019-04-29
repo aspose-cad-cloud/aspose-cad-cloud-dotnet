@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="FileInfo.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Aspose" file="HttpUtility.cs">
+//   Copyright (c) 2017 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,26 +23,18 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client.Internal
-{
-    /// <summary>
-    /// File info structure
-    /// </summary>
-    internal struct FileInfo
-    {
-        /// <summary>
-        /// The name of file
-        /// </summary>
-        public string Name;
-
-        /// <summary>
-        /// The MIME type
-        /// </summary>
-        public string MimeType;
-
-        /// <summary>
-        /// The file bytes
-        /// </summary>
-        public byte[] file;
+namespace Aspose.CAD.Cloud.Sdk
+{    
+    internal class HttpUtility
+    {        
+        public static string UrlEncode(string stringToEncode)
+        {
+#if NET20
+            return System.Web.HttpUtility.UrlEncode(stringToEncode);
+#endif
+#if NETSTANDARD1_6
+            return System.Net.WebUtility.UrlEncode(stringToEncode);
+#endif
+        }
     }
 }

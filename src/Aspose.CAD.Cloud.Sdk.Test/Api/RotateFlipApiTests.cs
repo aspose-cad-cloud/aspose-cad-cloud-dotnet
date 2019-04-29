@@ -92,7 +92,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 }
             }
 
-            foreach (FilesList.StorageFileInfo inputFile in InputTestFiles)
+            foreach (var inputFile in InputTestFiles)
             {
                 if (inputFile.Name.EndsWith(formatExtension))
                 {
@@ -150,7 +150,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 }
             }
 
-            foreach (FilesList.StorageFileInfo inputFile in InputTestFiles)
+            foreach (var inputFile in InputTestFiles)
             {
                 if (inputFile.Name.EndsWith(formatExtension))
                 {

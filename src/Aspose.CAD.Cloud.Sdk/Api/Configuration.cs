@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="Configuration.cs">
-//   Copyright (c) 2018 Aspose.Imaging for Cloud
+//   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,47 +23,50 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client
+namespace Aspose.CAD.Cloud.Sdk
 {
+    using System;
+
     /// <summary>
     /// Represents a set of configuration settings.
     /// </summary>
     public class Configuration
     {
-        #region Consts
-
-        /// <summary>
-        /// The default base URL
-        /// </summary>
-        public const string DefaultBaseUrl = "https://api.aspose.cloud";
-
-        /// <summary>
-        /// The default API version
-        /// </summary>
-        public const string DefaultApiVersion = "v1.1";
-
-        #endregion
-
-        #region Fields
-
-        /// <summary>
-        /// The API base URL
-        /// </summary>
-        private string apiBaseUrl = DefaultBaseUrl;
-
-        /// <summary>
-        /// The API version
-        /// </summary>
-        private string apiVersion = DefaultApiVersion;
-
-        /// <summary>
-        /// The debug mode
-        /// </summary>
+        private string apiBaseUrl = "https://api.aspose.cloud";       
         private bool debugMode = false;
 
-        #endregion
+        private AvailiableApiVersions version = AvailiableApiVersions.V1;
 
-        #region Properties
+        /// <summary>
+        /// The availiable api versions.
+        /// </summary>
+        public enum AvailiableApiVersions
+        {
+            /// <summary>
+            /// Current API version
+            /// </summary>
+            [EnumDescription("v1")]
+            V1 = 0,
+
+            /// <summary>
+            /// Don't use it, added for backward campability
+            /// </summary>
+            [Obsolete]
+            [EnumDescription("v1.1")]
+            V11 = 99,
+
+            /// <summary>
+            /// Stable version
+            /// </summary>
+            [EnumDescription("v2")]
+            V2 = 1,
+
+            /// <summary>
+            /// Frozen version
+            /// </summary>
+            [EnumDescription("v3")]
+            V3 = 2
+        }
 
         /// <summary>
         /// Aspose Cloud API base URL.
@@ -81,16 +84,19 @@ namespace Aspose.CAD.Cloud.Sdk.Client
             }
         }
 
-        public string ApiVersion
+        /// <summary>
+        /// Gets or sets the API version.
+        /// </summary>
+        public AvailiableApiVersions Version
         {
             get
             {
-                return this.apiVersion;
+                return this.version;
             }
 
             set
             {
-                this.apiVersion = value;
+                this.version = value;
             }
         }
 
@@ -121,26 +127,16 @@ namespace Aspose.CAD.Cloud.Sdk.Client
         }
 
         /// <summary>
-        /// Authentication type.
-        /// Default is URL signing.
+        /// Authentification type.
+        /// Default is OAuth 2.0
         /// </summary>
         public AuthType AuthType { get; set; }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Gets the API root URL.
-        /// </summary>
-        /// <returns></returns>
         internal string GetApiRootUrl()
         {
-            var result = this.ApiBaseUrl + "/" + this.ApiVersion;
+            var result = this.ApiBaseUrl + "/" + EnumDescriptionAttributeHelper.GetDescription(this.version);
 
             return result.EndsWith("/") ? result.Substring(0, result.Length - 1) : result;
-        }
-
-        #endregion
+        }       
     }
 }

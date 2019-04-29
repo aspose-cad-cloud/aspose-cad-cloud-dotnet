@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="IRequestHandler.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Aspose" file="WebRequestHelper.cs">
+//   Copyright (c) 2017 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,35 +23,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers
+namespace Aspose.CAD.Cloud.Sdk
 {
-    using System.IO;
     using System.Net;
 
-    /// <summary>
-    /// Reqeest handler interface.
-    /// </summary>
-    internal interface IRequestHandler
+    internal class WebRequestHelper
     {
-        /// <summary>
-        /// Processes the URL.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <returns>Processed URL.</returns>
-        string ProcessUrl(string url);
-
-        /// <summary>
-        /// Processes parameters before sending.
-        /// </summary>
-        /// <param name="request">The request.</param>
-        /// <param name="streamToSend">The stream to send.</param>
-        void BeforeSend(WebRequest request, Stream streamToSend);
-
-        /// <summary>
-        /// Processes the response.
-        /// </summary>
-        /// <param name="response">The response.</param>
-        /// <param name="resultStream">The result stream.</param>
-        void ProcessResponse(HttpWebResponse response, Stream resultStream);
+        public static void AddHeader(WebRequest request, string key, string value)
+        {
+#if NET20
+             request.Headers.Add(key, value);
+#endif
+#if NETSTANDARD1_6
+            request.Headers[key] = value;
+#endif
+        }
     }
 }

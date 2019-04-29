@@ -23,22 +23,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client.Internal
+namespace Aspose.CAD.Cloud.Sdk
 {
     using System.IO;
     using System.Text;
 
-    /// <summary>
-    /// Stream helper class
-    /// </summary>
-    public static class StreamHelper
+    internal class StreamHelper
     {
-        /// <summary>
-        /// Copies content of one stream to another.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="destination">The destination.</param>
-        /// <param name="bufferSize">Size of the buffer.</param>
         public static void CopyTo(Stream source, Stream destination, int bufferSize = 81920)
         {
             if (source.CanSeek)
@@ -55,11 +46,6 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal
             }
         }
 
-        /// <summary>
-        /// Reads stream content as bytes.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns>Stream content as bytes</returns>
         public static byte[] ReadAsBytes(Stream input)
         {
             byte[] buffer = new byte[16 * 1024];
@@ -75,26 +61,6 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal
             }
         }
 
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents a stream.
-        /// </summary>
-        /// <param name="stream">The stream.</param>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents a stream.
-        /// </returns>
-        public static string ToString(Stream stream)
-        {
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
-        /// <summary>
-        /// Copies the stream to string builder.
-        /// </summary>
-        /// <param name="sb">The string builder.</param>
-        /// <param name="stream">The stream.</param>
         public static void CopyStreamToStringBuilder(StringBuilder sb, Stream stream)
         {
             if ((stream == null) || !stream.CanRead)

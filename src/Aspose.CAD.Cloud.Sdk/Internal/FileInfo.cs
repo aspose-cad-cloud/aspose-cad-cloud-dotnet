@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="AuthType.cs">
-//   Copyright (c) 2018 Aspose.Imaging for Cloud
+// <copyright company="Aspose" file="FileInfo.cs">
+//   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,21 +23,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client
+namespace Aspose.CAD.Cloud.Sdk
 {
-    /// <summary>
-    /// Supported types of authentication.
-    /// </summary>
-    public enum AuthType
+    internal struct FileInfo
     {
-        /// <summary>
-        /// OAuth2.0
-        /// </summary>
-        OAuth2 = 0,
+        public string Name { get; set; }
 
-        /// <summary>
-        /// Authentication with signing of url.
-        /// </summary>
-        RequestSignature = 1
+        public string MimeType { get; set; }
+
+        public byte[] FileContent { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Aspose.CAD.Cloud.Sdk
     /// <summary>
     /// Aspose.Cad for Cloud API.
     /// </summary>
-    public class CADApi
+    public class CadApi
     {        
         private readonly ApiInvoker apiInvoker;
         private readonly Configuration configuration;     

@@ -25,84 +25,36 @@
 
 namespace Aspose.CAD.Cloud.Sdk
 {
-    using CAD.Cloud.Sdk.Client;
-    using Aspose.CAD.Cloud.Sdk.Client.Internal;
-    using CAD.Cloud.Sdk.Client.Internal.RequestHandlers;
     using System;
-    using System.Collections.Generic;
+    using System.Collections.Generic;    
     using System.IO;
     using System.Net;
+#if NETSTANDARD1_6
+    using System.Reflection;
+#endif
     using System.Text;
-    using FileInfo = Aspose.CAD.Cloud.Sdk.Client.Internal.FileInfo;
 
-    /// <summary>
-    /// API invoker class
-    /// </summary>
     internal class ApiInvoker
-    {
-        #region Consts
-
-        /// <summary>
-        /// Aspose client header name
-        /// </summary>
+    {        
         private const string AsposeClientHeaderName = "x-aspose-client";
-
-        /// <summary>
-        /// Aspose client version header name
-        /// </summary>
         private const string AsposeClientVersionHeaderName = "x-aspose-client-version";
-
-        /// <summary>
-        /// The timeout division increase coefficient - size in bytes is divided by its' value, getting milliseconds.
-        /// I.e., this is a number of bytes indicating timeout increase for 1 millisecond.
-        /// </summary>
-        private const long TimeoutDivisionIncreaseCoefficient = 40L;
-
-        #endregion
-
-        #region Fields
-
-        /// <summary>
-        /// The default header map
-        /// </summary>
         private readonly Dictionary<string, string> defaultHeaderMap = new Dictionary<string, string>();
-
-        /// <summary>
-        /// The request handlers
-        /// </summary>
-        private readonly List<IRequestHandler> requestHandlers;
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiInvoker"/> class.
-        /// </summary>
-        /// <param name="requestHandlers">The request handlers.</param>
+        private readonly List<IRequestHandler> requestHandlers; 
+    
         public ApiInvoker(List<IRequestHandler> requestHandlers)
         {
+#if NET20            
             var sdkVersion = this.GetType().Assembly.GetName().Version;
+#endif
+#if NETSTANDARD1_6
+            var sdkVersion = this.GetType().GetTypeInfo().Assembly.GetName().Version;
+#endif
             this.AddDefaultHeader(AsposeClientHeaderName, ".net sdk");
             this.AddDefaultHeader(AsposeClientVersionHeaderName, string.Format("{0}.{1}", sdkVersion.Major, sdkVersion.Minor));
             this.requestHandlers = requestHandlers;
         }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Invokes the API.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <param name="method">The method.</param>
-        /// <param name="body">The body.</param>
-        /// <param name="headerParams">The header parameters.</param>
-        /// <param name="formParams">The form parameters.</param>
-        /// <param name="contentType">Type of the content.</param>
-        /// <returns>Resulting stream.</returns>
-        public Stream InvokeApi(
+        
+        public string InvokeApi(
             string path,
             string method,
             string body = null,
@@ -110,36 +62,26 @@ namespace Aspose.CAD.Cloud.Sdk
             Dictionary<string, object> formParams = null,
             string contentType = "application/json")
         {
-            return this.InvokeInternal(path, method, body, headerParams, formParams, contentType);
+            return this.InvokeInternal(path, method, false, body, headerParams, formParams, contentType) as string;
         }
 
-        /// <summary>
-        /// Converts stream to the file information parameter.
-        /// </summary>
-        /// <param name="stream">The stream.</param>
-        /// <param name="paramName">Name of the parameter.</param>
-        /// <returns>File information parameter.</returns>
+        public Stream InvokeBinaryApi(
+            string path,
+            string method,
+            string body,
+            Dictionary<string, string> headerParams,
+            Dictionary<string, object> formParams,
+            string contentType = "application/json")
+        {
+            return (Stream)this.InvokeInternal(path, method, true, body, headerParams, formParams, contentType);
+        }                     
+       
         public FileInfo ToFileInfo(Stream stream, string paramName)
         {
-            return new FileInfo { Name = paramName, MimeType = "application/octet-stream", file = StreamHelper.ReadAsBytes(stream) };
-        }
+            // TODO: add contenttype
+            return new FileInfo { Name = paramName, FileContent = StreamHelper.ReadAsBytes(stream) };
+        }                 
 
-        /// <summary>
-        /// Converts bytes to the file information parameter.
-        /// </summary>
-        /// <param name="data">The data bytes.</param>
-        /// <returns>File information parameter.</returns>
-        public FileInfo ToFileInfo(byte[] data)
-        {
-            return new FileInfo { Name = "file", MimeType = "application/octet-stream", file = data };
-        }
-
-        /// <summary>
-        /// Gets the multipart form data.
-        /// </summary>
-        /// <param name="postParameters">The post parameters.</param>
-        /// <param name="boundary">The boundary.</param>
-        /// <returns>Multipart form data.</returns>
         private static byte[] GetMultipartFormData(Dictionary<string, object> postParameters, string boundary)
         {
             // TOOD: stream is not disposed
@@ -171,7 +113,7 @@ namespace Aspose.CAD.Cloud.Sdk
                         formDataStream.Write(Encoding.UTF8.GetBytes(postData), 0, Encoding.UTF8.GetByteCount(postData));
 
                         // Write the file data directly to the Stream, rather than serializing it to a string.
-                        formDataStream.Write(fileInfo.file, 0, fileInfo.file.Length);
+                        formDataStream.Write(fileInfo.FileContent, 0, fileInfo.FileContent.Length);
                     }
                     else
                     {
@@ -184,7 +126,7 @@ namespace Aspose.CAD.Cloud.Sdk
                         {
                             stringData = SerializationHelper.Serialize(param.Value);
                         }
-
+                        
                         string postData =
                             string.Format(
                                 "--{0}\r\nContent-Disposition: form-data; name=\"{1}\"\r\n\r\n{2}",
@@ -208,7 +150,7 @@ namespace Aspose.CAD.Cloud.Sdk
                         var fileInfo = (FileInfo)param.Value;
 
                         // Write the file data directly to the Stream, rather than serializing it to a string.
-                        formDataStream.Write(fileInfo.file, 0, fileInfo.file.Length);
+                        formDataStream.Write(fileInfo.FileContent, 0, fileInfo.FileContent.Length);
                     }
                     else
                     {
@@ -231,37 +173,23 @@ namespace Aspose.CAD.Cloud.Sdk
             formDataStream.Position = 0;
             byte[] formData = new byte[formDataStream.Length];
             formDataStream.Read(formData, 0, formData.Length);
-            formDataStream.Close();
+            formDataStream.Dispose();
 
             return formData;
         }
 
-        /// <summary>
-        /// Adds the default header.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="value">The value.</param>
         private void AddDefaultHeader(string key, string value)
         {
             if (!this.defaultHeaderMap.ContainsKey(key))
             {
                 this.defaultHeaderMap.Add(key, value);
             }
-        }
+        }    
 
-        /// <summary>
-        /// Invokes the internal API.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <param name="method">The method.</param>
-        /// <param name="body">The body.</param>
-        /// <param name="headerParams">The header parameters.</param>
-        /// <param name="formParams">The form parameters.</param>
-        /// <param name="contentType">Type of the content.</param>
-        /// <returns>Resulting stream.</returns>
-        private Stream InvokeInternal(
+        private object InvokeInternal(
             string path,
             string method,
+            bool binaryResponse,
             string body,
             Dictionary<string, string> headerParams,
             Dictionary<string, object> formParams,
@@ -276,33 +204,22 @@ namespace Aspose.CAD.Cloud.Sdk
             {
                 headerParams = new Dictionary<string, string>();
             }
-
+           
             this.requestHandlers.ForEach(p => path = p.ProcessUrl(path));
 
             WebRequest request;
             try
             {
                 request = this.PrepareRequest(path, method, formParams, headerParams, body, contentType);
-                return this.ReadResponse(request);
+                return this.ReadResponse(request, binaryResponse);
             }
             catch (NeedRepeatRequestException)
             {
                 request = this.PrepareRequest(path, method, formParams, headerParams, body, contentType);
-                return this.ReadResponse(request);
-            }
-        }
-
-        /// <summary>
-        /// Prepares the request.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <param name="method">The method.</param>
-        /// <param name="formParams">The form parameters.</param>
-        /// <param name="headerParams">The header parameters.</param>
-        /// <param name="body">The body.</param>
-        /// <param name="contentType">Type of the content.</param>
-        /// <returns>Prepared request.</returns>
-        /// <exception cref="Aspose.CAD.Cloud.Sdk.Client.ApiException">500 - unknown method type</exception>
+                return this.ReadResponse(request, binaryResponse);               
+            }            
+        }       
+        
         private WebRequest PrepareRequest(string path, string method, Dictionary<string, object> formParams, Dictionary<string, string> headerParams, string body, string contentType)
         {
             var client = WebRequest.Create(path);
@@ -321,9 +238,7 @@ namespace Aspose.CAD.Cloud.Sdk
                 {
                     client.ContentType = "multipart/form-data";
                     formData = GetMultipartFormData(formParams, string.Empty);
-                }
-
-                client.ContentLength = formData.Length;
+                }                
             }
             else
             {
@@ -332,14 +247,14 @@ namespace Aspose.CAD.Cloud.Sdk
 
             foreach (var headerParamsItem in headerParams)
             {
-                client.Headers.Add(headerParamsItem.Key, headerParamsItem.Value);
+                WebRequestHelper.AddHeader(client, headerParamsItem.Key, headerParamsItem.Value);
             }
 
             foreach (var defaultHeaderMapItem in this.defaultHeaderMap)
             {
                 if (!headerParams.ContainsKey(defaultHeaderMapItem.Key))
                 {
-                    client.Headers.Add(defaultHeaderMapItem.Key, defaultHeaderMapItem.Value);
+                    WebRequestHelper.AddHeader(client, defaultHeaderMapItem.Key, defaultHeaderMapItem.Value);
                 }
             }
 
@@ -366,7 +281,7 @@ namespace Aspose.CAD.Cloud.Sdk
                             requestWriter.Write(body);
                             requestWriter.Flush();
                         }
-
+                        
                         break;
                     default:
                         throw new ApiException(500, "unknown method type " + method);
@@ -376,17 +291,16 @@ namespace Aspose.CAD.Cloud.Sdk
 
                 if (streamToSend != null)
                 {
-                    client.Timeout += (int) (streamToSend.Length / TimeoutDivisionIncreaseCoefficient);
+#if NET20
                     using (Stream requestStream = client.GetRequestStream())
+#endif
+#if NETSTANDARD1_6
+                    using (Stream requestStream = client.GetRequestStreamAsync().Result) 
+#endif                    
                     {
                         StreamHelper.CopyTo(streamToSend, requestStream);
                     }
-                }
-                else
-                {
-                    // TODO: change the behavior according to CADCLOUD-52 resolution
-                    client.Timeout += 120000;
-                }
+                }                
             }
             finally
             {
@@ -395,16 +309,11 @@ namespace Aspose.CAD.Cloud.Sdk
                     streamToSend.Dispose();
                 }
             }
-
+            
             return client;
         }
 
-        /// <summary>
-        /// Reads the response.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <returns>Response stream.</returns>
-        private Stream ReadResponse(WebRequest client)
+        private object ReadResponse(WebRequest client, bool binaryResponse)
         {
             var webResponse = (HttpWebResponse)this.GetResponse(client);
             var resultStream = new MemoryStream();
@@ -415,7 +324,17 @@ namespace Aspose.CAD.Cloud.Sdk
                 this.requestHandlers.ForEach(p => p.ProcessResponse(webResponse, resultStream));
 
                 resultStream.Position = 0;
-                return resultStream;
+                if (binaryResponse)
+                {
+                    return resultStream;
+                }
+
+                using (var responseReader = new StreamReader(resultStream))
+                {
+                    var responseData = responseReader.ReadToEnd();
+                    resultStream.Dispose();
+                    return responseData;
+                }
             }
             catch (Exception)
             {
@@ -424,17 +343,34 @@ namespace Aspose.CAD.Cloud.Sdk
             }
         }
 
-        /// <summary>
-        /// Gets the response.
-        /// </summary>
-        /// <param name="request">The request.</param>
-        /// <returns>The response.</returns>
         private WebResponse GetResponse(WebRequest request)
         {
             try
             {
-                return request.GetResponse();
-            }
+#if NET20
+                    return request.GetResponse();
+#endif
+#if NETSTANDARD1_6
+                try
+                {
+                    return request.GetResponseAsync().Result;
+                }
+                catch (AggregateException ae)
+                {
+                    ae.Handle((x) =>
+                        {
+                            if (x is WebException)
+                            {
+                                throw x;
+                            }
+
+                            return false;
+                        });
+
+                    throw;
+                }                
+#endif
+            }           
             catch (WebException wex)
             {
                 if (wex.Response != null)
@@ -445,7 +381,5 @@ namespace Aspose.CAD.Cloud.Sdk
                 throw;
             }
         }
-
-        #endregion
     }
 }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="SaaSposeResponse.cs">
+// <copyright company="Aspose" file="EnumDescriptionAttributeHelper.cs">
 //   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
@@ -23,38 +23,38 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Model 
+namespace Aspose.CAD.Cloud.Sdk
 {
-  using System.Text;
-  using System.Net;
+    using System;
+#if NETSTANDARD1_6
+    using System.Linq;
+    using System.Reflection;    
+#endif
 
-    /// <summary>
-    /// The basic SaaSposeResponse response class kept from the old Aspose for Cloud Platform. We keep this base class and use it because most probably users are already using it to get API responses. The plan in future is to get rid of this name, but who knows when ?!
-    /// </summary>  
-    public class SaaSposeResponse 
-    {                       
-        /// <summary>
-        /// Gets or sets Code
-        /// </summary>
-        public HttpStatusCode Code { get; set; }
-
-        /// <summary>
-        /// Gets or sets Status
-        /// </summary>  
-        public string Status { get; set; }
-
-        /// <summary>
-        /// Get the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()  
+    internal static class EnumDescriptionAttributeHelper
+    {        
+        public static string GetDescription(Enum e)
         {
-          var sb = new StringBuilder();
-          sb.Append("class SaaSposeResponse {\n");
-          sb.Append("  Code: ").Append(this.Code).Append("\n");
-          sb.Append("  Status: ").Append(this.Status).Append("\n");
-          sb.Append("}\n");
-          return sb.ToString();
+            if (e == null)
+            {
+                return string.Empty;
+            }
+
+#if NET20
+            var descriptionAttribute =
+                (EnumDescriptionAttribute)e.GetType().GetField(e.ToString()).GetCustomAttributes(typeof(EnumDescriptionAttribute), false)[0];
+#endif
+#if NETSTANDARD1_6
+             var descriptionAttribute =
+                (EnumDescriptionAttribute)e.GetType().GetTypeInfo().GetField(e.ToString()).GetCustomAttributes(typeof(EnumDescriptionAttribute), false).First();
+#endif
+
+            if (descriptionAttribute != null)
+            {
+                return descriptionAttribute.Description;
+            }
+        
+            return string.Empty;
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="NeedRepeatRequestException.cs">
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Aspose" file="ApiException.cs">
 //   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
@@ -23,15 +23,40 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client.Internal
+namespace Aspose.CAD.Cloud.Sdk
 {
     using System;
 
     /// <summary>
-    /// Exception for repeat request need
+    /// API exception.
     /// </summary>
-    /// <seealso cref="System.Exception" />
-    internal class NeedRepeatRequestException : Exception
+    public class ApiException : Exception
     {
+        private readonly int errorCode;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiException"/> class.
+        /// </summary>
+        /// <param name="errorCode">
+        /// The error code.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        public ApiException(int errorCode, string message) : base(message)
+        {
+            this.errorCode = errorCode;
+        }
+
+        /// <summary>
+        /// Error code.
+        /// </summary>
+        public int ErrorCode
+        {
+            get
+            {
+                return this.errorCode;
+            }
+        }       
     }
 }

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="SerializationHelper.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+//   Copyright (c) 2017 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,26 +23,21 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client.Internal
+namespace Aspose.CAD.Cloud.Sdk
 {
     using System;
     using System.IO;
+#if NETSTANDARD1_6
+    using System.Reflection;
+#endif
 
-    using Aspose.CAD.Cloud.Sdk.Client;
+    using Aspose.CAD.Cloud.Sdk.Model;
 
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
-    /// <summary>
-    /// JSON serialization helper class
-    /// </summary>
-    public static class SerializationHelper
+    internal class SerializationHelper
     {
-        /// <summary>
-        /// Serializes the specified object.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns>Serialized object.</returns>
-        /// <exception cref="Aspose.CAD.Cloud.Sdk.Client.ApiException">500</exception>
         public static string Serialize(object obj)
         {
             try
@@ -59,29 +54,11 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal
             }
         }
 
-        /// <summary>
-        /// Deserializes the specified JSON string.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="json">The JSON string.</param>
-        /// <returns>Deserialized JSON string</returns>
-        /// <exception cref="Aspose.CAD.Cloud.Sdk.Client.ApiException">
-        /// 500
-        /// </exception>
-        public static object Deserialize<T>(string json)
+        public static object Deserialize(string json, Type type)
         {
             try
             {
-                if (json.StartsWith("{") || json.StartsWith("["))
-                {
-                    return (T)JsonConvert.DeserializeObject(json, typeof(T));
-                }
-                else
-                {
-                    System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
-                    xmlDoc.LoadXml(json);
-                    return JsonConvert.SerializeXmlNode(xmlDoc);
-                }
+                throw new ApiException(500, "Server does not return json: '" + json + "'");
             }
             catch (IOException e)
             {
@@ -95,6 +72,46 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal
             {
                 throw new ApiException(500, "Error while parse response: " + xmle.Message);
             }
+        }
+
+        internal abstract class JsonCreationConverter<T> : JsonConverter
+        {            
+            public override bool CanConvert(Type objectType)
+            {
+#if NET20
+                return typeof(T).IsAssignableFrom(objectType);
+#endif
+#if NETSTANDARD1_6
+                return typeof(T).GetTypeInfo().IsAssignableFrom(objectType);
+#endif
+            }
+
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer)
+            {
+                var jsonObject = JObject.Load(reader);
+                T target = this.Create(objectType, jsonObject);
+                serializer.Populate(jsonObject.CreateReader(), target);
+                return target;
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
+
+            /// <summary>
+            /// Create an instance of objectType, based properties in the JSON object.
+            /// </summary>
+            /// <param name="objectType">type of object expected.</param>
+            /// <param name="jsonObject">
+            /// Contents of JSON object that will be deserialized.
+            /// </param>
+            /// <returns>An instance of objectType.</returns>
+            protected abstract T Create(Type objectType, JObject jsonObject);
         }
     }
 }

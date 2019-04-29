@@ -23,23 +23,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client.Internal
+namespace Aspose.CAD.Cloud.Sdk
 {
-    using System;
-    using System.Web;
-
-    /// <summary>
-    /// URL helper class
-    /// </summary>
     internal class UrlHelper
     {
-        /// <summary>
-        /// Adds the path parameter.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <param name="parameterName">Name of the parameter.</param>
-        /// <param name="parameterValue">The parameter value.</param>
-        /// <returns>Resulting URL</returns>
         public static string AddPathParameter(string url, string parameterName, object parameterValue)
         {
             if (parameterValue == null || string.IsNullOrEmpty(parameterValue.ToString()))
@@ -52,15 +39,8 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal
             }
 
             return url;
-        }
+        }        
 
-        /// <summary>
-        /// Adds the query parameter to URL.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <param name="parameterName">Name of the parameter.</param>
-        /// <param name="parameterValue">The parameter value.</param>
-        /// <returns>Resulting URL</returns>
         public static string AddQueryParameterToUrl(string url, string parameterName, object parameterValue)
         {
             if (url.Contains("{" + parameterName + "}"))
@@ -81,12 +61,23 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal
                 return url;
             }
 
-            var uriBuilder = new UriBuilder(url);
-            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-            query.Add(parameterName, parameterValue.ToString());
-            uriBuilder.Query = query.ToString();
+            url = AddParamToQuery(url, parameterName, parameterValue.ToString());           
+            return url;
+        }
 
-            return uriBuilder.ToString();
+        private static string AddParamToQuery(string url, string parameterName, string parameterValue)
+        {
+            if (url.Contains("?"))
+            {
+                url += "&";
+            }
+            else
+            {
+                url += "?";
+            }
+
+            url += string.Format("{0}={1}", parameterName, HttpUtility.UrlEncode(parameterValue));
+            return url;
         }
     }
 }

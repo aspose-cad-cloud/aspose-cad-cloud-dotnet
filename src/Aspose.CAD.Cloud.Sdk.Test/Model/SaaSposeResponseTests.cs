@@ -31,11 +31,11 @@ using System.Collections.Generic;
 using System.Net;
 using Aspose.CAD.Cloud.Sdk;
 using Aspose.CAD.Cloud.Sdk.Model;
-using Aspose.CAD.Cloud.Sdk.Client;
+using Aspose.CAD.Cloud.Sdk;
 using System.Reflection;
 using Newtonsoft.Json;
-using Com.Aspose.Storage.Api;
-using Com.Aspose.Storage.Model;
+using Aspose.Storage.Cloud.Sdk.Api;
+using Aspose.Storage.Cloud.Sdk.Model;
 
 namespace Aspose.CAD.Cloud.Sdk.Test.Model
 {

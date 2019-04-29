@@ -75,7 +75,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
             string folder = CloudTestFolder;
             string storage = DefaultStorage;
 
-            foreach (FilesList.StorageFileInfo inputFile in InputTestFiles)
+            foreach (var inputFile in InputTestFiles)
             {
                 if (inputFile.Name.EndsWith(formatExtension))
                 {

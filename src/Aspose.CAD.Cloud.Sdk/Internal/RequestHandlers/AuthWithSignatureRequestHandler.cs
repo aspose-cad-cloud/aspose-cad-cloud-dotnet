@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="AuthWithSignatureRequestHandler.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+//   Copyright (c) 2016 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers
+namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
 {
     using System;
     using System.IO;
@@ -31,44 +31,16 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers
     using System.Security.Cryptography;
     using System.Text;
     using System.Text.RegularExpressions;
-
-    using Aspose.CAD.Cloud.Sdk.Client;
-
-    /// <summary>
-    /// Signature authentication request handler
-    /// </summary>
-    /// <seealso cref="Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers.IRequestHandler" />
+    
     internal class AuthWithSignatureRequestHandler : IRequestHandler
     {
-        #region Fields
-
-        /// <summary>
-        /// The configuration
-        /// </summary>
         private readonly Configuration configuration;
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AuthWithSignatureRequestHandler"/> class.
-        /// </summary>
-        /// <param name="configuration">The configuration.</param>
         public AuthWithSignatureRequestHandler(Configuration configuration)
         {
             this.configuration = configuration;
         }
 
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Processes the URL.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <returns>Processed URL.</returns>
         public string ProcessUrl(string url)
         {
             if (this.configuration.AuthType != AuthType.RequestSignature)
@@ -76,39 +48,24 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers
                 return url;
             }
 
-            url = UrlHelper.AddQueryParameterToUrl(url, "appSid", this.configuration.AppSid);
+            url = UrlHelper.AddQueryParameterToUrl(url, "appSid", this.configuration.AppSid);                      
             url = this.Sign(url);
 
             return url;
         }
 
-        /// <summary>
-        /// Processes parameters before sending.
-        /// </summary>
-        /// <param name="request">The request.</param>
-        /// <param name="streamToSend">The stream to send.</param>
         public void BeforeSend(WebRequest request, Stream streamToSend)
         {
         }
 
-        /// <summary>
-        /// Processes the response.
-        /// </summary>
-        /// <param name="response">The response.</param>
-        /// <param name="resultStream">The result stream.</param>
         public void ProcessResponse(HttpWebResponse response, Stream resultStream)
         {
         }
 
-        /// <summary>
-        /// Signs the specified URL.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <returns>Signed URL.</returns>
         private string Sign(string url)
         {
             UriBuilder uriBuilder = new UriBuilder(url);
-
+            
             // Remove final slash here as it can be added automatically.
             uriBuilder.Path = uriBuilder.Path.TrimEnd('/');
 
@@ -122,7 +79,7 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers
 
             // Remove invalid symbols.
             signature = signature.TrimEnd('=');
-            //signature = HttpUtility.UrlEncode(signature);
+            signature = HttpUtility.UrlEncode(signature);
 
             // Convert codes to upper case as they can be updated automatically.
             signature = Regex.Replace(signature, "%[0-9a-f]{2}", e => e.Value.ToUpper());
@@ -130,7 +87,5 @@ namespace Aspose.CAD.Cloud.Sdk.Client.Internal.RequestHandlers
             // Add the signature to query string.
             return string.Format("{0}&signature={1}", uriBuilder.Uri.AbsoluteUri, signature);
         }
-
-        #endregion
     }
 }
