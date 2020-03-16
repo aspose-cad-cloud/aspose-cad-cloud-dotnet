@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright company="Aspose" file="CadApi.cs">
-//   Copyright (c) 2018 Aspose.Cad for Cloud
+//   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,7 +32,7 @@ namespace Aspose.CAD.Cloud.Sdk
     using Aspose.CAD.Cloud.Sdk.RequestHandlers;
     
     /// <summary>
-    /// Aspose.Cad for Cloud API.
+    /// Aspose.CAD Cloud API.
     /// </summary>
     public class CadApi
     {        
@@ -1571,3 +1571,4 @@ namespace Aspose.CAD.Cloud.Sdk
         }
     }
 }
+

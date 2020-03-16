@@ -2,7 +2,7 @@
 This repository contains Aspose.CAD Cloud SDK for .NET source code. This SDK allows you to perform a wide range of CAD drawing processing operations including creation, manipulation and conversion in the cloud, with zero initial costs and gain all benefits of strong types and IDE highlights.
 
 # Key Features
-* Supports the latest versions of AutoCAD DWG, DXF, DWF, DWT, STL, IGS, DGN and CF2 files
+* Supports the latest versions of AutoCAD DWG, DXF, DWF, DWT, STL, IGS, DGN, OBJ and CF2 files
 * Convert CAD drawings to high quality PDF
 * Convert CAD drawing to high quality raster images
 * Convert CAD drawing to high quality vector files like SVG and WMF
