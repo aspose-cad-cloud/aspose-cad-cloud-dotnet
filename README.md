@@ -15,7 +15,7 @@ This repository contains Aspose.CAD Cloud SDK for .NET source code. This SDK all
 See [API Reference](https://apireference.aspose.cloud/cad/) for full API specification.
 
 ## How to use the SDK?
-The complete source code is available in this repository folder. You can either directly use it in your project via source code or get [NuGet distribution](https://www.nuget.org/packages/Aspose.CAD-Cloud/) (recommended). For more details, please visit our [documentation website](https://docs.aspose.cloud/display/CADcloud/Available+SDKs#AvailableSDKs-.NET).
+The complete source code is available in this repository folder. You can either directly use it in your project via source code or get [NuGet distribution](https://www.nuget.org/packages/Aspose.CAD-Cloud/) (recommended). For more details, please visit our [documentation website](https://docs.aspose.cloud/cad/available-sdks/).
 
 ### Prerequisites
 
@@ -111,7 +111,7 @@ Your feedback is very important to us. Please feel free to contact us using our 
 + [**Web API reference**](https://apireference.aspose.cloud/cad/)
 + [**Website**](https://www.aspose.cloud/)
 + [**Product Home**](https://products.aspose.cloud/cad)
-+ [**Documentation**](https://docs.aspose.cloud/display/cadcloud/Home)
++ [**Documentation**](https://docs.aspose.cloud/cad/)
 + [**Free Support Forum**](https://forum.aspose.cloud/c/cad)
 + [**Paid Support Helpdesk**](https://helpdesk.aspose.cloud/)
 + [**Blog**](https://blog.aspose.cloud/category/cad/)
