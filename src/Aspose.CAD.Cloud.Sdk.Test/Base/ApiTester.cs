@@ -31,10 +31,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using Aspose.CAD.Cloud.Sdk.Api;
 using Aspose.CAD.Cloud.Sdk.Model;
-using Aspose.Storage.Cloud.Sdk.Api;
-using Aspose.Storage.Cloud.Sdk.Model;
-using Aspose.Storage.Cloud.Sdk.Model.Requests;
+using Aspose.CAD.Cloud.Sdk.Model.Requests;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -70,7 +69,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// <summary>
         /// The local test folder
         /// </summary>
-        protected const string LocalTestFolder = @"TestData";
+        protected const string LocalTestFolder = @"../../../../../TestData";
 
         /// <summary>
         /// The local test folder
@@ -110,17 +109,12 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
 
         #region Fields
 
-        protected List<FileResponse> InputTestFiles;
+        protected List<StorageFile> InputTestFiles;
 
         /// <summary>
         /// Aspose.CAD API
         /// </summary>
         protected CadApi CadApi;
-
-        /// <summary>
-        /// Aspose.Storage API
-        /// </summary>
-        protected StorageApi StorageApi;
 
         #region Properties
 
@@ -212,7 +206,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// <typeparam name="T">response type</typeparam>
         /// <param name="response">typed response</param>
         /// <param name="referenceInfo">etalon file info</param>
-        protected delegate void ResponseValidatorDelegate<T>(T response, Stream resultStream, FileResponse referenceInfo);
+        protected delegate void ResponseValidatorDelegate<T>(T response, Stream resultStream, StorageFile referenceInfo);
 
         #endregion
 
@@ -225,13 +219,13 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// <param name="appSid">The application sid.</param>
         /// <param name="baseUrl">The base URL.</param>
         /// <param name="apiVersion">The API version.</param>
-        /// <param name="authType">Type of the authentication.</param>
+        /// <param name="onPremise">on-premise setup.</param>
         /// <param name="debug">if set to <c>true</c> [debug].</param>
         /// <exception cref="System.ArgumentException">Please, specify valid access data (AppKey, AppSid, Base URL)</exception>
         protected void CreateApiInstances(
             string appKey = AppKey, string appSid = AppSid, string baseUrl = BaseUrl, 
-            Configuration.AvailiableApiVersions apiVersion = Configuration.AvailiableApiVersions.V3, 
-            AuthType authType = AuthType.OAuth2, bool debug = true)
+            AvailableApiVersions apiVersion = AvailableApiVersions.V3, 
+            bool onPremise = false, bool debug = true)
         {
             if (appKey == AppKey || appSid == AppSid || string.IsNullOrEmpty(baseUrl))
             {
@@ -251,61 +245,37 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 }
             }
 
-            CadApi = new CadApi(new Configuration()
-            {
-                ApiBaseUrl =
+            CadApi = new CadApi(
+                appKey,
+                appSid,
 #if LOCAL
-                    "https://localhost:44350",
+                "https://localhost:44350",
 #else
-                    baseUrl,
+                baseUrl,
 #endif
-                AppKey = appKey,
-                AppSid = appSid,
-                AuthType = authType,
-                DebugMode = debug,
-                Version = apiVersion
-            });
 
-            StorageApi = new StorageApi(new Storage.Cloud.Sdk.Configuration()
-            {
-                ApiBaseUrl = baseUrl,
-                AppKey = appKey,
-                AppSid = appSid,
-                DebugMode = debug,
-                AuthType = (Storage.Cloud.Sdk.Api.AuthType)(int)authType
-            });
-
-            RemoveSigningRequestHandler(StorageApi);
-
-            UploadInputTestFiles(false);
+                
+                apiVersion,
+                debug
+            );
+       
+            UploadInputTestFiles(true);
 
             InputTestFiles = FetchInputTestFilesInfo().ToList();
         }
 
-        private void RemoveSigningRequestHandler(StorageApi storageApi)
+        private void EnsureDirectoryExists(string directoryPath, string storage)
         {
-            var apiInvokerField = storageApi.GetType().GetField("apiInvoker", BindingFlags.Instance | BindingFlags.NonPublic);
-            var apiInvoker = apiInvokerField.GetValue(storageApi);
-            var requestHandlersField = apiInvoker.GetType().GetField("requestHandlers", BindingFlags.Instance | BindingFlags.NonPublic);
-            var list = requestHandlersField.GetValue(apiInvoker) as IList;
-            if (list.Count == 4)
-            {
-                list.RemoveAt(list.Count - 1);
-            }
-        }
-
-        private void EnsureDirectiryExists(string directoryPath, string storage)
-        {
-            var filesResponse = StorageApi.GetListFiles(new GetListFilesRequest(directoryPath, storage));
+            var filesResponse = CadApi.GetFilesList(new GetFilesListRequest(directoryPath, storage));
             if (filesResponse == null)
             {
-                StorageApi.PutCreateFolder(new PutCreateFolderRequest(directoryPath, storage, storage));
+                CadApi.CreateFolder(new CreateFolderRequest(directoryPath, storage));
             }
         }
 
         private void UploadInputTestFiles(bool forceOverride = false)
         {
-            if (ForceReferenceOverride)
+            if (ForceReferenceOverride || forceOverride)
             {
                 Directory.CreateDirectory(LocalReferenceFolderFullPath);
                 EnsureFilesExists(CloudTestFolder, DefaultStorage, LocalTestFolderFullPath, forceOverride);
@@ -315,11 +285,10 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
 
         private void EnsureFilesExists(string cloudFolder, string storage, string localFolder, bool forceOverride)
         {
-            EnsureDirectiryExists(cloudFolder, storage);
-            var filesResponse = StorageApi.GetListFiles(new GetListFilesRequest(cloudFolder, storage));
-
-            Assert.AreEqual(filesResponse.Code, (int)HttpStatusCode.OK);
-            var files = filesResponse.Files;
+            EnsureDirectoryExists(cloudFolder, storage);
+            var filesResponse = CadApi.GetFilesList(new GetFilesListRequest(cloudFolder, storage));
+            
+            var files = filesResponse.Value;
 
             foreach (var file in Directory.GetFiles(Path.GetFullPath(localFolder), "*.*", SearchOption.TopDirectoryOnly))
             {
@@ -337,7 +306,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 {
                     if (forceOverride)
                     {
-                        StorageApi.DeleteFile(new DeleteFileRequest(fullStorageFileName, "", storage));
+                        CadApi.DeleteFile(new DeleteFileRequest(fullStorageFileName, storage));
                     }
                 }
                 else
@@ -349,7 +318,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 {
                     using (var fs = File.OpenRead(fileInfo.FullName))
                     {
-                        StorageApi.PutCreate(new PutCreateRequest(fullStorageFileName, fs, null, storage));
+                        CadApi.UploadFile(new UploadFileRequest(fullStorageFileName, fs, storage));
                     }
                 }
             }
@@ -378,7 +347,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// <param name="inputFileName">Name of the input file.</param>
         /// <param name="cloudFileInfos">cloud files metadata</param>
         /// <returns></returns>
-        protected bool CheckFileExistsOnCloud(string inputFileName, ICollection<FileResponse> cloudFileInfos)
+        protected bool CheckFileExistsOnCloud(string inputFileName, ICollection<StorageFile> cloudFileInfos)
         {
             foreach (var storageFileInfo in cloudFileInfos)
             {
@@ -398,11 +367,11 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// <param name="fileName">Name of the file.</param>
         /// <param name="storage">The storage.</param>
         /// <returns></returns>
-        protected FileResponse GetStorageFileInfo(string folder, string fileName, string storage)
+        protected StorageFile GetStorageFileInfo(string folder, string fileName, string storage)
         {
-            var fileListResponse = StorageApi.GetListFiles(new GetListFilesRequest(folder, storage));
+            var fileListResponse = CadApi.GetFilesList(new GetFilesListRequest(folder, storage));
 
-            foreach (var storageFileInfo in fileListResponse.Files)
+            foreach (var storageFileInfo in fileListResponse.Value)
             {
                 if (storageFileInfo.Name == fileName)
                 {
@@ -417,24 +386,24 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// Fetches the input test files info.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<FileResponse> FetchInputTestFilesInfo()
+        private IEnumerable<StorageFile> FetchInputTestFilesInfo()
         {
-            if (StorageApi.GetIsExist(
-                    new GetIsExistRequest(CloudTempFolder, null, DefaultStorage)).FileExist.IsExist != true)
+            if (CadApi.ObjectExists(
+                    new ObjectExistsRequest(CloudTempFolder, DefaultStorage)).Exists != true)
             {
-                StorageApi.PutCreateFolder(new PutCreateFolderRequest(CloudTempFolder, DefaultStorage));
+                CadApi.CreateFolder(new CreateFolderRequest(CloudTempFolder, DefaultStorage));
             }
 
-            if (StorageApi.GetIsExist(
-                    new GetIsExistRequest(CloudTestFolder, null, DefaultStorage)).FileExist.IsExist != true)
+            if (CadApi.ObjectExists(
+                    new ObjectExistsRequest(CloudTestFolder, DefaultStorage)).Exists != true)
             {
-                StorageApi.PutCreateFolder(new PutCreateFolderRequest(CloudTestFolder, DefaultStorage));
+                CadApi.CreateFolder(new CreateFolderRequest(CloudTestFolder, DefaultStorage));
             }
 
-            if (StorageApi.GetIsExist(
-                    new GetIsExistRequest(CloudReferencesFolder, null, DefaultStorage)).FileExist.IsExist != true)
+            if (CadApi.ObjectExists(
+                    new ObjectExistsRequest(CloudReferencesFolder, DefaultStorage)).Exists != true)
             {
-                StorageApi.PutCreateFolder(new PutCreateFolderRequest(CloudReferencesFolder, DefaultStorage));
+                CadApi.CreateFolder(new CreateFolderRequest(CloudReferencesFolder, DefaultStorage));
             }
 
 #if LOCAL
@@ -453,9 +422,9 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 });
 #endif
 
-            var filesResponse = StorageApi.GetListFiles(new GetListFilesRequest(CloudTestFolder, DefaultStorage));
+            var filesResponse = CadApi.GetFilesList(new GetFilesListRequest(CloudTestFolder, DefaultStorage));
             
-            return filesResponse?.Files;
+            return filesResponse?.Value;
         }
 
         /// <summary>
@@ -468,7 +437,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// <returns></returns>
         private long ObtainPostResponseLength(string inputPath, string outPath, string storage, PostRequestInvokerDelegate requestInvoker)
         {
-            var inputDownloadResponse = StorageApi.GetDownload(new GetDownloadRequest(inputPath, null, storage));
+            var inputDownloadResponse = CadApi.DownloadFile(new DownloadFileRequest(inputPath, null, storage));
 
             using (inputDownloadResponse)
             {
@@ -516,8 +485,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo.Size ?? 0;
-                    CheckSizeDiff(referenceLength, stream.Length);
+                    var referenceLength = refInfo.Size;
+                    CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
                 storage);
@@ -557,8 +526,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo.Size ?? 0;
-                    CheckSizeDiff(referenceLength, stream.Length);
+                    var referenceLength = refInfo.Size;
+                    CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
                 storage);
@@ -597,8 +566,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo.Size ?? 0;
-                    CheckSizeDiff(referenceLength, stream.Length);
+                    var referenceLength = refInfo.Size;
+                    CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
                 storage);
@@ -644,8 +613,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo.Size ?? 0;
-                    CheckSizeDiff(referenceLength, stream.Length);
+                    var referenceLength = refInfo.Size;
+                    CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
                 storage);
@@ -724,34 +693,34 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                     outPath = CloudTempFolder + "/" + resultFileName;
 
                     // remove output file from the storage (if exists)
-                    if (StorageApi.GetIsExist(new GetIsExistRequest(outPath, null, storage)).FileExist.IsExist ?? false)
+                    if (CadApi.ObjectExists(new ObjectExistsRequest(outPath, storage)).Exists ?? false)
                     {
-                        StorageApi.DeleteFile(new DeleteFileRequest(outPath, null, storage));
+                        CadApi.DeleteFile(new DeleteFileRequest(outPath, storage));
                     }
                 }
 
                 var response = invokeRequestFunc.Invoke();
 
                 var download = saveResultToStorage
-                                    ? StorageApi.GetDownload(new GetDownloadRequest(outPath, null, storage))
+                                    ? CadApi.DownloadFile(new DownloadFileRequest(outPath, storage))
                                     : response as Stream;
 
                 if (AutoRecoverReference && download != null)
                 {
                     var hasToUpload = ForceReferenceOverride;
-                    if (!StorageApi.GetIsExist(new GetIsExistRequest(referencePath + "/" + resultFileName, null, storage)).FileExist.IsExist ?? false)
+                    if (!CadApi.ObjectExists(new ObjectExistsRequest(referencePath + "/" + resultFileName, storage)).Exists ?? false)
                     {
                         hasToUpload = true;
                     }
                     else if (ForceReferenceOverride)
                     {
                         hasToUpload = true;
-                        StorageApi.DeleteFile(new DeleteFileRequest(referencePath + "/" + resultFileName, null, storage));
+                        CadApi.DeleteFile(new DeleteFileRequest(referencePath + "/" + resultFileName, storage));
                     }
 
                     if (hasToUpload)
                     {
-                        StorageApi.PutCreate(new PutCreateRequest(referencePath + "/" + resultFileName, download, null, storage));
+                        CadApi.UploadFile(new UploadFileRequest(referencePath + "/" + resultFileName, download, storage));
                     }
 
 #if DEBUG
@@ -797,16 +766,15 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 if (saveResultToStorage 
                     && !passed 
                     && this.AutoRecoverReference 
-                    && (StorageApi.GetIsExist(new GetIsExistRequest(outPath, null, storage)).FileExist.IsExist ?? false))
+                    && (CadApi.ObjectExists(new ObjectExistsRequest(outPath, storage)).Exists ?? false))
                 {
-                    var moveFileResponse = StorageApi.PostMoveFile(new PostMoveFileRequest(outPath, referencePath + "/" + resultFileName, null, storage, storage));
-                    Assert.AreEqual(moveFileResponse.Status, HttpStatusCode.OK.ToString());
+                    CadApi.MoveFile(new MoveFileRequest(outPath, referencePath + "/" + resultFileName, storage, storage));
                 }
                 else if (saveResultToStorage 
                          && this.RemoveResult 
-                         && (StorageApi.GetIsExist(new GetIsExistRequest(outPath, null, storage)).FileExist.IsExist ?? false))
+                         && (CadApi.ObjectExists(new ObjectExistsRequest(outPath, storage)).Exists ?? false))
                 {
-                    StorageApi.DeleteFile(new DeleteFileRequest(outPath, null, storage));
+                    CadApi.DeleteFile(new DeleteFileRequest(outPath, storage));
                 }
 
                 Console.WriteLine($"Test passed: {passed}");

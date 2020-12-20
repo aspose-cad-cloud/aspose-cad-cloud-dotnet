@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="WebRequestHelper.cs">
-//   Copyright (c) 2017 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="DiscUsage.cs">
+//   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,20 +23,43 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk
+namespace Aspose.CAD.Cloud.Sdk.Model 
 {
-    using System.Net;
+  using System;  
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Runtime.Serialization;
+  using System.Text;
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Converters;
 
-    internal class WebRequestHelper
-    {
-        public static void AddHeader(WebRequest request, string key, string value)
+  /// <summary>
+  /// Class for disc space information.
+  /// </summary>  
+  public class DiscUsage 
+  {                       
+        /// <summary>
+        /// Application used disc space.
+        /// </summary>  
+        public long? UsedSize { get; set; }
+
+        /// <summary>
+        /// Total disc space.
+        /// </summary>  
+        public long? TotalSize { get; set; }
+
+        /// <summary>
+        /// Get the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()  
         {
-#if NET461
-             request.Headers.Add(key, value);
-#endif
-#if NETSTANDARD2_0
-            request.Headers[key] = value;
-#endif
+          var sb = new StringBuilder();
+          sb.Append("class DiscUsage {\n");
+          sb.Append("  UsedSize: ").Append(this.UsedSize).Append("\n");
+          sb.Append("  TotalSize: ").Append(this.TotalSize).Append("\n");
+          sb.Append("}\n");
+          return sb.ToString();
         }
     }
 }

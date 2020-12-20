@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="WebRequestHelper.cs">
-//   Copyright (c) 2017 Aspose.CAD for Cloud
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Aspose" file="IRequestHandler.cs">
+//   Copyright (c) 2018 Aspose.CAD for Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,20 +23,17 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk
+namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
 {
+    using System.IO;
     using System.Net;
 
-    internal class WebRequestHelper
+    internal interface IRequestHandler
     {
-        public static void AddHeader(WebRequest request, string key, string value)
-        {
-#if NET461
-             request.Headers.Add(key, value);
-#endif
-#if NETSTANDARD2_0
-            request.Headers[key] = value;
-#endif
-        }
+        string ProcessUrl(string url);
+
+        void BeforeSend(WebRequest request, Stream streamToSend);
+
+        void ProcessResponse(HttpWebResponse response, Stream resultStream);
     }
 }

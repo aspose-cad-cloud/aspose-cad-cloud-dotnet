@@ -29,10 +29,10 @@ namespace Aspose.CAD.Cloud.Sdk
     {        
         public static string UrlEncode(string stringToEncode)
         {
-#if NET20
+#if NET461
             return System.Web.HttpUtility.UrlEncode(stringToEncode);
 #endif
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
             return System.Net.WebUtility.UrlEncode(stringToEncode);
 #endif
         }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Configurations>Debug;Release;DEBUG-REGEN;LOCAL</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -32,7 +32,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Aspose.Storage.Core-Cloud" Version="18.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="NMock3" version="3.5.44" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />

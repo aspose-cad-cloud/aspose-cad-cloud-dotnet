@@ -46,16 +46,11 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
             var requestHandlers = new List<IRequestHandler>();
             requestHandlers.Add(new DebugLogRequestHandler(this.configuration));
             requestHandlers.Add(new ApiExceptionRequestHandler());
-            this.apiInvoker = new ApiInvoker(requestHandlers);
+            this.apiInvoker = new ApiInvoker(requestHandlers, configuration);
         }
 
         public string ProcessUrl(string url)
         {
-            if (this.configuration.AuthType != AuthType.OAuth2)
-            {
-                return url;
-            }
-
             if (string.IsNullOrEmpty(this.accessToken))
             {
                 this.RequestToken();
@@ -66,21 +61,11 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
 
         public void BeforeSend(WebRequest request, Stream streamToSend)
         {
-            if (this.configuration.AuthType != AuthType.OAuth2)
-            {
-                return;
-            }
-
             WebRequestHelper.AddHeader(request, "Authorization", "Bearer " + this.accessToken);
         }       
 
         public void ProcessResponse(HttpWebResponse response, Stream resultStream)
         {
-            if (this.configuration.AuthType != AuthType.OAuth2)
-            {
-                return;
-            }
-
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 this.RequestToken();
@@ -112,7 +97,7 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
                 contentType: "application/x-www-form-urlencoded");
 
             var result =
-                (GetAccessTokenResult)SerializationHelper.Deserialize(responseString, typeof(GetAccessTokenResult));
+                (GetAccessTokenResult)SerializationHelper.Deserialize<GetAccessTokenResult>(responseString);
 
             this.accessToken = result.AccessToken;
             this.refreshToken = result.RefreshToken;
@@ -126,6 +111,7 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
                 baseUrl = baseUrl.Replace("http:", "https:");
             }
 
+            baseUrl = baseUrl.Trim('/');
             var requestUrl = baseUrl + "/connect/token";
 
             var postData = "grant_type=client_credentials";
@@ -139,7 +125,7 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
                 contentType: "application/x-www-form-urlencoded");
 
             var result =
-                (GetAccessTokenResult)SerializationHelper.Deserialize(responseString, typeof(GetAccessTokenResult));
+                (GetAccessTokenResult)SerializationHelper.Deserialize<GetAccessTokenResult>(responseString);
 
             this.accessToken = result.AccessToken;
             this.refreshToken = result.RefreshToken;

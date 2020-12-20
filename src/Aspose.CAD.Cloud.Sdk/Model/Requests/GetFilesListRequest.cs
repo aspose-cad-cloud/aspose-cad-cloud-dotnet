@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="WebRequestHelper.cs">
-//   Copyright (c) 2017 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="GetFilesListRequest.cs">
+//   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,21 +22,41 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Aspose.CAD.Cloud.Sdk
+namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
-    using System.Net;
+  using Aspose.CAD.Cloud.Sdk.Model; 
 
-    internal class WebRequestHelper
-    {
-        public static void AddHeader(WebRequest request, string key, string value)
+  /// <summary>
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.GetFilesList" /> operation.
+  /// </summary>  
+  public class GetFilesListRequest  
+  {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetFilesListRequest"/> class.
+        /// </summary>        
+        public GetFilesListRequest()
         {
-#if NET461
-             request.Headers.Add(key, value);
-#endif
-#if NETSTANDARD2_0
-            request.Headers[key] = value;
-#endif
         }
-    }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetFilesListRequest"/> class.
+        /// </summary>
+        /// <param name="path">Folder path e.g. &#39;/folder&#39;</param>
+        /// <param name="storageName">Storage name</param>
+        public GetFilesListRequest(string path, string storageName = null)             
+        {
+            this.Path = path;
+            this.StorageName = storageName;
+        }
+
+        /// <summary>
+        /// Folder path e.g. '/folder'
+        /// </summary>  
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Storage name
+        /// </summary>  
+        public string StorageName { get; set; }
+  }
 }

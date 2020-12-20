@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfDocumentInfo.cs">
+// <copyright company="Aspose" file="DeleteFolderRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -22,56 +22,48 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Aspose.CAD.Cloud.Sdk.Model 
+namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
-  using System;  
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Runtime.Serialization;
-  using System.Text;
-  using Newtonsoft.Json;
-  using Newtonsoft.Json.Converters;
+  using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// 
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.DeleteFolder" /> operation.
   /// </summary>  
-  public class PdfDocumentInfo 
-  {                       
+  public class DeleteFolderRequest  
+  {
         /// <summary>
-        /// Gets or sets Keywords
-        /// </summary>  
-        public string Keywords { get; set; }
-
-        /// <summary>
-        /// Gets or sets Title
-        /// </summary>  
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets Author
-        /// </summary>  
-        public string Author { get; set; }
-
-        /// <summary>
-        /// Gets or sets Subject
-        /// </summary>  
-        public string Subject { get; set; }
-
-        /// <summary>
-        /// Get the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()  
+        /// Initializes a new instance of the <see cref="DeleteFolderRequest"/> class.
+        /// </summary>        
+        public DeleteFolderRequest()
         {
-          var sb = new StringBuilder();
-          sb.Append("class PdfDocumentInfo {\n");
-          sb.Append("  Keywords: ").Append(this.Keywords).Append("\n");
-          sb.Append("  Title: ").Append(this.Title).Append("\n");
-          sb.Append("  Author: ").Append(this.Author).Append("\n");
-          sb.Append("  Subject: ").Append(this.Subject).Append("\n");
-          sb.Append("}\n");
-          return sb.ToString();
         }
-    }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteFolderRequest"/> class.
+        /// </summary>
+        /// <param name="path">Folder path e.g. &#39;/folder&#39;</param>
+        /// <param name="storageName">Storage name</param>
+        /// <param name="recursive">Enable to delete folders, subfolders and files</param>
+        public DeleteFolderRequest(string path, string storageName = null, bool? recursive = null)             
+        {
+            this.Path = path;
+            this.StorageName = storageName;
+            this.Recursive = recursive;
+        }
+
+        /// <summary>
+        /// Folder path e.g. '/folder'
+        /// </summary>  
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Storage name
+        /// </summary>  
+        public string StorageName { get; set; }
+
+        /// <summary>
+        /// Enable to delete folders, subfolders and files
+        /// </summary>  
+        public bool? Recursive { get; set; }
+  }
 }

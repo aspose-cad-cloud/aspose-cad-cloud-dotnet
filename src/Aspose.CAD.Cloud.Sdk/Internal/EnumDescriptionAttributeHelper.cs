@@ -23,10 +23,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Linq;
+
 namespace Aspose.CAD.Cloud.Sdk
 {
     using System;
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
     using System.Linq;
     using System.Reflection;    
 #endif
@@ -40,13 +42,13 @@ namespace Aspose.CAD.Cloud.Sdk
                 return string.Empty;
             }
 
-#if NET20
+#if NET461
             var descriptionAttribute =
                 (EnumDescriptionAttribute)e.GetType().GetField(e.ToString()).GetCustomAttributes(typeof(EnumDescriptionAttribute), false)[0];
 #endif
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
              var descriptionAttribute =
-                (EnumDescriptionAttribute)e.GetType().GetTypeInfo().GetField(e.ToString()).GetCustomAttributes(typeof(EnumDescriptionAttribute), false).First();
+                (EnumDescriptionAttribute)e.GetType().GetField(e.ToString()).GetCustomAttributes(typeof(EnumDescriptionAttribute), false).First();
 #endif
 
             if (descriptionAttribute != null)

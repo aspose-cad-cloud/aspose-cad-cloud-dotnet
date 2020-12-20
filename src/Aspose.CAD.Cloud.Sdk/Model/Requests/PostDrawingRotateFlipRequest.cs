@@ -43,7 +43,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// </summary>
         /// <param name="drawingData">Input drawing</param>
         /// <param name="outputFormat">Resulting file format.</param>
-        /// <param name="rotateFlipType">Rotate/flip operation to apply.</param>
+        /// <param name="rotateFlipType">Rotate/flip operation to apply. Possible values: RotateNoneFlipNone, Rotate90FlipNone, Rotate180FlipNone, Rotate270FlipNone, RotateNoneFlipX, Rotate90FlipX, Rotate180FlipX, Rotate270FlipX, RotateNoneFlipY, Rotate90FlipY, Rotate180FlipY, Rotate270FlipY, RotateNoneFlipXY, Rotate90FlipXY, Rotate180FlipXY, Rotate270FlipXY</param>
         /// <param name="outPath">Path to updated file (if this is empty, response contains streamed file).</param>
         /// <param name="storage">Your Aspose Cloud Storage name.</param>
         public PostDrawingRotateFlipRequest(System.IO.Stream drawingData, string outputFormat, string rotateFlipType, string outPath = null, string storage = null)             
@@ -66,7 +66,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         public string OutputFormat { get; set; }
 
         /// <summary>
-        /// Rotate/flip operation to apply.
+        /// Rotate/flip operation to apply. Possible values: RotateNoneFlipNone, Rotate90FlipNone, Rotate180FlipNone, Rotate270FlipNone, RotateNoneFlipX, Rotate90FlipX, Rotate180FlipX, Rotate270FlipX, RotateNoneFlipY, Rotate90FlipY, Rotate180FlipY, Rotate270FlipY, RotateNoneFlipXY, Rotate90FlipXY, Rotate180FlipXY, Rotate270FlipXY
         /// </summary>  
         public string RotateFlipType { get; set; }
 

@@ -23,13 +23,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Aspose.CAD.Cloud.Sdk.RequestHandlers;
+
 namespace Aspose.CAD.Cloud.Sdk
 {
     using System;
     using System.Collections.Generic;    
     using System.IO;
     using System.Net;
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
     using System.Reflection;
 #endif
     using System.Text;
@@ -40,23 +42,22 @@ namespace Aspose.CAD.Cloud.Sdk
         private const string AsposeClientHeaderName = "x-aspose-client";
         private const string AsposeClientVersionHeaderName = "x-aspose-client-version";
         private readonly Dictionary<string, string> defaultHeaderMap = new Dictionary<string, string>();
-        private readonly List<IRequestHandler> requestHandlers; 
+        private readonly List<IRequestHandler> requestHandlers;
+        private readonly Configuration configuration;
+
         private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings()
         {
             NullValueHandling = NullValueHandling.Ignore
         };
     
-        public ApiInvoker(List<IRequestHandler> requestHandlers)
+        public ApiInvoker(List<IRequestHandler> requestHandlers, Configuration configuration)
         {
-#if NET20            
             var sdkVersion = this.GetType().Assembly.GetName().Version;
-#endif
-#if NETSTANDARD1_6
-            var sdkVersion = this.GetType().GetTypeInfo().Assembly.GetName().Version;
-#endif
+
             this.AddDefaultHeader(AsposeClientHeaderName, ".net sdk");
             this.AddDefaultHeader(AsposeClientVersionHeaderName, string.Format("{0}.{1}", sdkVersion.Major, sdkVersion.Minor));
             this.requestHandlers = requestHandlers;
+            this.configuration = configuration;
         }
         
         public string InvokeApi(
@@ -318,10 +319,10 @@ namespace Aspose.CAD.Cloud.Sdk
 
                 if (streamToSend != null)
                 {
-#if NET20
+#if NET461
                     using (Stream requestStream = client.GetRequestStream())
 #endif
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
                     using (Stream requestStream = client.GetRequestStreamAsync().Result) 
 #endif                    
                     {
@@ -374,10 +375,10 @@ namespace Aspose.CAD.Cloud.Sdk
         {
             try
             {
-#if NET20
+#if NET461
                     return request.GetResponse();
 #endif
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
                 try
                 {
                     return request.GetResponseAsync().Result;

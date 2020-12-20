@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="IRequestHandler.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Aspose" file="FileVersions.cs">
+//   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,17 +23,37 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk
+namespace Aspose.CAD.Cloud.Sdk.Model 
 {
-    using System.IO;
-    using System.Net;
+  using System;  
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Runtime.Serialization;
+  using System.Text;
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Converters;
 
-    internal interface IRequestHandler
-    {
-        string ProcessUrl(string url);
+  /// <summary>
+  /// File versions FileVersion.
+  /// </summary>  
+  public class FileVersions 
+  {                       
+        /// <summary>
+        /// File versions FileVersion.
+        /// </summary>  
+        public List<FileVersion> Value { get; set; }
 
-        void BeforeSend(WebRequest request, Stream streamToSend);
-
-        void ProcessResponse(HttpWebResponse response, Stream resultStream);
+        /// <summary>
+        /// Get the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()  
+        {
+          var sb = new StringBuilder();
+          sb.Append("class FileVersions {\n");
+          sb.Append("  Value: ").Append(this.Value).Append("\n");
+          sb.Append("}\n");
+          return sb.ToString();
+        }
     }
 }

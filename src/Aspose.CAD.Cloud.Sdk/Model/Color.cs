@@ -34,47 +34,47 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// The color of the pixel.
+  /// 
   /// </summary>  
   public class Color 
   {                       
         /// <summary>
-        /// Gets the red component value of this Color structure.
+        /// Gets or sets R
         /// </summary>  
         public int? R { get; set; }
 
         /// <summary>
-        /// Gets the green component value of this Color structure.
+        /// Gets or sets G
         /// </summary>  
         public int? G { get; set; }
 
         /// <summary>
-        /// Gets the blue component value of this Color structure.
+        /// Gets or sets B
         /// </summary>  
         public int? B { get; set; }
 
         /// <summary>
-        /// Gets the alpha component value of this Color structure.
+        /// Gets or sets A
         /// </summary>  
         public int? A { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether this Color structure is a predefined color. Predefined colors are represented by the elements of the KnownColor enumeration.
+        /// Gets or sets IsKnownColor
         /// </summary>  
         public bool? IsKnownColor { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether this Color structure is uninitialized.
+        /// Gets or sets IsEmpty
         /// </summary>  
         public bool? IsEmpty { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether this Color structure is a named color or a member of the KnownColor enumeration.
+        /// Gets or sets IsNamedColor
         /// </summary>  
         public bool? IsNamedColor { get; set; }
 
         /// <summary>
-        /// Gets the name of this Color.
+        /// Gets or sets Name
         /// </summary>  
         public string Name { get; set; }
 

@@ -34,42 +34,42 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// RD optimizer settings class
+  /// 
   /// </summary>  
   public class RdOptimizerSettings 
   {                       
         /// <summary>
-        /// Gets or sets the BPP (bits per pixel) scale factor.
+        /// Gets or sets BppScale
         /// </summary>  
         public int? BppScale { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum R value for consideration in  in bits per pixel
+        /// Gets or sets BppMax
         /// </summary>  
         public double? BppMax { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum quantization value.
+        /// Gets or sets MaxQ
         /// </summary>  
         public int? MaxQ { get; set; }
 
         /// <summary>
-        /// Gets the minimum allowed quantization value.
+        /// Gets or sets MinQ
         /// </summary>  
         public int? MinQ { get; set; }
 
         /// <summary>
-        /// Gets the maximum pixel value.
+        /// Gets or sets MaxPixelValue
         /// </summary>  
         public int? MaxPixelValue { get; set; }
 
         /// <summary>
-        /// Gets the PSNR maximum expected value.
+        /// Gets or sets PsnrMax
         /// </summary>  
         public int? PsnrMax { get; set; }
 
         /// <summary>
-        /// Gets the maximum R value for consideration.
+        /// Gets or sets DiscretizedBppMax
         /// </summary>  
         public int? DiscretizedBppMax { get; set; }
 

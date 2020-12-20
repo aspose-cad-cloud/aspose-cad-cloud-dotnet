@@ -25,81 +25,26 @@
 
 namespace Aspose.CAD.Cloud.Sdk
 {
-    using System;
-
     /// <summary>
     /// Represents a set of configuration settings.
     /// </summary>
     public class Configuration
     {
-        private string apiBaseUrl = "https://api.aspose.cloud";       
+        internal const string DefaultBaseUrl = "https://api.aspose.cloud";
+        internal const AvailableApiVersions DefaultApiVersion = AvailableApiVersions.V3;
+        
         private bool debugMode = false;
-
-        private AvailiableApiVersions version = AvailiableApiVersions.V1;
-
-        /// <summary>
-        /// The availiable api versions.
-        /// </summary>
-        public enum AvailiableApiVersions
-        {
-            /// <summary>
-            /// Current API version
-            /// </summary>
-            [EnumDescription("v1")]
-            V1 = 0,
-
-            /// <summary>
-            /// Don't use it, added for backward campability
-            /// </summary>
-            [Obsolete]
-            [EnumDescription("v1.1")]
-            V11 = 99,
-
-            /// <summary>
-            /// Stable version
-            /// </summary>
-            [EnumDescription("v2")]
-            V2 = 1,
-
-            /// <summary>
-            /// Frozen version
-            /// </summary>
-            [EnumDescription("v3")]
-            V3 = 2
-        }
 
         /// <summary>
         /// Aspose Cloud API base URL.
         /// </summary>
-        public string ApiBaseUrl
-        {
-            get
-            {
-                return this.apiBaseUrl;
-            }
-
-            set
-            {
-                this.apiBaseUrl = value;
-            }
-        }
+        public string ApiBaseUrl { get; set; } = DefaultBaseUrl;
 
         /// <summary>
         /// Gets or sets the API version.
         /// </summary>
-        public AvailiableApiVersions Version
-        {
-            get
-            {
-                return this.version;
-            }
-
-            set
-            {
-                this.version = value;
-            }
-        }
-
+        public AvailableApiVersions ApiVersion { get; set; } = AvailableApiVersions.V3;
+        
         /// <summary>
         /// Gets or sets the app key.
         /// </summary>
@@ -113,30 +58,18 @@ namespace Aspose.CAD.Cloud.Sdk
         /// <summary>
         /// Gets or sets a value indicating whether debug mode.
         /// </summary>
-        public bool DebugMode
-        {
-            get
-            {
-                return this.debugMode;
-            }
-
-            set
-            {
-                this.debugMode = value;
-            }
-        }
-
+        public bool DebugMode { get; set; }
+        
         /// <summary>
-        /// Authentification type.
-        /// Default is OAuth 2.0
+        /// Gets or sets a value indicating whether client will be used to connect to on-premise API.
         /// </summary>
-        public AuthType AuthType { get; set; }
+        public bool OnPremise { get; set; }
 
         internal string GetApiRootUrl()
         {
-            var result = this.ApiBaseUrl + "/" + EnumDescriptionAttributeHelper.GetDescription(this.version) + ".0";
+            var result = this.ApiBaseUrl;// + "/" + EnumDescriptionAttributeHelper.GetDescription(this.ApiVersion);
 
-            return result.EndsWith("/") ? result.Substring(0, result.Length - 1) : result;
+            return result.Trim('/');
         }       
     }
 }

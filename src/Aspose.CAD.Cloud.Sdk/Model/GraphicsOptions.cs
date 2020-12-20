@@ -34,14 +34,13 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Represents graphics options for embedded bitmap.
+  /// 
   /// </summary>  
   public class GraphicsOptions 
   {                       
         /// <summary>
-        /// Gets or sets text rendering hint.
+        /// Gets or sets TextRenderingHint
         /// </summary>
-        /// <value>Gets or sets text rendering hint.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TextRenderingHintEnum
         { 
@@ -77,9 +76,8 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         }
 
         /// <summary>
-        /// Gets or sets smoothing mode.
+        /// Gets or sets SmoothingMode
         /// </summary>
-        /// <value>Gets or sets smoothing mode.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SmoothingModeEnum
         { 
@@ -115,9 +113,8 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         }
 
         /// <summary>
-        /// Gets or sets interpolation mode.
+        /// Gets or sets InterpolationMode
         /// </summary>
-        /// <value>Gets or sets interpolation mode.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InterpolationModeEnum
         { 
@@ -168,17 +165,17 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         }
 
         /// <summary>
-        /// Gets or sets text rendering hint.
+        /// Gets or sets TextRenderingHint
         /// </summary>
         public TextRenderingHintEnum? TextRenderingHint { get; set; }
 
         /// <summary>
-        /// Gets or sets smoothing mode.
+        /// Gets or sets SmoothingMode
         /// </summary>
         public SmoothingModeEnum? SmoothingMode { get; set; }
 
         /// <summary>
-        /// Gets or sets interpolation mode.
+        /// Gets or sets InterpolationMode
         /// </summary>
         public InterpolationModeEnum? InterpolationMode { get; set; }
 

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="WebRequestHelper.cs">
-//   Copyright (c) 2017 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="GetDiscUsageRequest.cs">
+//   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,21 +22,34 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Aspose.CAD.Cloud.Sdk
+namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
-    using System.Net;
+  using Aspose.CAD.Cloud.Sdk.Model; 
 
-    internal class WebRequestHelper
-    {
-        public static void AddHeader(WebRequest request, string key, string value)
+  /// <summary>
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.GetDiscUsage" /> operation.
+  /// </summary>  
+  public class GetDiscUsageRequest  
+  {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetDiscUsageRequest"/> class.
+        /// </summary>        
+        public GetDiscUsageRequest()
         {
-#if NET461
-             request.Headers.Add(key, value);
-#endif
-#if NETSTANDARD2_0
-            request.Headers[key] = value;
-#endif
         }
-    }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetDiscUsageRequest"/> class.
+        /// </summary>
+        /// <param name="storageName">Storage name</param>
+        public GetDiscUsageRequest(string storageName = null)             
+        {
+            this.StorageName = storageName;
+        }
+
+        /// <summary>
+        /// Storage name
+        /// </summary>  
+        public string StorageName { get; set; }
+  }
 }

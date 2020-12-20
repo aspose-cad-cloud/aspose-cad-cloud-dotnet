@@ -34,14 +34,13 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// The PDF options.
+  /// 
   /// </summary>  
   public class PdfDocumentOptions 
   {                       
         /// <summary>
-        /// Desired conformance level for generated PDF document. Important note: This option should not be changed after PdfDocument object is constructed. Default is Pdf15.
+        /// Gets or sets Compliance
         /// </summary>
-        /// <value>Desired conformance level for generated PDF document. Important note: This option should not be changed after PdfDocument object is constructed. Default is Pdf15.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ComplianceEnum
         { 
@@ -62,7 +61,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         }
 
         /// <summary>
-        /// Desired conformance level for generated PDF document. Important note: This option should not be changed after PdfDocument object is constructed. Default is Pdf15.
+        /// Gets or sets Compliance
         /// </summary>
         public ComplianceEnum? Compliance { get; set; }
 

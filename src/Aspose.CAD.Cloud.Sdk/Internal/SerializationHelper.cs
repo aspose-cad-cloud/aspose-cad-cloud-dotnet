@@ -23,11 +23,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Globalization;
+
 namespace Aspose.CAD.Cloud.Sdk
 {
     using System;
     using System.IO;
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
     using System.Reflection;
 #endif
 
@@ -54,11 +56,16 @@ namespace Aspose.CAD.Cloud.Sdk
             }
         }
 
-        public static object Deserialize(string json, Type type)
+        public static T Deserialize<T>(string json)
         {
+            if (json?.StartsWith("body:", true, CultureInfo.InvariantCulture) == true)
+            {
+                json = json.Substring(5).Trim();
+            }
+            
             try
             {
-                return JsonConvert.DeserializeObject(json, type);
+                return JsonConvert.DeserializeObject<T>(json);
             }
             catch (IOException e)
             {
@@ -78,12 +85,7 @@ namespace Aspose.CAD.Cloud.Sdk
         {            
             public override bool CanConvert(Type objectType)
             {
-#if NET20
                 return typeof(T).IsAssignableFrom(objectType);
-#endif
-#if NETSTANDARD1_6
-                return typeof(T).GetTypeInfo().IsAssignableFrom(objectType);
-#endif
             }
 
             public override object ReadJson(

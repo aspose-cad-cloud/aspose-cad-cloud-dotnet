@@ -28,7 +28,7 @@ namespace Aspose.CAD.Cloud.Sdk
     using System.IO;
     using System.Text;
 
-    internal class StreamHelper
+    internal static class StreamHelper
     {
         public static void CopyTo(Stream source, Stream destination, int bufferSize = 81920)
         {
@@ -89,6 +89,19 @@ namespace Aspose.CAD.Cloud.Sdk
                 sb.AppendLine("Body:");
                 sb.AppendLine(content);
             }
-        }       
+        }
+        
+        public static string ToString(Stream stream)
+        {
+            if ((stream == null) || !stream.CanRead)
+            {
+                return null;
+            }
+
+            var sb = new StringBuilder();
+            CopyStreamToStringBuilder(sb, stream);
+
+            return sb.ToString();
+        }
     }
 }

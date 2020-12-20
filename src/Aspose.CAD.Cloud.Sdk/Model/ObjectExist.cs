@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="AuthType.cs">
-//   Copyright (c) 2018 Aspose.CAD for Cloud
+// <copyright company="Aspose" file="ObjectExist.cs">
+//   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
 //   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,21 +23,43 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Aspose.CAD.Cloud.Sdk
+namespace Aspose.CAD.Cloud.Sdk.Model 
 {
-    /// <summary>
-    /// Supported types of authentication.
-    /// </summary>
-    public enum AuthType
-    {
+  using System;  
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Runtime.Serialization;
+  using System.Text;
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Converters;
+
+  /// <summary>
+  /// Object exists
+  /// </summary>  
+  public class ObjectExist 
+  {                       
         /// <summary>
-        /// OAuth2.0
-        /// </summary>
-        OAuth2 = 0,
+        /// Indicates that the file or folder exists.
+        /// </summary>  
+        public bool? Exists { get; set; }
 
         /// <summary>
-        /// Authentication with signing of url.
+        /// True if it is a folder, false if it is a file.
+        /// </summary>  
+        public bool? IsFolder { get; set; }
+
+        /// <summary>
+        /// Get the string presentation of the object
         /// </summary>
-        RequestSignature = 1
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()  
+        {
+          var sb = new StringBuilder();
+          sb.Append("class ObjectExist {\n");
+          sb.Append("  Exists: ").Append(this.Exists).Append("\n");
+          sb.Append("  IsFolder: ").Append(this.IsFolder).Append("\n");
+          sb.Append("}\n");
+          return sb.ToString();
+        }
     }
 }

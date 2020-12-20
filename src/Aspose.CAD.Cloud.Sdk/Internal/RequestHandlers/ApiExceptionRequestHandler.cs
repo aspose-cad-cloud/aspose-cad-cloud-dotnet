@@ -58,7 +58,7 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
                 using (var responseReader = new StreamReader(resultStream))
                 {
                     var responseData = responseReader.ReadToEnd();
-                    var errorResponse = (CadApiErrorResponse)SerializationHelper.Deserialize(responseData, typeof(CadApiErrorResponse));
+                    var errorResponse = (CadApiErrorResponse)SerializationHelper.Deserialize<CadApiErrorResponse>(responseData);
                     if (string.IsNullOrEmpty(errorResponse.Message))
                     {
                         errorResponse.Message = responseData;

@@ -34,14 +34,13 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Drawing pen options
+  /// 
   /// </summary>  
   public class PenOptions 
   {                       
         /// <summary>
-        /// Gets or sets the start cap.
+        /// Gets or sets StartCap
         /// </summary>
-        /// <value>Gets or sets the start cap.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StartCapEnum
         { 
@@ -102,9 +101,8 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         }
 
         /// <summary>
-        /// Gets or sets the end cap.
+        /// Gets or sets EndCap
         /// </summary>
-        /// <value>Gets or sets the end cap.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EndCapEnum
         { 
@@ -165,12 +163,12 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         }
 
         /// <summary>
-        /// Gets or sets the start cap.
+        /// Gets or sets StartCap
         /// </summary>
         public StartCapEnum? StartCap { get; set; }
 
         /// <summary>
-        /// Gets or sets the end cap.
+        /// Gets or sets EndCap
         /// </summary>
         public EndCapEnum? EndCap { get; set; }
 

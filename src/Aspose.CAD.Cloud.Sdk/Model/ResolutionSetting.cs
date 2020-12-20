@@ -34,17 +34,17 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// The resolution setting for image save options.
+  /// 
   /// </summary>  
   public class ResolutionSetting 
   {                       
         /// <summary>
-        /// Gets or sets the horizontal resolution.
+        /// Gets or sets HorizontalResolution
         /// </summary>  
         public double? HorizontalResolution { get; set; }
 
         /// <summary>
-        /// Gets or sets the vertical resolution.
+        /// Gets or sets VerticalResolution
         /// </summary>  
         public double? VerticalResolution { get; set; }
 

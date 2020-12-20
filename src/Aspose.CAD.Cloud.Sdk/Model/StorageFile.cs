@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfDocumentInfo.cs">
+// <copyright company="Aspose" file="StorageFile.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,29 +34,34 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// 
+  /// File or folder information
   /// </summary>  
-  public class PdfDocumentInfo 
+  public class StorageFile 
   {                       
         /// <summary>
-        /// Gets or sets Keywords
+        /// File or folder name.
         /// </summary>  
-        public string Keywords { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets Title
+        /// True if it is a folder.
         /// </summary>  
-        public string Title { get; set; }
+        public bool? IsFolder { get; set; }
 
         /// <summary>
-        /// Gets or sets Author
+        /// File or folder last modified DateTime.
         /// </summary>  
-        public string Author { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         /// <summary>
-        /// Gets or sets Subject
+        /// File or folder size.
         /// </summary>  
-        public string Subject { get; set; }
+        public long? Size { get; set; }
+
+        /// <summary>
+        /// File or folder path.
+        /// </summary>  
+        public string Path { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -65,11 +70,12 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class PdfDocumentInfo {\n");
-          sb.Append("  Keywords: ").Append(this.Keywords).Append("\n");
-          sb.Append("  Title: ").Append(this.Title).Append("\n");
-          sb.Append("  Author: ").Append(this.Author).Append("\n");
-          sb.Append("  Subject: ").Append(this.Subject).Append("\n");
+          sb.Append("class StorageFile {\n");
+          sb.Append("  Name: ").Append(this.Name).Append("\n");
+          sb.Append("  IsFolder: ").Append(this.IsFolder).Append("\n");
+          sb.Append("  ModifiedDate: ").Append(this.ModifiedDate).Append("\n");
+          sb.Append("  Size: ").Append(this.Size).Append("\n");
+          sb.Append("  Path: ").Append(this.Path).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

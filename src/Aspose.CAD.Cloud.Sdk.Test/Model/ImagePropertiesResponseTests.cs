@@ -33,8 +33,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Model
     using Aspose.CAD.Cloud.Sdk.Model;
     using Aspose.CAD.Cloud.Sdk;
     using System.Reflection;
-    using Aspose.Storage.Cloud.Sdk.Api;
-    using Aspose.Storage.Cloud.Sdk.Model;
     using Newtonsoft.Json;
     using NUnit.Framework;
 

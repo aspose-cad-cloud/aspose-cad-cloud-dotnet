@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfDocumentInfo.cs">
+// <copyright company="Aspose" file="DeleteFileRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -22,56 +22,48 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Aspose.CAD.Cloud.Sdk.Model 
+namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
-  using System;  
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Runtime.Serialization;
-  using System.Text;
-  using Newtonsoft.Json;
-  using Newtonsoft.Json.Converters;
+  using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// 
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.DeleteFile" /> operation.
   /// </summary>  
-  public class PdfDocumentInfo 
-  {                       
+  public class DeleteFileRequest  
+  {
         /// <summary>
-        /// Gets or sets Keywords
-        /// </summary>  
-        public string Keywords { get; set; }
-
-        /// <summary>
-        /// Gets or sets Title
-        /// </summary>  
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets Author
-        /// </summary>  
-        public string Author { get; set; }
-
-        /// <summary>
-        /// Gets or sets Subject
-        /// </summary>  
-        public string Subject { get; set; }
-
-        /// <summary>
-        /// Get the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()  
+        /// Initializes a new instance of the <see cref="DeleteFileRequest"/> class.
+        /// </summary>        
+        public DeleteFileRequest()
         {
-          var sb = new StringBuilder();
-          sb.Append("class PdfDocumentInfo {\n");
-          sb.Append("  Keywords: ").Append(this.Keywords).Append("\n");
-          sb.Append("  Title: ").Append(this.Title).Append("\n");
-          sb.Append("  Author: ").Append(this.Author).Append("\n");
-          sb.Append("  Subject: ").Append(this.Subject).Append("\n");
-          sb.Append("}\n");
-          return sb.ToString();
         }
-    }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteFileRequest"/> class.
+        /// </summary>
+        /// <param name="path">File path e.g. &#39;/folder/file.ext&#39;</param>
+        /// <param name="storageName">Storage name</param>
+        /// <param name="versionId">File version ID to delete</param>
+        public DeleteFileRequest(string path, string storageName = null, string versionId = null)             
+        {
+            this.Path = path;
+            this.StorageName = storageName;
+            this.VersionId = versionId;
+        }
+
+        /// <summary>
+        /// File path e.g. '/folder/file.ext'
+        /// </summary>  
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Storage name
+        /// </summary>  
+        public string StorageName { get; set; }
+
+        /// <summary>
+        /// File version ID to delete
+        /// </summary>  
+        public string VersionId { get; set; }
+  }
 }

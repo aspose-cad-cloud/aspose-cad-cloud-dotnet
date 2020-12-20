@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfDocumentInfo.cs">
+// <copyright company="Aspose" file="MoveFolderRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -22,56 +22,55 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Aspose.CAD.Cloud.Sdk.Model 
+namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
-  using System;  
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Runtime.Serialization;
-  using System.Text;
-  using Newtonsoft.Json;
-  using Newtonsoft.Json.Converters;
+  using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// 
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.MoveFolder" /> operation.
   /// </summary>  
-  public class PdfDocumentInfo 
-  {                       
+  public class MoveFolderRequest  
+  {
         /// <summary>
-        /// Gets or sets Keywords
-        /// </summary>  
-        public string Keywords { get; set; }
-
-        /// <summary>
-        /// Gets or sets Title
-        /// </summary>  
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets Author
-        /// </summary>  
-        public string Author { get; set; }
-
-        /// <summary>
-        /// Gets or sets Subject
-        /// </summary>  
-        public string Subject { get; set; }
-
-        /// <summary>
-        /// Get the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()  
+        /// Initializes a new instance of the <see cref="MoveFolderRequest"/> class.
+        /// </summary>        
+        public MoveFolderRequest()
         {
-          var sb = new StringBuilder();
-          sb.Append("class PdfDocumentInfo {\n");
-          sb.Append("  Keywords: ").Append(this.Keywords).Append("\n");
-          sb.Append("  Title: ").Append(this.Title).Append("\n");
-          sb.Append("  Author: ").Append(this.Author).Append("\n");
-          sb.Append("  Subject: ").Append(this.Subject).Append("\n");
-          sb.Append("}\n");
-          return sb.ToString();
         }
-    }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MoveFolderRequest"/> class.
+        /// </summary>
+        /// <param name="srcPath">Folder path to move e.g. &#39;/folder&#39;</param>
+        /// <param name="destPath">Destination folder path to move to e.g &#39;/dst&#39;</param>
+        /// <param name="srcStorageName">Source storage name</param>
+        /// <param name="destStorageName">Destination storage name</param>
+        public MoveFolderRequest(string srcPath, string destPath, string srcStorageName = null, string destStorageName = null)             
+        {
+            this.SrcPath = srcPath;
+            this.DestPath = destPath;
+            this.SrcStorageName = srcStorageName;
+            this.DestStorageName = destStorageName;
+        }
+
+        /// <summary>
+        /// Folder path to move e.g. '/folder'
+        /// </summary>  
+        public string SrcPath { get; set; }
+
+        /// <summary>
+        /// Destination folder path to move to e.g '/dst'
+        /// </summary>  
+        public string DestPath { get; set; }
+
+        /// <summary>
+        /// Source storage name
+        /// </summary>  
+        public string SrcStorageName { get; set; }
+
+        /// <summary>
+        /// Destination storage name
+        /// </summary>  
+        public string DestStorageName { get; set; }
+  }
 }
