@@ -33,7 +33,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
     using Aspose.CAD.Cloud.Sdk.Model.Requests;
     
     /// <summary>
-    /// Aspose.Imaging Cloud API.
+    /// Aspose.CAD Cloud API.
     /// </summary>
     public class CadApi
     {                 
@@ -149,7 +149,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/file/copy/{srcPath}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/file/copy/{srcPath}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -188,7 +188,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/folder/copy/{srcPath}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/folder/copy/{srcPath}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -220,7 +220,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/folder/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/folder/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -250,7 +250,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/file/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/file/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -281,7 +281,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/folder/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/folder/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -313,7 +313,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/file/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/file/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -341,7 +341,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         public DiscUsage GetDiscUsage(GetDiscUsageRequest request)
         {
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/disc";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/disc";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -378,7 +378,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/properties";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/properties";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -435,7 +435,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/resize";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/resize";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -485,7 +485,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/rotateflip";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/rotateflip";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -528,7 +528,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/saveAs/{outputFormat}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/saveAs/{outputFormat}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -564,7 +564,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/version/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/version/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -602,7 +602,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/folder/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/folder/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -645,7 +645,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/file/move/{srcPath}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/file/move/{srcPath}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -684,7 +684,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/folder/move/{srcPath}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/folder/move/{srcPath}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -717,7 +717,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/exist/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/exist/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -762,7 +762,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/bmp";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/bmp";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -803,7 +803,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/gif";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/gif";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -844,7 +844,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/jpeg";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/jpeg";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -885,7 +885,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/jpeg2000";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/jpeg2000";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -926,7 +926,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/pdf";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/pdf";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -967,7 +967,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/png";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/png";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1002,7 +1002,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/properties";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/properties";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1048,7 +1048,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/psd";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/psd";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1101,7 +1101,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/resize";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/resize";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1153,7 +1153,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/rotateflip";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/rotateflip";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1198,7 +1198,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/saveAs/{outputFormat}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/saveAs/{outputFormat}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1242,7 +1242,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/svg";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/svg";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1283,7 +1283,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/tiff";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/tiff";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1324,7 +1324,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/{name}/wmf";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/wmf";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1359,7 +1359,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/bmp";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/bmp";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1400,7 +1400,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/gif";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/gif";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1441,7 +1441,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/jpeg";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/jpeg";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1482,7 +1482,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/jpeg2000";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/jpeg2000";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1523,7 +1523,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/pdf";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/pdf";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1564,7 +1564,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/png";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/png";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1605,7 +1605,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/psd";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/psd";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1646,7 +1646,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/svg";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/svg";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1687,7 +1687,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/tiff";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/tiff";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1728,7 +1728,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/wmf";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/wmf";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1769,7 +1769,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/{storageName}/exist";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/{storageName}/exist";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1812,7 +1812,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
 
             // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/v3.0/cad/storage/file/{path}";
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/storage/file/{path}";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")

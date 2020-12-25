@@ -67,8 +67,7 @@ namespace Aspose.CAD.Cloud.Sdk
 
         internal string GetApiRootUrl()
         {
-            var result = this.ApiBaseUrl;// + "/" + EnumDescriptionAttributeHelper.GetDescription(this.ApiVersion);
-
+            var result = this.ApiBaseUrl + "/" + EnumDescriptionAttributeHelper.GetDescription(this.ApiVersion);
             return result.Trim('/');
         }       
     }
