@@ -38,9 +38,9 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
     public class ResizeApiTests : ApiTester
     {
         /// <summary>
-        /// Setup before each unit test
+        /// One time setup before all unit tests
         /// </summary>
-        [SetUp]
+        [OneTimeSetUp]
         public void Init()
         {
             // you can pass your own parameters here

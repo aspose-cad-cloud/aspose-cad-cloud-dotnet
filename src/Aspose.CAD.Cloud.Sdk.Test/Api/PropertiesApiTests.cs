@@ -42,9 +42,9 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
     public class PropertiesApiTests : ApiTester
     {
         /// <summary>
-        /// Setup before each unit test
+        /// One time setup before all unit tests
         /// </summary>
-        [SetUp]
+        [OneTimeSetUp]
         public void Init()
         {
             // you can pass your own parameters here
