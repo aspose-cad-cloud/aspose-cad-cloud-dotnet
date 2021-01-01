@@ -4,7 +4,7 @@ This repository contains Aspose.CAD Cloud SDK for .NET source code. This SDK all
 
 # Key Features
 
-* Supports the latest versions of AutoCAD DWG, DXF, DWF, DWT, STL, IGS, DGN, OBJ and CF2 files
+* Supports the latest versions of AutoCAD DWG, DXF, DWF, DWFX, DWT, STL, IGS, DGN, OBJ and CF2 files
 * Convert CAD drawings to high quality PDF
 * Convert CAD drawing to high quality raster images
 * Convert CAD drawing to high quality vector files like SVG and WMF
@@ -44,48 +44,47 @@ From within Visual Studio:
 
 ### Sample usage
 
-The examples below show how your application have to initiate and convert "doc" file to "pdf" using Aspose.CAD-Cloud library:
+The examples below show how your application have to initiate and convert "dxf" file to "pdf" using Aspose.CAD-Cloud library:
 
 ```csharp
 // optional parameters are base URL, API version, authentication type and debug mode
 // default base URL is https://api.aspose.cloud
-// default API version is v1.1
+// default API version is v3.0
 // default authentication type is OAuth2.0
 // default debug mode is false
-var CADApi = new CADApi("yourAppKey", "yourAppSID");
+var cadApi = new CadApi("yourAppSID", "yourAppKey");
 
 // this GET request converts drawing files
 // optional parameters are output file path, input file folder and Aspose storage name (if you have more than one storage and want to use non-default one) 
 // if output file path is not set, resulting image is returned in a stream; otherwise, it's saved at the specified path in the storage and null is returned
-var getSaveRequest = new GetImageSaveAsRequest("inputImage.dwwg", "png", "ResultFolder/resultImage.png", "InputFolder");
+var getSaveRequest = new GetDrawingSaveAsRequest("inputImage.dwg", "png", "InputFolder", "ResultFolder/resultImage.png", "Your storage");
 
 // returns null, saves result to storage
-CADApi.GetImageSaveAs(getSaveRequest);
+cadApi.GetDrawingSaveAs(getSaveRequest);
 
-var getStreamRequest = new GetImageSaveAsRequest("inputDrawing.dxf", "png", null, "InputFolder");
+var getStreamRequest = new GetImageSaveAsRequest("inputDrawing.dxf", "pdf", "InputFolder", null);
 
 // returns resulting stream
-using (Stream resultGetImageStream = CADApi.GetImageSaveAs(getStreamRequest))
+using (Stream resultGetImageStream = cadApi.GetDrawingSaveAs(getStreamRequest))
 {
 	// process resulting stream
 }
 
-// another option is to use POST request and send image in a stream, if it's not present in your storage
-
+// another option is to use POST request and send drawing in a stream, if it's not present in your storage
 using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.dxf", FileMode.Open, FileAccess.Read))
 {
-	var postSaveRequest = new PostImageSaveAsRequest(inputImageStream, "png", "ResultFolder/resultImage.png");
+	var postSaveRequest = new PostDrawingSaveAsRequest(inputImageStream, "png", "ResultFolder/resultImage.png");
 
 	// returns null, saves result to storage
-	CADApi.PostImageSaveAs(postSaveRequest);
+	cadApi.PostDrawingSaveAs(postSaveRequest);
 }
 
 using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.dwg", FileMode.Open, FileAccess.Read))
 {
-	var postStreamRequest = new PostImageSaveAsRequest(inputImageStream, "png");
+	var postStreamRequest = new PostDrawingSaveAsRequest(inputImageStream, "png");
 
 	// returns resulting stream
-	using (Stream resultPostImageStream = CADApi.PostImageSaveAs(postStreamRequest))
+	using (Stream resultPostImageStream = cadApi.PostDrawingSaveAs(postStreamRequest))
 	{
 		// process resulting stream
 	}
@@ -97,8 +96,8 @@ using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.
 
 ## Dependencies
 
-- .NET Framework 2.0 or later
-- [Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/)
+- .NET Standard 2.0
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
 
 ## SDK Advanages
 
