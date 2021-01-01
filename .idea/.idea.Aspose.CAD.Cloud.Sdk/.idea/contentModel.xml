@@ -9,7 +9,6 @@
           <e p="CadApi.cs" t="Include" />
         </e>
         <e p="Aspose.CAD.Cloud.Sdk.csproj" t="IncludeRecursive" />
-        <e p="Aspose.CAD.Cloud.Sdk.nuspec" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Internal" t="Include">
           <e p="ApiException.cs" t="Include" />
@@ -121,9 +120,6 @@
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="net461" t="Include">
-              <e p="Aspose.CAD.Cloud.Sdk.AssemblyInfo.cs" t="Include" />
-            </e>
             <e p="netstandard2.0" t="Include">
               <e p="Aspose.CAD.Cloud.Sdk.AssemblyInfo.cs" t="Include" />
             </e>

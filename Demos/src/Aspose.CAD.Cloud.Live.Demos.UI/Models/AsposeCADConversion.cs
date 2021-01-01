@@ -3,6 +3,7 @@ using System.IO;
 using System.Web.Http;
 using Aspose.CAD.Cloud.Live.Demos.UI.Models;
 using System.Diagnostics;
+using Aspose.CAD.Cloud.Sdk.Model.Requests;
 using Newtonsoft.Json.Linq;
 
 namespace Aspose.CAD.Cloud.Live.Demos.UI.Models
@@ -33,12 +34,12 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Models
                 outputType == "pdf")
             {
                 string formatToExport = outputType;
-                var request = new Aspose.CAD.Cloud.Sdk.Model.Requests.GetImageSaveAsRequest(fileName, formatToExport, null, null, null, null);
-                var stream = cadApi.GetImageSaveAs(request);
+                var request = new GetDrawingSaveAsRequest(fileName, formatToExport, null, null, null);
+                var stream = cadApi.GetDrawingSaveAs(request);
 
                 stream.Position = 0;
-                Aspose.Storage.Cloud.Sdk.Model.Requests.PutCreateRequest putCreateRequest = new Aspose.Storage.Cloud.Sdk.Model.Requests.PutCreateRequest(outputFileName, stream, null, null);
-                storageApi.PutCreate(putCreateRequest);
+                var putCreateRequest = new UploadFileRequest(outputFileName, stream, null);
+                cadApi.UploadFile(putCreateRequest);
             }
             else
             {

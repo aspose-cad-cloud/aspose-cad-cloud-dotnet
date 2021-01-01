@@ -9,8 +9,8 @@ using Aspose.CAD.Cloud.Live.Demos.UI.Config;
 using Aspose.CAD.Cloud.Live.Demos.UI.Models;
 using System.Net;
 using System.Web.Http;
-using Aspose.Storage.Cloud.Sdk.Api;
-using Aspose.Storage.Cloud.Sdk.Model.Requests;
+using Aspose.CAD.Cloud.Sdk.Api;
+using Aspose.CAD.Cloud.Sdk.Model.Requests;
 
 namespace Aspose.CAD.Cloud.Live.Demos.UI.Services
 {
@@ -22,7 +22,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Services
 			FileUploadResult uploadResult = null;
 			string fn = "";
 
-			StorageApi storageApi = new StorageApi(Config.Configuration.AppKey, Config.Configuration.AppSID);
+			CadApi cadApi = new CadApi(Config.Configuration.AppSID, Config.Configuration.AppKey);
 			try
 			{
 				string folderName = Guid.NewGuid().ToString();
@@ -42,10 +42,10 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Services
 					postedFile.SaveAs(uploadPath + "\\" + fn);
 				}
 
-				PutCreateRequest request = new PutCreateRequest(fn, File.OpenRead(uploadPath + "\\" + fn), null, null);
+				var request = new UploadFileRequest(fn, File.OpenRead(uploadPath + "\\" + fn), null);
 
 				// Upload original document to Cloud Storage
-				storageApi.PutCreate(request);
+				cadApi.UploadFile(request);
 
 				// Create response
 				return new FileUploadResult
@@ -57,12 +57,8 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Services
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex.Message);
+				throw;
 			}
-			return uploadResult;
 		}
-		
-		
-       
-		
-	}
+    }
 }

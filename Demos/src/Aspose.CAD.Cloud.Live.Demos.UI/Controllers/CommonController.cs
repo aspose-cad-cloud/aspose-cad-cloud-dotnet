@@ -7,8 +7,8 @@ using System.Net;
 using System.Web.Mvc;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Aspose.Storage.Cloud.Sdk.Api;
-using Aspose.Storage.Cloud.Sdk.Model.Requests;
+using Aspose.CAD.Cloud.Sdk.Api;
+using Aspose.CAD.Cloud.Sdk.Model.Requests;
 
 namespace Aspose.CAD.Cloud.Live.Demos.UI.Controllers
 {
@@ -19,7 +19,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Controllers
 	public  class CommonController : BaseController
 	{
 		public override string Product => (string)RouteData.Values["product"];
-		StorageApi storageApi = new StorageApi(Config.Configuration.AppKey, Config.Configuration.AppSID);
+		CadApi cadApi = new CadApi(Config.Configuration.AppSID, Config.Configuration.AppKey);
 		/// <summary>
 		/// Sends back specified file from specified folder inside OutputDirectory.
 		/// </summary>
@@ -30,8 +30,8 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Controllers
 
 		public FileResult DownloadFile(string file)
 		{
-			GetDownloadRequest getDownloadRequest = new GetDownloadRequest(file);
-			return File(storageApi.GetDownload(getDownloadRequest), "application/octet-stream", file);
+			var getDownloadRequest = new DownloadFileRequest(file);
+			return File(cadApi.DownloadFile(getDownloadRequest), "application/octet-stream", file);
 		}
 		
 	}

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Aspose.CAD-Cloud</id>
+        <title>Aspose.CAD Cloud</title>
+        <version>20.11</version>
+        <authors>Aspose</authors>
+        <owners>Aspose</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <developmentDependency>false</developmentDependency>
+		<iconUrl>https://www.aspose.cloud/templates/aspose/App_Themes/V3/images/cad/272x272/aspose_cad-for-net-min.png</iconUrl> 
+		<summary>New generation of Aspose Cloud SDK that allows to manipulate, edit or convert CAD and BIM drawings (10+ file formats) in Aspose Cloud from .NET applications.</summary>
+        <description>Aspose.CAD Cloud enables your applications to perform a great range of drawing processing tasks. With Aspose.CAD you can load, save and convert drawings of the following formats: DWG, DXF, DWF, DWFX, DWT, STL, IGS, DGN, OBJ and CF2. Such drawings might be converted into variety of raster and vector formats: BMP, JPEG, J2K, JP2, GIF, PSD, PDF, WMF, SVG, PNG, TIFF. 
+            
+With Aspose.CAD you can modify, convert and render drawings and plots without utilizing Autodesk AutoCAD®. Aspose.CAD Cloud is well documented to help you create your solutions on different platforms.
+            
+Rich Set of Features
+
+Conversions: High quality conversions to variety of raster and vector formats including PNG and PDF.
+Document Object Model: Programmatic access through a rich API to all drawing elements and formatting allows to modify, extract and replace drawings content.
+Rendering: Convert whole documents or pages to PDF, XPS or for server-side document generation. Also convert document pages to TIFF, PNG, BMP or EMF images, print or render pages to .NET Graphics. All with high fidelity - exactly like Microsoft Word® would have done it.
+
+Performance and Scalability
+            
+Aspose.CAD Cloud is designed to perform great. You can literally generate thousands of drawing in minutes with Aspose.CAD Cloud and that involves opening a drawing, modifying content and populating it with data and exporting it. Even most of the complex drawings are opened and saved in fractions of a second.
+            
+Free support for Aspose.CAD Cloud is provided on our support forum: https://forum.aspose.cloud/ and on StackOverflow: https://stackoverflow.com/questions/tagged/aspose.words
+
+To use this SDK, you will need App SID and App Key which can be looked up at Aspose Cloud Dashboard (https://dashboard.aspose.cloud/#/apps) (free registration in Aspose Cloud is required for this).</description>
+		<license type="file">LICENSE.txt</license>
+        <projectUrl>https://github.com/aspose-cad-cloud</projectUrl>
+        <copyright>Aspose 2002-2020. All Rights Reserved.</copyright>
+        <dependencies>
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="Newtonsoft.Json" version="12.0.2" exclude="Build,Analyzers" />
+			</group>
+        </dependencies>
+    </metadata>
+	<files>
+	  <file src="./Publish/Aspose.CAD.Cloud.Sdk.dll" target="lib\netstandard20" />
+	  <file src="./LICENSE.txt" target="" />
+    </files>
+</package>

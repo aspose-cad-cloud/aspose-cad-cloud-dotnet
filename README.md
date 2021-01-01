@@ -1,7 +1,9 @@
 # Aspose.CAD Cloud SDK for .NET [![NuGet](https://img.shields.io/nuget/v/Aspose.CAD-Cloud.svg)](https://www.nuget.org/packages/Aspose.CAD-Cloud/)
+
 This repository contains Aspose.CAD Cloud SDK for .NET source code. This SDK allows you to perform a wide range of CAD drawing processing operations including creation, manipulation and conversion in the cloud, with zero initial costs and gain all benefits of strong types and IDE highlights.
 
 # Key Features
+
 * Supports the latest versions of AutoCAD DWG, DXF, DWF, DWT, STL, IGS, DGN, OBJ and CF2 files
 * Convert CAD drawings to high quality PDF
 * Convert CAD drawing to high quality raster images
@@ -15,6 +17,7 @@ This repository contains Aspose.CAD Cloud SDK for .NET source code. This SDK all
 See [API Reference](https://apireference.aspose.cloud/cad/) for full API specification.
 
 ## How to use the SDK?
+
 The complete source code is available in this repository folder. You can either directly use it in your project via source code or get [NuGet distribution](https://www.nuget.org/packages/Aspose.CAD-Cloud/) (recommended). For more details, please visit our [documentation website](https://docs.aspose.cloud/cad/available-sdks/).
 
 ### Prerequisites
@@ -27,12 +30,10 @@ To use Aspose CAD for Cloud .NET SDK you need to register an account with [Aspos
 
 From the command line:
 
-	nuget install Aspose.CAD-Cloud
-
+nuget install Aspose.CAD-Cloud
 From Package Manager:
 
-	PM> Install-Package Aspose.CAD-Cloud
-
+PM> Install-Package Aspose.CAD-Cloud
 From within Visual Studio:
 
 1. Open the Solution Explorer.
@@ -44,6 +45,7 @@ From within Visual Studio:
 ### Sample usage
 
 The examples below show how your application have to initiate and convert "doc" file to "pdf" using Aspose.CAD-Cloud library:
+
 ```csharp
 // optional parameters are base URL, API version, authentication type and debug mode
 // default base URL is https://api.aspose.cloud
@@ -73,7 +75,7 @@ using (Stream resultGetImageStream = CADApi.GetImageSaveAs(getStreamRequest))
 using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.dxf", FileMode.Open, FileAccess.Read))
 {
 	var postSaveRequest = new PostImageSaveAsRequest(inputImageStream, "png", "ResultFolder/resultImage.png");
-	
+
 	// returns null, saves result to storage
 	CADApi.PostImageSaveAs(postSaveRequest);
 }
@@ -81,7 +83,7 @@ using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.
 using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.dwg", FileMode.Open, FileAccess.Read))
 {
 	var postStreamRequest = new PostImageSaveAsRequest(inputImageStream, "png");
-	
+
 	// returns resulting stream
 	using (Stream resultPostImageStream = CADApi.PostImageSaveAs(postStreamRequest))
 	{
@@ -91,23 +93,26 @@ using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.
 
 // another requests typically follow the same principles
 ```
-
 [Tests](Aspose.CAD.Cloud.Sdk.Test) contain various examples of using the SDK.
 
 ## Dependencies
+
 - .NET Framework 2.0 or later
 - [Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/)
 
 ## SDK Advanages
+
 + SDK is fully in sync with the API, all missing methods are added
 + Classes, methods and properties have comments and are IDE-friendly
 + Integrated security
 + Usage of Request/Response classes to represent long lists of parameters. This allows for cleaner code and easier backwards-compatibility going forward
 
 ## Contact Us
+
 Your feedback is very important to us. Please feel free to contact us using our [Support Forums](https://forum.aspose.cloud/c/cad).
 
 # Resources
+
 + [**Web API reference**](https://apireference.aspose.cloud/cad/)
 + [**Website**](https://www.aspose.cloud/)
 + [**Product Home**](https://products.aspose.cloud/cad)
@@ -117,4 +122,5 @@ Your feedback is very important to us. Please feel free to contact us using our 
 + [**Blog**](https://blog.aspose.cloud/category/cad/)
 
 # Licensing
+
 All Aspose.CAD for Cloud SDKs, helper scripts and templates are licensed under [MIT License](LICENSE).

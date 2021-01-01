@@ -1,14 +1,12 @@
 ﻿using Aspose.CAD.Cloud.Sdk;
-using Aspose.CAD.Cloud.Sdk.Client;
 using Aspose.CAD.Cloud.Sdk.Model.Requests;
-using Aspose.Storage.Cloud.Sdk.Api;
-using Aspose.Storage.Cloud.Sdk.Model.Requests;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Aspose.CAD.Cloud.Sdk.Api;
 
 namespace Aspose.CAD.Cloud.Sdk.Examples
 {
@@ -46,7 +44,7 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
         // Change Scale of an existing image
         private void GetImageResize()
         {
-            CADApi cadApi = new CADApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
 
             string fileName = "910609.dxf";
             // Possible values are jpg, bmp, psd, tiff, gif, png, j2k, wmf and pdf
@@ -58,8 +56,8 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
             // Upload document to Cloud Storage
             uploadFileToCloudStorage(fileName);
 
-            var request = new GetChangeImageScaleRequest(fileName, formatToExport, newWidth, newHeight, null, null, null);
-            var responseStream = cadApi.GetChangeImageScale(request);
+            var request = new GetDrawingResizeRequest(fileName, formatToExport, newWidth, newHeight, null, null, null);
+            var responseStream = cadApi.GetDrawingResize(request);
 
             // Save the output file to disk
             saveFileToDisk(responseStream, destFileName);
@@ -68,7 +66,7 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
         // Change scale of an image from body
         private void PostImageResize()
         {
-            CADApi cadApi = new CADApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
             string fileName = "910609.dxf";
             // Possible values are jpg, bmp, psd, tiff, gif, png, j2k, wmf and pdf
             string formatToExport = "pdf";
@@ -77,8 +75,8 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
             string dataFilePath = Path.Combine(pathToDataDir(), fileName);
             string destFileName = "910609.pdf";
 
-            var request = new PostChangeImageScaleRequest(File.OpenRead(dataFilePath), formatToExport, newWidth, newHeight, null, null);
-            var responseStream = cadApi.PostChangeImageScale(request);
+            var request = new PostDrawingResizeRequest(File.OpenRead(dataFilePath), formatToExport, newWidth, newHeight, null, null);
+            var responseStream = cadApi.PostDrawingResize(request);
 
             // Save the output file to disk
             saveFileToDisk(responseStream, destFileName);
@@ -87,20 +85,20 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
         // Get properties of an image
         private void GetImageProperties()
         {
-            CADApi cadApi = new CADApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
             string fileName = "910609.dxf";
 
             // Upload document to Cloud Storage
             uploadFileToCloudStorage(fileName);
 
-            var request = new GetImagePropertiesRequest(fileName, null, null);
-            var properties = cadApi.GetImageProperties(request);
+            var request = new GetDrawingPropertiesRequest(fileName, null, null);
+            var properties = cadApi.GetDrawingProperties(request);
         }
 
         // Rotate and flip existing image
         private void GetImageRotateFlip()
         {
-            CADApi cadApi = new CADApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
             string fileName = "910609.dxf";
             // Possible values are jpg, bmp, psd, tiff, gif, png, j2k, wmf and pdf
             string formatToExport = "pdf";
@@ -113,8 +111,8 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
             // Upload document to Cloud Storage
             uploadFileToCloudStorage(fileName);
 
-            var request = new GetImageRotateFlipRequest(fileName, formatToExport, method, null, null, null);
-            var responseStream = cadApi.GetImageRotateFlip(request);
+            var request = new GetDrawingRotateFlipRequest(fileName, formatToExport, method, null, null, null);
+            var responseStream = cadApi.GetDrawingRotateFlip(request);
 
             // Save the output file to disk
             saveFileToDisk(responseStream, destFileName);
@@ -123,7 +121,7 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
         // Rotate and flip existing image and get it from response
         private void PostImageRotateFlip()
         {
-            CADApi cadApi = new CADApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
             string fileName = "01.026.385.01.0.I SOPORTE ENFRIADOR.dwg";
             // Possible values are jpg, bmp, psd, tiff, gif, png, j2k, wmf and pdf
             string formatToExport = "pdf";
@@ -134,8 +132,8 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
             string destFileName = "01.026.385.01.0.I SOPORTE ENFRIADOR.pdf";
             string dataFilePath = Path.Combine(pathToDataDir(), fileName);
 
-            var request = new PostImageRotateFlipRequest(File.OpenRead(dataFilePath), formatToExport, method, null);
-            var responseStream = cadApi.PostImageRotateFlip(request);
+            var request = new PostDrawingRotateFlipRequest(File.OpenRead(dataFilePath), formatToExport, method, null);
+            var responseStream = cadApi.PostDrawingRotateFlip(request);
 
             // Save the output file to disk
             saveFileToDisk(responseStream, destFileName);
@@ -144,7 +142,7 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
         // Export existing drawing to another format
         private void GetImageSaveAs()
         {
-            CADApi cadApi = new CADApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
             string fileName = "01.026.385.01.0.I SOPORTE ENFRIADOR.dwg";
             // Possible values are jpg, bmp, psd, tiff, gif, png, j2k, wmf and pdf
             string formatToExport = "pdf";
@@ -153,8 +151,8 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
             // Upload document to Cloud Storage
             uploadFileToCloudStorage(fileName);
 
-            var request = new GetImageSaveAsRequest(fileName, formatToExport, null, null, null, null);
-            var responseStream = cadApi.GetImageSaveAs(request);
+            var request = new GetDrawingSaveAsRequest(fileName, formatToExport, null, null, null);
+            var responseStream = cadApi.GetDrawingSaveAs(request);
 
             // Save the output file to disk
             saveFileToDisk(responseStream, destFileName);
@@ -163,15 +161,15 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
         // Export existing image to another format. Image is passed as request body
         private void PostImageSaveAs()
         {
-            CADApi cadApi = new CADApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
             string fileName = "01.026.385.01.0.I SOPORTE ENFRIADOR.dwg";
             // Possible values are jpg, bmp, psd, tiff, gif, png, j2k, wmf and pdf
             string formatToExport = "pdf";
             string dataFilePath = Path.Combine(pathToDataDir(), fileName);
             string destFileName = "01.026.385.01.0.I SOPORTE ENFRIADOR.pdf";
 
-            var request = new PostImageSaveAsRequest(File.OpenRead(dataFilePath), formatToExport, null, null, null);
-            var responseStream = cadApi.PostImageSaveAs(request);
+            var request = new PostDrawingSaveAsRequest(File.OpenRead(dataFilePath), formatToExport, null, null);
+            var responseStream = cadApi.PostDrawingSaveAs(request);
 
             // Save the output file to disk
             saveFileToDisk(responseStream, destFileName);
@@ -189,12 +187,12 @@ namespace Aspose.CAD.Cloud.Sdk.Examples
 
         private void uploadFileToCloudStorage(String fileName)
         {
-            StorageApi storageApi = new StorageApi(AppKey, AppSid);
+            var cadApi = new CadApi(AppKey, AppSid);
 
             string dataFilePath = Path.Combine(pathToDataDir(), fileName);
 
-            PutCreateRequest putCreateRequest = new PutCreateRequest(fileName, File.OpenRead(dataFilePath), null, null);
-            storageApi.PutCreate(putCreateRequest);
+            var putCreateRequest = new UploadFileRequest(fileName, File.OpenRead(dataFilePath), null);
+            cadApi.UploadFile(putCreateRequest);
         }
 
         private void saveFileToDisk(Stream responseStream, String destFileName)

@@ -6,7 +6,7 @@ using System.IO.Compression;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Aspose.CAD.Cloud.Sdk;
-using Aspose.Storage.Cloud.Sdk.Api;
+using Aspose.CAD.Cloud.Sdk.Api;
 
 namespace  Aspose.CAD.Cloud.Live.Demos.UI.Models
 {
@@ -16,8 +16,8 @@ namespace  Aspose.CAD.Cloud.Live.Demos.UI.Models
 
 	public abstract class AsposeCADCloudBase : ApiController
     {
-		protected CADApi cadApi = new CADApi(Config.Configuration.AppKey, Config.Configuration.AppSID);
-		protected StorageApi storageApi = new StorageApi(Config.Configuration.AppKey, Config.Configuration.AppSID);
+		protected CadApi cadApi = new CadApi(Config.Configuration.AppSID, Config.Configuration.AppKey);
+		
 		///<Summary>
 		/// Get File extension
 		///</Summary>

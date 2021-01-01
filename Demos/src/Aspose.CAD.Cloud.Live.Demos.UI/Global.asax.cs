@@ -45,14 +45,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI
 		{
 			routes.RouteExistingFiles = true;
 			routes.Ignore("{resource}.axd/{*pathInfo}");
-					
 
-			routes.MapRoute(
-				name: "Default",
-				url: "Default",
-				defaults: new { controller = "Home", action = "Default" }
-			);
-			
 			routes.MapRoute(
 				"AsposeConversionRoute",
 				"{product}/Conversion",
@@ -61,12 +54,14 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI
 			routes.MapRoute(
 				"DownloadFileRoute",
 				"common/download",
-				new { controller = "Common", action = "DownloadFile" }				
-				
+				new { controller = "Common", action = "DownloadFile" }
 			);		
 
+			routes.MapRoute(
+				name: "Default",
+				url: "",
+				defaults: new { controller = "Home", action = "Default" }
+			);
 		}
-
-		
 	}
 }
