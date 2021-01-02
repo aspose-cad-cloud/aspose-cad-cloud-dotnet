@@ -1,6 +1,8 @@
 # Aspose.CAD Cloud SDK for .NET [![NuGet](https://img.shields.io/nuget/v/Aspose.CAD-Cloud.svg)](https://www.nuget.org/packages/Aspose.CAD-Cloud/)
+[Aspose.CAD Cloud](https://products.aspose.cloud/cad) is a true [REST API](https://apireference.aspose.cloud/cad/) that enables you to perform a wide range of CAD and BIM drawings processing operations including manipulation, export and conversion in a cloud, with zero initial costs.
 
-This repository contains Aspose.CAD Cloud SDK for .NET source code. This SDK allows you to perform a wide range of CAD drawing processing operations including creation, manipulation and conversion in the cloud, with zero initial costs and gain all benefits of strong types and IDE highlights.
+This repository contains [Aspose.CAD Cloud .NET SDK](https://products.aspose.cloud/cad/net) source code which is written in C#. This SDK allows you to work with Aspose.CAD Cloud REST APIs in your .NET applications quickly and easily, with zero initial cost and gain all benefits of strong types and IDE highlights.
+
 
 # Key Features
 
@@ -9,10 +11,47 @@ This repository contains Aspose.CAD Cloud SDK for .NET source code. This SDK all
 * Convert CAD drawing to high quality raster images
 * Convert CAD drawing to high quality vector files like SVG and WMF
 * Modify and convert CAD drawing to DXF
+* Modify and convert CAD drawing to DWF
 * Select and modify specific entities
+* Retrieve & update drawing properties and metadata
 * Select and convert specific layouts
 * Select and convert specific layers
 * Track the file conversion process
+
+#### Drawing Formats Support
+Export the following drawing to various formats (generally supported ones are BMP, PSD, JPEG, TIFF, GIF, PNG, JPEG2000, SVG, WMF and PDF):
+* DWG
+* DXF
+* DWF
+* DWFX
+* DWT
+* STL
+* IGS
+* DGN
+* OBJ
+* CF2
+
+Process options, change and return drawings in the same format:
+* DXF
+* DWF
+
+Output formats to export:
+* BMP
+* PSD
+* JPEG
+* TIFF
+* GIF
+* PNG
+* JPEG2000 (JP2, J2K)
+* SVG
+* WMF
+* PDF
+
+#### Supported CAD Operations
+* Export 
+* Resize
+* Crop
+* Rotate and Flip
 
 See [API Reference](https://apireference.aspose.cloud/cad/) for full API specification.
 
@@ -47,12 +86,12 @@ From within Visual Studio:
 The examples below show how your application have to initiate and convert "dxf" file to "pdf" using Aspose.CAD-Cloud library:
 
 ```csharp
-// optional parameters are base URL, API version, authentication type and debug mode
+// optional parameters are base URL, API version and debug mode
 // default base URL is https://api.aspose.cloud
 // default API version is v3.0
-// default authentication type is OAuth2.0
 // default debug mode is false
-var cadApi = new CadApi("yourAppSID", "yourAppKey");
+// authentication type is OAuth2.0 (bearer JWT token)
+var cadApi = new CadApi("yourAppKey", "yourAppSID");
 
 // this GET request converts drawing files
 // optional parameters are output file path, input file folder and Aspose storage name (if you have more than one storage and want to use non-default one) 
@@ -70,7 +109,7 @@ using (Stream resultGetImageStream = cadApi.GetDrawingSaveAs(getStreamRequest))
 	// process resulting stream
 }
 
-// another option is to use POST request and send drawing in a stream, if it's not present in your storage
+// another option is to use POST request and send drawing as a stream, if it's not present in your storage
 using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.dxf", FileMode.Open, FileAccess.Read))
 {
 	var postSaveRequest = new PostDrawingSaveAsRequest(inputImageStream, "png", "ResultFolder/resultImage.png");
