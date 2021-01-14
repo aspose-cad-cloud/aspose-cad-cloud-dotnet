@@ -1,57 +1,26 @@
-# Aspose.CAD Cloud SDK for .NET [![NuGet](https://img.shields.io/nuget/v/Aspose.CAD-Cloud.svg)](https://www.nuget.org/packages/Aspose.CAD-Cloud/)
+![](https://img.shields.io/badge/api-v3.0-lightgrey) ![Nuget](https://img.shields.io/nuget/v/Aspose.cad-Cloud) ![Nuget](https://img.shields.io/nuget/dt/Aspose.cad-Cloud) [![GitHub license](https://img.shields.io/github/license/aspose-cad-cloud/aspose-cad-cloud-dotnet)](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet/blob/master/LICENSE) ![GitHub last commit](https://img.shields.io/github/last-commit/Aspose-cad-Cloud/aspose-cad-cloud-dotnet)
+# AutoCAD File Processing .NET Cloud REST API
 [Aspose.CAD Cloud](https://products.aspose.cloud/cad) is a true [REST API](https://apireference.aspose.cloud/cad/) that enables you to perform a wide range of CAD and BIM drawings processing operations including manipulation, export and conversion in a cloud, with zero initial costs.
 
 This repository contains [Aspose.CAD Cloud .NET SDK](https://products.aspose.cloud/cad/net) source code which is written in C#. This SDK allows you to work with Aspose.CAD Cloud REST APIs in your .NET applications quickly and easily, with zero initial cost and gain all benefits of strong types and IDE highlights.
 
+## CAD Processing Features
+- Export CAD drawings to other file formats.
+- Get image properties of a CAD drawing.
+- Change the scale of an AutoCAD sketch.
+- Flip and rotate a CAD image.
+- Upload or download CAD drawings to the cloud storage.
+- Copy, move, delete CAD files from the cloud storage.
 
-# Key Features
+## Read & Write CAD Formats
+DXF (R12/2007/2010)
 
-* Supports the latest versions of AutoCAD DWG, DXF, DWF, DWFX, DWT, STL, IGS, DGN, OBJ and CF2 files
-* Convert CAD drawings to high quality PDF
-* Convert CAD drawing to high quality raster images
-* Convert CAD drawing to high quality vector files like SVG and WMF
-* Modify and convert CAD drawing to DXF
-* Modify and convert CAD drawing to DWF
-* Select and modify specific entities
-* Retrieve & update drawing properties and metadata
-* Select and convert specific layouts
-* Select and convert specific layers
-* Track the file conversion process
+## Save CAD As
+*Fixed Layout*: PDF (as a vector and as a raster)
+*Images*: BMP, PNG, JPG, JPEG, JPEG2000, TIF, TIFF, PSD, GIF, WMF
 
-#### Drawing Formats Support
-Export the following drawing to various formats (generally supported ones are BMP, PSD, JPEG, TIFF, GIF, PNG, JPEG2000, SVG, WMF and PDF):
-* DWG
-* DXF
-* DWF
-* DWFX
-* DWT
-* STL
-* IGS
-* DGN
-* OBJ
-* CF2
-
-Process options, change and return drawings in the same format:
-* DXF
-* DWF
-
-Output formats to export:
-* BMP
-* PSD
-* JPEG
-* TIFF
-* GIF
-* PNG
-* JPEG2000 (JP2, J2K)
-* SVG
-* WMF
-* PDF
-
-#### Supported CAD Operations
-* Export 
-* Resize
-* Crop
-* Rotate and Flip
+## Read CAD Formats
+DWG (13, 14, 2000, 2004), DWG (2010, 2013, 2014), DWG (2015, 2017, 2018), DWT (13, 14, 2000, 2004), DWT (2010, 2013, 2014), DWT (2015, 2017, 2018), DWF, DGN v7, IGES (IGS), PLT, Industry Foundation Classes (IFC), STereoLithography (STL)
 
 See [API Reference](https://apireference.aspose.cloud/cad/) for full API specification.
 
@@ -94,7 +63,7 @@ The examples below show how your application have to initiate and convert "dxf" 
 var cadApi = new CadApi("yourAppKey", "yourAppSID");
 
 // this GET request converts drawing files
-// optional parameters are output file path, input file folder and Aspose storage name (if you have more than one storage and want to use non-default one) 
+// optional parameters are output file path, input file folder and Aspose storage name (if you have more than one storage and want to use non-default one)
 // if output file path is not set, resulting image is returned in a stream; otherwise, it's saved at the specified path in the storage and null is returned
 var getSaveRequest = new GetDrawingSaveAsRequest("inputImage.dwg", "png", "InputFolder", "ResultFolder/resultImage.png", "Your storage");
 
@@ -145,20 +114,15 @@ using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.
 + Integrated security
 + Usage of Request/Response classes to represent long lists of parameters. This allows for cleaner code and easier backwards-compatibility going forward
 
-## Contact Us
-
-Your feedback is very important to us. Please feel free to contact us using our [Support Forums](https://forum.aspose.cloud/c/cad).
-
-# Resources
-
-+ [**Web API reference**](https://apireference.aspose.cloud/cad/)
-+ [**Website**](https://www.aspose.cloud/)
-+ [**Product Home**](https://products.aspose.cloud/cad)
-+ [**Documentation**](https://docs.aspose.cloud/cad/)
-+ [**Free Support Forum**](https://forum.aspose.cloud/c/cad)
-+ [**Paid Support Helpdesk**](https://helpdesk.aspose.cloud/)
-+ [**Blog**](https://blog.aspose.cloud/category/cad/)
-
 # Licensing
 
 All Aspose.CAD for Cloud SDKs, helper scripts and templates are licensed under [MIT License](LICENSE).
+
+## Aspose.CAD Cloud SDKs in Popular Languages
+
+| .NET | Java | PHP | Python | Ruby | Node.js |
+|---|---|---|---|---|---|
+| [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-java) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-php) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-python) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-ruby)  | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-node) |
+| [NuGet](https://www.nuget.org/packages/Aspose.cad-Cloud/) | [Maven](https://repository.aspose.cloud/webapp/#/artifacts/browse/tree/General/repo/com/aspose/aspose-cad-cloud) | [Composer](https://packagist.org/packages/aspose/aspose-cad-cloud) | [PIP](https://pypi.org/project/aspose.cad-cloud/) | [GEM](https://rubygems.org/gems/aspose_cad_cloud)  | [NPM](https://www.npmjs.com/package/@asposecloud/aspose-cad-cloud) |
+
+[Product Page](https://products.aspose.cloud/cad/net) | [Documentation](https://docs.aspose.cloud/display/cadcloud/Home) | [API Reference](https://apireference.aspose.cloud/cad/) | [Code Samples](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet) | [Blog](https://blog.aspose.cloud/category/cad/) | [Free Support](https://forum.aspose.cloud/c/cad) | [Free Trial](https://dashboard.aspose.cloud/#/apps)|
