@@ -22,7 +22,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Services
 			FileUploadResult uploadResult = null;
 			string fn = "";
 
-			CadApi cadApi = new CadApi(Config.Configuration.AppSID, Config.Configuration.AppKey);
+			CadApi cadApi = new CadApi(Config.Configuration.AppKey, Config.Configuration.AppSID);
 			try
 			{
 				string folderName = Guid.NewGuid().ToString();

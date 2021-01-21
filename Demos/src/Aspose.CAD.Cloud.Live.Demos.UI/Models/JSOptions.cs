@@ -16,7 +16,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Models
     public string AppName => Parent.AppName;
 
     //public string APIBasePath => $"{Configuration.AsposeToolsAPIBasePath}";
-    public string UIBasePath => $"{Configuration.AsposeHTMLCloudLiveDemosPath}";
+    public string UIBasePath => $"{Configuration.AsposeCADCloudLiveDemosPath}";
 
 		public string ViewerPathWF => $"{UIBasePath}/{Parent.Product}/viewer/";
 

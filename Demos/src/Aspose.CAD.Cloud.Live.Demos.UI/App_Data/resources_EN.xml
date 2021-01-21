@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <res name="ApplicationTitle">Aspose.HTML Cloud Live Demos</res>
-  <res name="ApplicationTitle2">Aspose.HTML Cloud API for C#</res>
+  <res name="ApplicationTitle">Aspose.CAD Cloud Live Demos</res>
+  <res name="ApplicationTitle2">Aspose.CAD Cloud API for C#</res>
   <res name="HomePageTitle">Home</res>
   <res name="DownloadFileLinkTitle">Download your file</res>
 	<res name="NoSearchResultsMessage">No search results</res>
@@ -11,7 +11,6 @@
 	<res name="FileAmountMessageOne">Please select only one file</res>
 	<res name="FileAmountMessageLessTen">Please select less than ten files</res>
   <res name="btnConvertNow">CONVERT NOW</res>
-	<res name="AsposeHtml">Aspose.HTML Cloud</res>
   <res name="AsposeCad">Aspose.CAD Cloud</res>
   <res name="PageNotFound">404 Page not found</res>
   <res name="BrokenLinkTitle">The link you followed probably broken or the page has been moved</res>
@@ -26,7 +25,7 @@
   <res name="DownLoadNow">DOWNLOAD NOW</res>
   <res name="FileWrongTypeMessage">You are trying to upload document(s) of unsupported type: </res>
 	<res name="cadConversionPageTitle">Free Online CAD to PDF Converter using cloud. Try it now for free!</res>
-	<res name="cadConversionMetaDescription">HTML converter, convert HTML, convert HTML to PDF, XPS, JPG, JPEG, PNG, BMP, TIFF, GIF or MHTML, convert HTML online, convert HTML free, free HTML converter.</res>
+	<res name="cadConversionMetaDescription">CAD converter, convert CAD, convert CAD to PDF, JPG, BMP, PSD, TIFF, GIF, PNG, J2K or WMF, convert CAD online, convert CAD free, free CAD converter.</res>
 	<res name="cadConversionTitle">Free CAD Online Converter</res>
 	<res name="cadConversionSubTitle">High Quality Online CAD Converter which works on any Platform for Free.</res>
 	<!-- Conversion App - How To-->

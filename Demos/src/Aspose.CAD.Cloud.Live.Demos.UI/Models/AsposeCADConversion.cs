@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 namespace Aspose.CAD.Cloud.Live.Demos.UI.Models
 {
     ///<Summary>
-    /// Aspose.HTML Cloud API convert method to convert word document file to other format
+    /// Aspose.CAD Cloud API convert method to convert word document file to other format
     ///</Summary>
 
     public class AsposeCADConversion : AsposeCADCloudBase

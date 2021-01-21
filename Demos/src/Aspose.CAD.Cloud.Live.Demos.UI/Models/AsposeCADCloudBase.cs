@@ -16,7 +16,7 @@ namespace  Aspose.CAD.Cloud.Live.Demos.UI.Models
 
 	public abstract class AsposeCADCloudBase : ApiController
     {
-		protected CadApi cadApi = new CadApi(Config.Configuration.AppSID, Config.Configuration.AppKey);
+		protected CadApi cadApi = new CadApi(Config.Configuration.AppKey, Config.Configuration.AppSID);
 		
 		///<Summary>
 		/// Get File extension

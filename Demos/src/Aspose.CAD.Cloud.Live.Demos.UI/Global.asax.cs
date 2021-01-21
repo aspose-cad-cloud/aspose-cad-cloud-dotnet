@@ -37,8 +37,8 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI
 
 		private void SetResourceFile(string strLanguage)
 		{
-			if (Session["AsposeHTMLCloudResources"] == null)
-				Session["AsposeHTMLCloudResources"] = new GlobalAppHelper(HttpContext.Current, Application, Configuration.ResourceFileSessionName, strLanguage);
+			if (Session["AsposeCADCloudResources"] == null)
+				Session["AsposeCADCloudResources"] = new GlobalAppHelper(HttpContext.Current, Application, Configuration.ResourceFileSessionName, strLanguage);
 		}
 
 		void RegisterCustomRoutes(RouteCollection routes)

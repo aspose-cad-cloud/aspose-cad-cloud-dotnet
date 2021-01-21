@@ -19,7 +19,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Controllers
 	public  class CommonController : BaseController
 	{
 		public override string Product => (string)RouteData.Values["product"];
-		CadApi cadApi = new CadApi(Config.Configuration.AppSID, Config.Configuration.AppKey);
+		CadApi cadApi = new CadApi(Config.Configuration.AppKey, Config.Configuration.AppSID);
 		/// <summary>
 		/// Sends back specified file from specified folder inside OutputDirectory.
 		/// </summary>

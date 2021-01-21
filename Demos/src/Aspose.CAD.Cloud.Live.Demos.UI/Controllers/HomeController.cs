@@ -15,8 +15,9 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Controllers
 
 		public ActionResult Default()
 		{
-			ViewBag.PageTitle = "HTML Renderer &amp; Converter REST API (C# &amp; .NET REST SDK)";
-			ViewBag.MetaDescription = ".NET C# cloud SDK to turn (convert) HTML into PDF, XPS, JSON, Markdown, JPEG, PNG, ZIP (Images) and various other formats.";
+			ViewBag.PageTitle = Resources["cadConversionPageTitle"];
+			ViewBag.MetaDescription = Resources["cadConversionMetaDescription"];
+
 			var model = new LandingPageModel(this);
 
 			return View(model);

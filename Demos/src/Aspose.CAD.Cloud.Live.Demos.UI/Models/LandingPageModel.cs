@@ -16,7 +16,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Models
 		/// </summary>
 		public string Product { get; set; }
 		private AsposeCADCloudContext _atcContext;
-		public AsposeCADCloudContext AsposeHTMLCloudContext
+		public AsposeCADCloudContext AsposeCADCloudContext
 		{
 			get
 			{
@@ -29,7 +29,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Models
 		{
 			get
 			{
-				if (_resources == null) _resources = AsposeHTMLCloudContext.Resources;
+				if (_resources == null) _resources = AsposeCADCloudContext.Resources;
 				return _resources;
 			}
 			set
@@ -38,7 +38,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Models
 			}
 		}
 
-		public string UIBasePath => Configuration.AsposeHTMLCloudLiveDemosPath;
+		public string UIBasePath => Configuration.AsposeCADCloudLiveDemosPath;
 
 		public LandingPageModel(BaseController controller)
 		{

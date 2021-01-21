@@ -11,10 +11,10 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Config
 	public static class Configuration
 	{		
 		
-		private static string _asposeHTMLCloudLiveDemosPath = ConfigurationManager.AppSettings["AsposeHTMLCloudLiveDemosPath"].ToString();
+		private static string _asposeCADCloudLiveDemosPath = ConfigurationManager.AppSettings["AsposeCADCloudLiveDemosPath"].ToString();
 		private static string _resourceFileSessionName = ConfigurationManager.AppSettings["ResourceFileSessionName"];	      
 		private static string _fileViewLink = ConfigurationManager.AppSettings["FileViewLink"];		
-		private static string _asposeHTMLCloudAppsAssetURL = ConfigurationManager.AppSettings["AsposeHTMLCloudAppsAssetURL"];
+		private static string _asposeCADCloudAppsAssetURL = ConfigurationManager.AppSettings["AsposeCADCloudAppsAssetURL"];
 		private static string _appKey = ConfigurationManager.AppSettings["AppKey"];
 		private static string _appSID = ConfigurationManager.AppSettings["AppSID"];		
 		private static string _asposeCloudStorage = ConfigurationManager.AppSettings["AsposeCloudStorage"];
@@ -56,9 +56,9 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Config
 				return OutputFilespath;
 			}
 		}		
-		public static string AsposeHTMLCloudLiveDemosPath
+		public static string AsposeCADCloudLiveDemosPath
 		{
-			get { return _asposeHTMLCloudLiveDemosPath; }
+			get { return _asposeCADCloudLiveDemosPath; }
 		}		
 		public static string AppKey
 		{
@@ -77,9 +77,9 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Config
 		{
 			get { return _asposeCloudStorage; }
 		}	
-		public static string AsposeHTMLCloudAppsAssetURL
+		public static string AsposeCADCloudAppsAssetURL
 		{
-            get { return _asposeHTMLCloudAppsAssetURL; }
+            get { return _asposeCADCloudAppsAssetURL; }
         }
 		
 

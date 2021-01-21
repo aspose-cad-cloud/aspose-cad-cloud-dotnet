@@ -14,7 +14,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Config
         /// <summary>
         /// Main context object to access all the SybContent specific context info
         /// </summary>
-        public AsposeCADCloudContext AsposeHTMLCloudContext
+        public AsposeCADCloudContext AsposeCADCloudContext
 		{
             get
             {
@@ -32,7 +32,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Config
 		{
 			get
 			{
-				if (_resources == null) _resources = AsposeHTMLCloudContext.Resources;
+				if (_resources == null) _resources = AsposeCADCloudContext.Resources;
 				return _resources;
 			}
 		}
@@ -40,7 +40,7 @@ namespace Aspose.CAD.Cloud.Live.Demos.UI.Config
 		protected override void OnLoad(EventArgs e)
         {
 			// Sync the central context store with the first loaded context for this page
-			AsposeCADCloudContext.atcc = AsposeHTMLCloudContext;
+			AsposeCADCloudContext.atcc = AsposeCADCloudContext;
             base.OnLoad(e);
         }
     }

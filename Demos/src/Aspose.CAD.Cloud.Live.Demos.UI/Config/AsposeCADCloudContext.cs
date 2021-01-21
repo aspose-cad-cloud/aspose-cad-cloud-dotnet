@@ -7,7 +7,7 @@ using System.Threading;
 namespace Aspose.CAD.Cloud.Live.Demos.UI.Config
 {
 	/// <summary>
-	/// Wrapper class for Aspose.HTML Cloud Tools context access to Pages and controls
+	/// Wrapper class for Aspose.CAD Cloud Tools context access to Pages and controls
 	/// </summary>
 	public class AsposeCADCloudContext : Context
 	{
