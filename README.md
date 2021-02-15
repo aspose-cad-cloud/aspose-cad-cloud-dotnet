@@ -50,57 +50,23 @@ From within Visual Studio:
 4. Click on the *Browse* tab and search for "Aspose.CAD-Cloud".
 5. Click on the Aspose.CAD-Cloud package, select the appropriate version in the right-tab and click *Install*.
 
-### Sample usage
-
-The examples below show how your application have to initiate and convert "dxf" file to "pdf" using Aspose.CAD-Cloud library:
+## Convert DWG to PNG in C# .Net
 
 ```csharp
-// optional parameters are base URL, API version and debug mode
-// default base URL is https://api.aspose.cloud
-// default API version is v3.0
-// default debug mode is false
-// authentication type is OAuth2.0 (bearer JWT token)
-var cadApi = new CadApi("yourAppKey", "yourAppSID");
-
-// this GET request converts drawing files
-// optional parameters are output file path, input file folder and Aspose storage name (if you have more than one storage and want to use non-default one)
-// if output file path is not set, resulting image is returned in a stream; otherwise, it's saved at the specified path in the storage and null is returned
-var getSaveRequest = new GetDrawingSaveAsRequest("inputImage.dwg", "png", "InputFolder", "ResultFolder/resultImage.png", "Your storage");
-
-// returns null, saves result to storage
-cadApi.GetDrawingSaveAs(getSaveRequest);
-
-var getStreamRequest = new GetImageSaveAsRequest("inputDrawing.dxf", "pdf", "InputFolder", null);
-
-// returns resulting stream
-using (Stream resultGetImageStream = cadApi.GetDrawingSaveAs(getStreamRequest))
-{
-	// process resulting stream
-}
-
-// another option is to use POST request and send drawing as a stream, if it's not present in your storage
-using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.dxf", FileMode.Open, FileAccess.Read))
-{
-	var postSaveRequest = new PostDrawingSaveAsRequest(inputImageStream, "png", "ResultFolder/resultImage.png");
-
-	// returns null, saves result to storage
-	cadApi.PostDrawingSaveAs(postSaveRequest);
-}
-
-using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.dwg", FileMode.Open, FileAccess.Read))
-{
-	var postStreamRequest = new PostDrawingSaveAsRequest(inputImageStream, "png");
-
-	// returns resulting stream
-	using (Stream resultPostImageStream = cadApi.PostDrawingSaveAs(postStreamRequest))
+	// Get your ClientId and ClientSecret from https://dashboard.aspose.cloud (free registration required).
+	var config = new Configuration
 	{
-		// process resulting stream
-	}
-}
+		AppSid = "MY_CLIENT_ID",
+		AppKey = "MY_CLIENT_SECRET",
+		ApiBaseUrl = baseUrl,
+	};
 
-// another requests typically follow the same principles
+	var cadApi = new CadApi(config);
+	var getSaveRequest = new GetDrawingSaveAsRequest("inputImage.dwg", "png", "InputFolder", "ResultFolder/resultImage.png", "Your storage");
+
+	Stream cadApi.GetDrawingSaveAs(getSaveRequest);
 ```
-[Tests](Aspose.CAD.Cloud.Sdk.Test) contain various examples of using the SDK.
+[Tests](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet/tree/master/src/Aspose.CAD.Cloud.Sdk.Test) contain various examples of using the SDK.
 
 ## Dependencies
 
@@ -116,13 +82,13 @@ using (FileStream inputImageStream = new FileStream(@"D:\test\localInputDrawing.
 
 # Licensing
 
-All Aspose.CAD for Cloud SDKs, helper scripts and templates are licensed under [MIT License](LICENSE).
+All Aspose.CAD for Cloud SDKs, helper scripts and templates are licensed under [MIT License](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet/blob/master/LICENSE.txt).
 
 ## Aspose.CAD Cloud SDKs in Popular Languages
 
 | .NET | Java | PHP | Python | Ruby | Node.js |
 |---|---|---|---|---|---|
-| [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-java) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-php) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-python) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-ruby)  | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-node) |
+| [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-java) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-php) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-python) | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-ruby)  | [GitHub](https://github.com/aspose-cad-cloud/aspose-cad-cloud-nodejs) |
 | [NuGet](https://www.nuget.org/packages/Aspose.cad-Cloud/) | [Maven](https://repository.aspose.cloud/webapp/#/artifacts/browse/tree/General/repo/com/aspose/aspose-cad-cloud) | [Composer](https://packagist.org/packages/aspose/aspose-cad-cloud) | [PIP](https://pypi.org/project/aspose.cad-cloud/) | [GEM](https://rubygems.org/gems/aspose_cad_cloud)  | [NPM](https://www.npmjs.com/package/@asposecloud/aspose-cad-cloud) |
 
 [Product Page](https://products.aspose.cloud/cad/net) | [Documentation](https://docs.aspose.cloud/display/cadcloud/Home) | [API Reference](https://apireference.aspose.cloud/cad/) | [Code Samples](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet) | [Blog](https://blog.aspose.cloud/category/cad/) | [Free Support](https://forum.aspose.cloud/c/cad) | [Free Trial](https://dashboard.aspose.cloud/#/apps)|
