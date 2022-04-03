@@ -466,6 +466,96 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
 
+<a name="postdrawingdxf"></a>
+## **PostDrawingDXF**
+> System.IO.Stream PostDrawingDXF(PostDrawingDXFRequest request)
+
+Export an existing drawing to DXF format with export settings specified.
+
+### **PostDrawingDXFRequest** Parameters
+```csharp
+PostDrawingDXFRequest(
+    string name, 
+    DxfOptionsDTO options, 
+    string folder = null, 
+    string outPath = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| Filename of an input drawing on a storage. | 
+ **options** | [**DxfOptionsDTO**](DxfOptionsDTO.md)| Export DXF options passed as a JSON on a request body. | 
+ **folder** | **string**| Folder with a drawing to process. | [optional] 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="postdrawingdwf"></a>
+## **PostDrawingDwf**
+> System.IO.Stream PostDrawingDwf(PostDrawingDwfRequest request)
+
+Export an existing drawing to Dwf format with export settings specified.
+
+### **PostDrawingDwfRequest** Parameters
+```csharp
+PostDrawingDwfRequest(
+    string name, 
+    DwfOptionsDTO options, 
+    string folder = null, 
+    string outPath = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| Filename of an input drawing on a storage. | 
+ **options** | [**DwfOptionsDTO**](DwfOptionsDTO.md)| Export Dwf options passed as a JSON on a request body. | 
+ **folder** | **string**| Folder with a drawing to process. | [optional] 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="postdrawingfbx"></a>
+## **PostDrawingFbx**
+> System.IO.Stream PostDrawingFbx(PostDrawingFbxRequest request)
+
+Export an existing drawing to Fbx format with export settings specified.
+
+### **PostDrawingFbxRequest** Parameters
+```csharp
+PostDrawingFbxRequest(
+    string name, 
+    FbxOptionsDTO options, 
+    string folder = null, 
+    string outPath = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| Filename of an input drawing on a storage. | 
+ **options** | [**FbxOptionsDTO**](FbxOptionsDTO.md)| Export Fbx options passed as a JSON on a request body. | 
+ **folder** | **string**| Folder with a drawing to process. | [optional] 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
 <a name="postdrawinggif"></a>
 ## **PostDrawingGif**
 > System.IO.Stream PostDrawingGif(PostDrawingGifRequest request)
@@ -546,6 +636,36 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string**| Filename of an input drawing on a storage. | 
  **options** | [**Jpeg2000OptionsDTO**](Jpeg2000OptionsDTO.md)| Export JPEG2000 options passed as a JSON on a request body. | 
+ **folder** | **string**| Folder with a drawing to process. | [optional] 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="postdrawingobj"></a>
+## **PostDrawingObj**
+> System.IO.Stream PostDrawingObj(PostDrawingObjRequest request)
+
+Export an existing drawing to Obj format with export settings specified.
+
+### **PostDrawingObjRequest** Parameters
+```csharp
+PostDrawingObjRequest(
+    string name, 
+    ObjOptionsDTO options, 
+    string folder = null, 
+    string outPath = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| Filename of an input drawing on a storage. | 
+ **options** | [**ObjOptionsDTO**](ObjOptionsDTO.md)| Export Obj options passed as a JSON on a request body. | 
  **folder** | **string**| Folder with a drawing to process. | [optional] 
  **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
  **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
@@ -876,6 +996,90 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
 
+<a name="putdrawingdxf"></a>
+## **PutDrawingDXF**
+> System.IO.Stream PutDrawingDXF(PutDrawingDXFRequest request)
+
+Export drawing to DXF format. Drawing data is passed as zero-indexed multipart/form-data as well as export DXF options serialized as JSON. Order of drawing data and DXF options could vary.
+
+### **PutDrawingDXFRequest** Parameters
+```csharp
+PutDrawingDXFRequest(
+    System.IO.Stream drawingData, 
+    string outPath = null, 
+    string exportOptions = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **exportOptions** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/DxfOptionsDTO model definition. | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="putdrawingdwf"></a>
+## **PutDrawingDwf**
+> System.IO.Stream PutDrawingDwf(PutDrawingDwfRequest request)
+
+Export drawing to Dwf format. Drawing data is passed as zero-indexed multipart/form-data as well as export Dwf options serialized as JSON. Order of drawing data and Dwf options could vary.
+
+### **PutDrawingDwfRequest** Parameters
+```csharp
+PutDrawingDwfRequest(
+    System.IO.Stream drawingData, 
+    string outPath = null, 
+    string exportOptions = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **exportOptions** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/DwfOptionsDTO model definition. | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="putdrawingfbx"></a>
+## **PutDrawingFbx**
+> System.IO.Stream PutDrawingFbx(PutDrawingFbxRequest request)
+
+Export drawing to Fbx format. Drawing data is passed as zero-indexed multipart/form-data as well as export Fbx options serialized as JSON. Order of drawing data and Fbx options could vary.
+
+### **PutDrawingFbxRequest** Parameters
+```csharp
+PutDrawingFbxRequest(
+    System.IO.Stream drawingData, 
+    string outPath = null, 
+    string exportOptions = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **exportOptions** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/FbxOptionsDTO model definition. | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
 <a name="putdrawinggif"></a>
 ## **PutDrawingGif**
 > System.IO.Stream PutDrawingGif(PutDrawingGifRequest request)
@@ -952,6 +1156,34 @@ Name | Type | Description  | Notes
  **drawingData** | **System.IO.Stream**| Input drawing | 
  **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
  **exportOptions** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/Jpeg2000OptionsDTO model definition. | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="putdrawingobj"></a>
+## **PutDrawingObj**
+> System.IO.Stream PutDrawingObj(PutDrawingObjRequest request)
+
+Export drawing to Obj format. Drawing data is passed as zero-indexed multipart/form-data as well as export Obj options serialized as JSON. Order of drawing data and Obj options could vary.
+
+### **PutDrawingObjRequest** Parameters
+```csharp
+PutDrawingObjRequest(
+    System.IO.Stream drawingData, 
+    string outPath = null, 
+    string exportOptions = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **exportOptions** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/ObjOptionsDTO model definition. | [optional] 
  **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
 
 ### Return type
@@ -1147,6 +1379,28 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**StorageExist**](StorageExist.md)
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="token"></a>
+## **Token**
+> string Token(TokenRequest request)
+
+
+
+### **TokenRequest** Parameters
+```csharp
+TokenRequest(
+    GetAccessTokenRequest request)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**GetAccessTokenRequest**](GetAccessTokenRequest.md)|  | 
+
+### Return type
+
+**string**
 
 [[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
 

@@ -66,6 +66,11 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public ComplianceEnum? Compliance { get; set; }
 
         /// <summary>
+        /// Gets or sets DigitalSignatureDetails
+        /// </summary>  
+        public PdfDigitalSignatureDetailsCore DigitalSignatureDetails { get; set; }
+
+        /// <summary>
         /// Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -74,6 +79,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
           var sb = new StringBuilder();
           sb.Append("class PdfDocumentOptions {\n");
           sb.Append("  Compliance: ").Append(this.Compliance).Append("\n");
+          sb.Append("  DigitalSignatureDetails: ").Append(this.DigitalSignatureDetails).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

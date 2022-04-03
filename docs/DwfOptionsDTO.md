@@ -1,4 +1,4 @@
-# Aspose.CAD.Cloud.Sdk.Model.SvgOptionsDTO
+# Aspose.CAD.Cloud.Sdk.Model.DwfOptionsDTO
 ## Properties
 
 Name | Type | Description | Notes
@@ -7,8 +7,6 @@ Name | Type | Description | Notes
 **Layers** | **List&lt;string&gt;** | Layers to export | [optional] 
 **ResolutionSettings** | [**ResolutionSetting**](ResolutionSetting.md) | DPI resolution settings | [optional] 
 **VectorRasterizationOptions** | [**CadRasterizationOptionsDTO**](CadRasterizationOptionsDTO.md) | Raster options | [optional] 
-**ColorType** | **string** | Color type | 
-**TextAsShapes** | **bool?** | Render text as shapes | 
 
 [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to API_README]](API_README.md)
 

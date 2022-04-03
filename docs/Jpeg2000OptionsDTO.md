@@ -3,6 +3,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Rotation** | **string** | Resulting rotation operation | 
+**Layers** | **List&lt;string&gt;** | Layers to export | [optional] 
+**ResolutionSettings** | [**ResolutionSetting**](ResolutionSetting.md) | DPI resolution settings | [optional] 
+**VectorRasterizationOptions** | [**CadRasterizationOptionsDTO**](CadRasterizationOptionsDTO.md) | Raster options | [optional] 
 **Comments** | **List&lt;string&gt;** |  | [optional] 
 **Codec** | **string** |  | 
 

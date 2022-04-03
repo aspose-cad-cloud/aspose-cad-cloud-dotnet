@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="BmpOptionsDTO.cs">
+// <copyright company="Aspose" file="GetAccessTokenRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,67 +34,19 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Export options for BMP format
+  /// 
   /// </summary>  
-  public class BmpOptionsDTO : DrawingOptionsBaseDTO 
+  public class GetAccessTokenRequest 
   {                       
         /// <summary>
-        /// Compression type
-        /// </summary>
-        /// <value>Compression type</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum CompressionEnum
-        { 
-            /// <summary>
-            /// Enum Rgb for "Rgb"
-            /// </summary>            
-            Rgb,
-            
-            /// <summary>
-            /// Enum Rle8 for "Rle8"
-            /// </summary>            
-            Rle8,
-            
-            /// <summary>
-            /// Enum Rle4 for "Rle4"
-            /// </summary>            
-            Rle4,
-            
-            /// <summary>
-            /// Enum Bitfields for "Bitfields"
-            /// </summary>            
-            Bitfields,
-            
-            /// <summary>
-            /// Enum Jpeg for "Jpeg"
-            /// </summary>            
-            Jpeg,
-            
-            /// <summary>
-            /// Enum Png for "Png"
-            /// </summary>            
-            Png,
-            
-            /// <summary>
-            /// Enum AlphaBitfields for "AlphaBitfields"
-            /// </summary>            
-            AlphaBitfields,
-            
-            /// <summary>
-            /// Enum Dxt1 for "Dxt1"
-            /// </summary>            
-            Dxt1            
-        }
-
-        /// <summary>
-        /// Compression type
-        /// </summary>
-        public CompressionEnum? Compression { get; set; }
-
-        /// <summary>
-        /// Bits per pixel
+        /// Gets or sets ClientId
         /// </summary>  
-        public int? BitsPerPixel { get; set; }
+        public string ClientId { get; set; }
+
+        /// <summary>
+        /// Gets or sets ClientSecret
+        /// </summary>  
+        public string ClientSecret { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -103,9 +55,9 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class BmpOptionsDTO {\n");
-          sb.Append("  BitsPerPixel: ").Append(this.BitsPerPixel).Append("\n");
-          sb.Append("  Compression: ").Append(this.Compression).Append("\n");
+          sb.Append("class GetAccessTokenRequest {\n");
+          sb.Append("  ClientId: ").Append(this.ClientId).Append("\n");
+          sb.Append("  ClientSecret: ").Append(this.ClientSecret).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

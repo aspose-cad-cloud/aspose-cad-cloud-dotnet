@@ -3,6 +3,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Rotation** | **string** | Resulting rotation operation | 
+**Layers** | **List&lt;string&gt;** | Layers to export | [optional] 
+**ResolutionSettings** | [**ResolutionSetting**](ResolutionSetting.md) | DPI resolution settings | [optional] 
+**VectorRasterizationOptions** | [**CadRasterizationOptionsDTO**](CadRasterizationOptionsDTO.md) | Raster options | [optional] 
 **ByteOrder** | **string** | Bytes order (little/big-endian notation) | 
 **Compression** | **string** | Compression level | 
 **ExpectedFormat** | **string** | Expected TIFF sub-format | 

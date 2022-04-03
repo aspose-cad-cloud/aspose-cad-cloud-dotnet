@@ -784,6 +784,129 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         }
         
         /// <summary>
+        /// Export an existing drawing to DXF format with export settings specified. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PostDrawingDXFRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PostDrawingDXF(PostDrawingDXFRequest request)
+        {
+            // verify the required parameter 'name' is set
+            if (request.Name == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling PostDrawingDXF");
+            }
+
+            // verify the required parameter 'options' is set
+            if (request.Options == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'options' when calling PostDrawingDXF");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/dxf";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.Name);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", request.Folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            var postBody = SerializationHelper.Serialize(request.Options);
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "POST", 
+                postBody, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export an existing drawing to Dwf format with export settings specified. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PostDrawingDwfRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PostDrawingDwf(PostDrawingDwfRequest request)
+        {
+            // verify the required parameter 'name' is set
+            if (request.Name == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling PostDrawingDwf");
+            }
+
+            // verify the required parameter 'options' is set
+            if (request.Options == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'options' when calling PostDrawingDwf");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/dwf";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.Name);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", request.Folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            var postBody = SerializationHelper.Serialize(request.Options);
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "POST", 
+                postBody, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export an existing drawing to Fbx format with export settings specified. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PostDrawingFbxRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PostDrawingFbx(PostDrawingFbxRequest request)
+        {
+            // verify the required parameter 'name' is set
+            if (request.Name == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling PostDrawingFbx");
+            }
+
+            // verify the required parameter 'options' is set
+            if (request.Options == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'options' when calling PostDrawingFbx");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/fbx";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.Name);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", request.Folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            var postBody = SerializationHelper.Serialize(request.Options);
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "POST", 
+                postBody, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
         /// Export an existing drawing into GIF format with export settings specified. 
         /// </summary>
         /// <param name="request">Specific request.<see cref="PostDrawingGifRequest" /></param>
@@ -886,6 +1009,47 @@ namespace Aspose.CAD.Cloud.Sdk.Api
 
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/jpeg2000";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.Name);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", request.Folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            var postBody = SerializationHelper.Serialize(request.Options);
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "POST", 
+                postBody, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export an existing drawing to Obj format with export settings specified. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PostDrawingObjRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PostDrawingObj(PostDrawingObjRequest request)
+        {
+            // verify the required parameter 'name' is set
+            if (request.Name == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling PostDrawingObj");
+            }
+
+            // verify the required parameter 'options' is set
+            if (request.Options == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'options' when calling PostDrawingObj");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/obj";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1387,6 +1551,129 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         }
         
         /// <summary>
+        /// Export drawing to DXF format. Drawing data is passed as zero-indexed multipart/form-data as well as export DXF options serialized as JSON. Order of drawing data and DXF options could vary. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PutDrawingDXFRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PutDrawingDXF(PutDrawingDXFRequest request)
+        {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PutDrawingDXF");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/dxf";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            
+            if (request.DrawingData != null) 
+            {
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
+            }
+            if (request.ExportOptions != null) 
+            {
+                formParams.Add("exportOptions", request.ExportOptions);
+            }
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "PUT", 
+                null, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export drawing to Dwf format. Drawing data is passed as zero-indexed multipart/form-data as well as export Dwf options serialized as JSON. Order of drawing data and Dwf options could vary. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PutDrawingDwfRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PutDrawingDwf(PutDrawingDwfRequest request)
+        {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PutDrawingDwf");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/dwf";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            
+            if (request.DrawingData != null) 
+            {
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
+            }
+            if (request.ExportOptions != null) 
+            {
+                formParams.Add("exportOptions", request.ExportOptions);
+            }
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "PUT", 
+                null, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export drawing to Fbx format. Drawing data is passed as zero-indexed multipart/form-data as well as export Fbx options serialized as JSON. Order of drawing data and Fbx options could vary. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PutDrawingFbxRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PutDrawingFbx(PutDrawingFbxRequest request)
+        {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PutDrawingFbx");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/fbx";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            
+            if (request.DrawingData != null) 
+            {
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
+            }
+            if (request.ExportOptions != null) 
+            {
+                formParams.Add("exportOptions", request.ExportOptions);
+            }
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "PUT", 
+                null, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
         /// Export drawing to GIF format. Drawing data is passed as zero-indexed multipart/form-data as well as export GIF options serialized as JSON. Order of drawing data and GIF options could vary. 
         /// </summary>
         /// <param name="request">Specific request.<see cref="PutDrawingGifRequest" /></param>
@@ -1483,6 +1770,47 @@ namespace Aspose.CAD.Cloud.Sdk.Api
 
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/jpeg2000";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            
+            if (request.DrawingData != null) 
+            {
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
+            }
+            if (request.ExportOptions != null) 
+            {
+                formParams.Add("exportOptions", request.ExportOptions);
+            }
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "PUT", 
+                null, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export drawing to Obj format. Drawing data is passed as zero-indexed multipart/form-data as well as export Obj options serialized as JSON. Order of drawing data and Obj options could vary. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PutDrawingObjRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PutDrawingObj(PutDrawingObjRequest request)
+        {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PutDrawingObj");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/obj";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -1790,6 +2118,42 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             }
       
             return (StorageExist)SerializationHelper.Deserialize<StorageExist>(StreamHelper.ToString(response));
+        }
+        
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="TokenRequest" /></param>
+        /// <returns><see cref="string"/></returns>            
+        public string Token(TokenRequest request)
+        {
+            // verify the required parameter 'request' is set
+            if (request.Request == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'request' when calling Token");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/connect/token";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            var postBody = SerializationHelper.Serialize(request.Request);
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "POST", 
+                postBody, 
+                null, 
+                formParams);
+            
+            if (response == null)
+            {
+                return null;
+            }
+      
+            return (string)SerializationHelper.Deserialize<string>(StreamHelper.ToString(response));
         }
         
         /// <summary>

@@ -1,10 +1,8 @@
-# Aspose.CAD.Cloud.Sdk.Model.PdfDocumentOptions
+# Aspose.CAD.Cloud.Sdk.Model.FbxProperties
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Compliance** | **string** |  | 
-**DigitalSignatureDetails** | [**PdfDigitalSignatureDetailsCore**](PdfDigitalSignatureDetailsCore.md) |  | [optional] 
 
 [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to API_README]](API_README.md)
 

@@ -3,6 +3,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Rotation** | **string** | Resulting rotation operation | 
+**Layers** | **List&lt;string&gt;** | Layers to export | [optional] 
+**ResolutionSettings** | [**ResolutionSetting**](ResolutionSetting.md) | DPI resolution settings | [optional] 
+**VectorRasterizationOptions** | [**CadRasterizationOptionsDTO**](CadRasterizationOptionsDTO.md) | Raster options | [optional] 
 **DoPaletteCorrection** | **bool?** | Determines whether to do auto-correction of a palette | 
 **ColorResolution** | **int?** | Color resolution | 
 **IsPaletteSorted** | **bool?** | Determines whether a palette is sorted | 

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="CadResponse.cs">
+// <copyright company="Aspose" file="X509Certificate2.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,79 +34,84 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Represents information about a drawing.
+  /// 
   /// </summary>  
-  public class CadResponse 
+  public class X509Certificate2 : X509Certificate 
   {                       
         /// <summary>
-        /// Gets or sets the height of a drawing.
+        /// Gets or sets Archived
         /// </summary>  
-        public int? Height { get; set; }
+        public bool? Archived { get; set; }
 
         /// <summary>
-        /// Gets or sets the width of a drawing.
+        /// Gets or sets Extensions
         /// </summary>  
-        public int? Width { get; set; }
+        public List<Object> Extensions { get; set; }
 
         /// <summary>
-        /// Gets or sets the DWG properties.
+        /// Gets or sets FriendlyName
         /// </summary>  
-        public DwgProperties DwgProperties { get; set; }
+        public string FriendlyName { get; set; }
 
         /// <summary>
-        /// Gets or sets the DXF properties.
+        /// Gets or sets HasPrivateKey
         /// </summary>  
-        public DxfProperties DxfProperties { get; set; }
+        public bool? HasPrivateKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the DWT properties.
+        /// Gets or sets PrivateKey
         /// </summary>  
-        public DwgProperties DwtProperties { get; set; }
+        public AsymmetricAlgorithm PrivateKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the DGN properties.
+        /// Gets or sets IssuerName
         /// </summary>  
-        public DgnProperties DgnProperties { get; set; }
+        public X500DistinguishedName IssuerName { get; set; }
 
         /// <summary>
-        /// Gets or sets the IFC properties.
+        /// Gets or sets NotAfter
         /// </summary>  
-        public IfcProperties IfcProperties { get; set; }
+        public DateTime? NotAfter { get; set; }
 
         /// <summary>
-        /// Gets or sets the IGS properties.
+        /// Gets or sets NotBefore
         /// </summary>  
-        public IgsProperties IgsProperties { get; set; }
+        public DateTime? NotBefore { get; set; }
 
         /// <summary>
-        /// Gets or sets the STL properties.
+        /// Gets or sets PublicKey
         /// </summary>  
-        public StlProperties StlProperties { get; set; }
+        public PublicKey PublicKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the DWF properties.
+        /// Gets or sets RawData
         /// </summary>  
-        public DwfProperties DwfProperties { get; set; }
+        public byte[] RawData { get; set; }
 
         /// <summary>
-        /// Gets or sets the Cf2 properties.
+        /// Gets or sets SerialNumber
         /// </summary>  
-        public Cf2Properties Cf2Properties { get; set; }
+        public string SerialNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the Cf2 properties.
+        /// Gets or sets SignatureAlgorithm
         /// </summary>  
-        public FbxProperties FbxProperties { get; set; }
+        public Oid SignatureAlgorithm { get; set; }
 
         /// <summary>
-        /// Gets or sets the FBX properties.
+        /// Gets or sets SubjectName
         /// </summary>  
-        public ObjProperties ObjProperties { get; set; }
+        public X500DistinguishedName SubjectName { get; set; }
 
         /// <summary>
-        /// Gets or sets the Cf2 properties.
+        /// Gets or sets Thumbprint
         /// </summary>  
-        public PltProperties PltProperties { get; set; }
+        public string Thumbprint { get; set; }
+
+        /// <summary>
+        /// Gets or sets Version
+        /// </summary>  
+        public int? Version { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -115,21 +120,22 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class CadResponse {\n");
-          sb.Append("  Height: ").Append(this.Height).Append("\n");
-          sb.Append("  Width: ").Append(this.Width).Append("\n");
-          sb.Append("  DwgProperties: ").Append(this.DwgProperties).Append("\n");
-          sb.Append("  DxfProperties: ").Append(this.DxfProperties).Append("\n");
-          sb.Append("  DwtProperties: ").Append(this.DwtProperties).Append("\n");
-          sb.Append("  DgnProperties: ").Append(this.DgnProperties).Append("\n");
-          sb.Append("  IfcProperties: ").Append(this.IfcProperties).Append("\n");
-          sb.Append("  IgsProperties: ").Append(this.IgsProperties).Append("\n");
-          sb.Append("  StlProperties: ").Append(this.StlProperties).Append("\n");
-          sb.Append("  DwfProperties: ").Append(this.DwfProperties).Append("\n");
-          sb.Append("  Cf2Properties: ").Append(this.Cf2Properties).Append("\n");
-          sb.Append("  FbxProperties: ").Append(this.FbxProperties).Append("\n");
-          sb.Append("  ObjProperties: ").Append(this.ObjProperties).Append("\n");
-          sb.Append("  PltProperties: ").Append(this.PltProperties).Append("\n");
+          sb.Append("class X509Certificate2 {\n");
+          sb.Append("  Archived: ").Append(this.Archived).Append("\n");
+          sb.Append("  Extensions: ").Append(this.Extensions).Append("\n");
+          sb.Append("  FriendlyName: ").Append(this.FriendlyName).Append("\n");
+          sb.Append("  HasPrivateKey: ").Append(this.HasPrivateKey).Append("\n");
+          sb.Append("  PrivateKey: ").Append(this.PrivateKey).Append("\n");
+          sb.Append("  IssuerName: ").Append(this.IssuerName).Append("\n");
+          sb.Append("  NotAfter: ").Append(this.NotAfter).Append("\n");
+          sb.Append("  NotBefore: ").Append(this.NotBefore).Append("\n");
+          sb.Append("  PublicKey: ").Append(this.PublicKey).Append("\n");
+          sb.Append("  RawData: ").Append(this.RawData).Append("\n");
+          sb.Append("  SerialNumber: ").Append(this.SerialNumber).Append("\n");
+          sb.Append("  SignatureAlgorithm: ").Append(this.SignatureAlgorithm).Append("\n");
+          sb.Append("  SubjectName: ").Append(this.SubjectName).Append("\n");
+          sb.Append("  Thumbprint: ").Append(this.Thumbprint).Append("\n");
+          sb.Append("  Version: ").Append(this.Version).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

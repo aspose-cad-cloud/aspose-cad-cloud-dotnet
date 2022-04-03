@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="BmpOptionsDTO.cs">
+// <copyright company="Aspose" file="PdfDigitalSignatureDetailsCore.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,67 +34,66 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Export options for BMP format
+  /// 
   /// </summary>  
-  public class BmpOptionsDTO : DrawingOptionsBaseDTO 
+  public class PdfDigitalSignatureDetailsCore 
   {                       
         /// <summary>
-        /// Compression type
+        /// Gets or sets HashAlgorithm
         /// </summary>
-        /// <value>Compression type</value>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum CompressionEnum
+        public enum HashAlgorithmEnum
         { 
             /// <summary>
-            /// Enum Rgb for "Rgb"
+            /// Enum Sha1 for "Sha1"
             /// </summary>            
-            Rgb,
+            Sha1,
             
             /// <summary>
-            /// Enum Rle8 for "Rle8"
+            /// Enum Sha256 for "Sha256"
             /// </summary>            
-            Rle8,
+            Sha256,
             
             /// <summary>
-            /// Enum Rle4 for "Rle4"
+            /// Enum Sha384 for "Sha384"
             /// </summary>            
-            Rle4,
+            Sha384,
             
             /// <summary>
-            /// Enum Bitfields for "Bitfields"
+            /// Enum Sha512 for "Sha512"
             /// </summary>            
-            Bitfields,
+            Sha512,
             
             /// <summary>
-            /// Enum Jpeg for "Jpeg"
+            /// Enum Md5 for "Md5"
             /// </summary>            
-            Jpeg,
-            
-            /// <summary>
-            /// Enum Png for "Png"
-            /// </summary>            
-            Png,
-            
-            /// <summary>
-            /// Enum AlphaBitfields for "AlphaBitfields"
-            /// </summary>            
-            AlphaBitfields,
-            
-            /// <summary>
-            /// Enum Dxt1 for "Dxt1"
-            /// </summary>            
-            Dxt1            
+            Md5            
         }
 
         /// <summary>
-        /// Compression type
+        /// Gets or sets HashAlgorithm
         /// </summary>
-        public CompressionEnum? Compression { get; set; }
+        public HashAlgorithmEnum? HashAlgorithm { get; set; }
 
         /// <summary>
-        /// Bits per pixel
+        /// Gets or sets Certificate
         /// </summary>  
-        public int? BitsPerPixel { get; set; }
+        public X509Certificate2 Certificate { get; set; }
+
+        /// <summary>
+        /// Gets or sets Reason
+        /// </summary>  
+        public string Reason { get; set; }
+
+        /// <summary>
+        /// Gets or sets Location
+        /// </summary>  
+        public string Location { get; set; }
+
+        /// <summary>
+        /// Gets or sets SignatureDate
+        /// </summary>  
+        public DateTime? SignatureDate { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -103,9 +102,12 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class BmpOptionsDTO {\n");
-          sb.Append("  BitsPerPixel: ").Append(this.BitsPerPixel).Append("\n");
-          sb.Append("  Compression: ").Append(this.Compression).Append("\n");
+          sb.Append("class PdfDigitalSignatureDetailsCore {\n");
+          sb.Append("  Certificate: ").Append(this.Certificate).Append("\n");
+          sb.Append("  Reason: ").Append(this.Reason).Append("\n");
+          sb.Append("  Location: ").Append(this.Location).Append("\n");
+          sb.Append("  SignatureDate: ").Append(this.SignatureDate).Append("\n");
+          sb.Append("  HashAlgorithm: ").Append(this.HashAlgorithm).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

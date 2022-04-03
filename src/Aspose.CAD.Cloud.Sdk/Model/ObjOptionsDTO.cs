@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="Cff2Properties.cs">
+// <copyright company="Aspose" file="ObjOptionsDTO.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,9 +34,9 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Represents information about CFF2 drawing.
+  /// Export options for FBX format
   /// </summary>  
-  public class Cff2Properties 
+  public class ObjOptionsDTO : DrawingOptionsBaseDTO 
   {                       
         /// <summary>
         /// Get the string presentation of the object
@@ -45,7 +45,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class Cff2Properties {\n");
+          sb.Append("class ObjOptionsDTO {\n");
           sb.Append("}\n");
           return sb.ToString();
         }
