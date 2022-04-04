@@ -1382,28 +1382,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
 
-<a name="token"></a>
-## **Token**
-> string Token(TokenRequest request)
-
-
-
-### **TokenRequest** Parameters
-```csharp
-TokenRequest(
-    GetAccessTokenRequest request)
-```
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **request** | [**GetAccessTokenRequest**](GetAccessTokenRequest.md)|  | 
-
-### Return type
-
-**string**
-
-[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
-
 <a name="uploadfile"></a>
 ## **UploadFile**
 > [FilesUploadResult](FilesUploadResult.md) UploadFile(UploadFileRequest request)

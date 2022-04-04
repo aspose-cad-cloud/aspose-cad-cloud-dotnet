@@ -2121,42 +2121,6 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         }
         
         /// <summary>
-        ///  
-        /// </summary>
-        /// <param name="request">Specific request.<see cref="TokenRequest" /></param>
-        /// <returns><see cref="string"/></returns>            
-        public string Token(TokenRequest request)
-        {
-            // verify the required parameter 'request' is set
-            if (request.Request == null) 
-            {
-                throw new ApiException(400, "Missing required parameter 'request' when calling Token");
-            }
-
-            // create path and map variables
-            var resourcePath = this.Configuration.GetApiRootUrl() + "/connect/token";
-            resourcePath = Regex
-                        .Replace(resourcePath, "\\*", string.Empty)
-                        .Replace("&amp;", "&")
-                        .Replace("/?", "?");
-            var formParams = new Dictionary<string, object>();
-            var postBody = SerializationHelper.Serialize(request.Request);
-            var response = this.apiInvoker.InvokeBinaryApi(
-                resourcePath, 
-                "POST", 
-                postBody, 
-                null, 
-                formParams);
-            
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (string)SerializationHelper.Deserialize<string>(StreamHelper.ToString(response));
-        }
-        
-        /// <summary>
         /// Upload file 
         /// </summary>
         /// <param name="request">Specific request.<see cref="UploadFileRequest" /></param>

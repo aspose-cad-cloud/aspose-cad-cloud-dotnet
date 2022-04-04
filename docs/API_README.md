@@ -54,7 +54,6 @@ Class | Method | HTTP request | Description
 *CadApi* | [**PutDrawingTiff**](CadApi.md#putdrawingtiff) | **PUT** /cad/tiff | Export drawing to TIFF format. Drawing data is passed as zero-indexed multipart/form-data as well as export TIFF options serialized as JSON. Order of drawing data and TIFF options could vary.
 *CadApi* | [**PutDrawingWmf**](CadApi.md#putdrawingwmf) | **PUT** /cad/wmf | Export drawing to WMF format. Drawing data is passed as zero-indexed multipart/form-data as well as export WMF options serialized as JSON. Order of drawing data and WMF options could vary.
 *CadApi* | [**StorageExists**](CadApi.md#storageexists) | **GET** /cad/storage/{storageName}/exist | Check if storage exists
-*CadApi* | [**Token**](CadApi.md#token) | **POST** /connect/token | 
 *CadApi* | [**UploadFile**](CadApi.md#uploadfile) | **PUT** /cad/storage/file/{path} | Upload file
 
 
@@ -78,7 +77,6 @@ Class | Method | HTTP request | Description
  - [Model.FileVersions](FileVersions.md)
  - [Model.FilesList](FilesList.md)
  - [Model.FilesUploadResult](FilesUploadResult.md)
- - [Model.GetAccessTokenRequest](GetAccessTokenRequest.md)
  - [Model.GraphicsOptions](GraphicsOptions.md)
  - [Model.IfcProperties](IfcProperties.md)
  - [Model.IgsProperties](IgsProperties.md)
