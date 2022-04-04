@@ -147,6 +147,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// </summary>
         protected readonly string[] BasicExportFormats = new string[]
         {
+            "dxf",
+            "obj",
             "jpg",
             "bmp",
             "psd",
