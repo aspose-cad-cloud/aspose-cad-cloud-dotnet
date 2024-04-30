@@ -109,6 +109,11 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public PltProperties PltProperties { get; set; }
 
         /// <summary>
+        /// Gets or sets the STP properties.
+        /// </summary>  
+        public StpProperties StpProperties { get; set; }
+
+        /// <summary>
         /// Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -130,6 +135,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
           sb.Append("  FbxProperties: ").Append(this.FbxProperties).Append("\n");
           sb.Append("  ObjProperties: ").Append(this.ObjProperties).Append("\n");
           sb.Append("  PltProperties: ").Append(this.PltProperties).Append("\n");
+          sb.Append("  StpProperties: ").Append(this.StpProperties).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

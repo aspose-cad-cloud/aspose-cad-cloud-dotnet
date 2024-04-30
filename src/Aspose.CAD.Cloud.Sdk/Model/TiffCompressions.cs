@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfOptionsDTO.cs">
+// <copyright company="Aspose" file="TiffCompressions.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,20 +34,10 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Export options for PDF format
+  /// 
   /// </summary>  
-  public class PdfOptionsDTO : DrawingOptionsBaseDTO 
+  public class TiffCompressions 
   {                       
-        /// <summary>
-        /// Document metadata
-        /// </summary>  
-        public PdfDocumentInfo PdfDocumentInfo { get; set; }
-
-        /// <summary>
-        /// Core PDF rendering options
-        /// </summary>  
-        public PdfDocumentOptionsDTO CorePdfOptions { get; set; }
-
         /// <summary>
         /// Get the string presentation of the object
         /// </summary>
@@ -55,9 +45,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class PdfOptionsDTO {\n");
-          sb.Append("  PdfDocumentInfo: ").Append(this.PdfDocumentInfo).Append("\n");
-          sb.Append("  CorePdfOptions: ").Append(this.CorePdfOptions).Append("\n");
+          sb.Append("class TiffCompressions {\n");
           sb.Append("}\n");
           return sb.ToString();
         }

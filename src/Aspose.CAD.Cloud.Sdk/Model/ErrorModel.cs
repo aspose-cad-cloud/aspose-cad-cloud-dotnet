@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfOptionsDTO.cs">
+// <copyright company="Aspose" file="ErrorModel.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,19 +34,29 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Export options for PDF format
+  /// Error
   /// </summary>  
-  public class PdfOptionsDTO : DrawingOptionsBaseDTO 
+  public class ErrorModel 
   {                       
         /// <summary>
-        /// Document metadata
+        /// Code             
         /// </summary>  
-        public PdfDocumentInfo PdfDocumentInfo { get; set; }
+        public string Code { get; set; }
 
         /// <summary>
-        /// Core PDF rendering options
+        /// Message             
         /// </summary>  
-        public PdfDocumentOptionsDTO CorePdfOptions { get; set; }
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Description             
+        /// </summary>  
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Inner Error             
+        /// </summary>  
+        public ErrorDetails InnerError { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -55,9 +65,11 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class PdfOptionsDTO {\n");
-          sb.Append("  PdfDocumentInfo: ").Append(this.PdfDocumentInfo).Append("\n");
-          sb.Append("  CorePdfOptions: ").Append(this.CorePdfOptions).Append("\n");
+          sb.Append("class ErrorModel {\n");
+          sb.Append("  Code: ").Append(this.Code).Append("\n");
+          sb.Append("  Message: ").Append(this.Message).Append("\n");
+          sb.Append("  Description: ").Append(this.Description).Append("\n");
+          sb.Append("  InnerError: ").Append(this.InnerError).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

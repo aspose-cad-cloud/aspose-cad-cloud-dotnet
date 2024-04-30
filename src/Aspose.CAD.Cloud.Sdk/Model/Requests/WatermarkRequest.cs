@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfOptionsDTO.cs">
+// <copyright company="Aspose" file="WatermarkRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -22,44 +22,55 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Aspose.CAD.Cloud.Sdk.Model 
+namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
-  using System;  
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Runtime.Serialization;
-  using System.Text;
-  using Newtonsoft.Json;
-  using Newtonsoft.Json.Converters;
+  using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Export options for PDF format
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.Watermark" /> operation.
   /// </summary>  
-  public class PdfOptionsDTO : DrawingOptionsBaseDTO 
-  {                       
+  public class WatermarkRequest  
+  {
         /// <summary>
-        /// Document metadata
-        /// </summary>  
-        public PdfDocumentInfo PdfDocumentInfo { get; set; }
-
-        /// <summary>
-        /// Core PDF rendering options
-        /// </summary>  
-        public PdfDocumentOptionsDTO CorePdfOptions { get; set; }
-
-        /// <summary>
-        /// Get the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()  
+        /// Initializes a new instance of the <see cref="WatermarkRequest"/> class.
+        /// </summary>        
+        public WatermarkRequest()
         {
-          var sb = new StringBuilder();
-          sb.Append("class PdfOptionsDTO {\n");
-          sb.Append("  PdfDocumentInfo: ").Append(this.PdfDocumentInfo).Append("\n");
-          sb.Append("  CorePdfOptions: ").Append(this.CorePdfOptions).Append("\n");
-          sb.Append("}\n");
-          return sb.ToString();
         }
-    }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WatermarkRequest"/> class.
+        /// </summary>
+        /// <param name="outputFormat"></param>
+        /// <param name="drawing"></param>
+        /// <param name="watermarkRgb"></param>
+        /// <param name="outputTypeExt"></param>
+        public WatermarkRequest(string outputFormat, System.IO.Stream drawing = null, string watermarkRgb = null, string outputTypeExt = null)             
+        {
+            this.OutputFormat = outputFormat;
+            this.Drawing = drawing;
+            this.WatermarkRgb = watermarkRgb;
+            this.OutputTypeExt = outputTypeExt;
+        }
+
+        /// <summary>
+        /// Gets or sets outputFormat
+        /// </summary>  
+        public string OutputFormat { get; set; }
+
+        /// <summary>
+        /// Gets or sets drawing
+        /// </summary>  
+        public System.IO.Stream Drawing { get; set; }
+
+        /// <summary>
+        /// Gets or sets watermarkRgb
+        /// </summary>  
+        public string WatermarkRgb { get; set; }
+
+        /// <summary>
+        /// Gets or sets outputTypeExt
+        /// </summary>  
+        public string OutputTypeExt { get; set; }
+  }
 }

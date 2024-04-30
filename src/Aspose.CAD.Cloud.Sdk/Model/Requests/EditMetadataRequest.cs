@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfOptionsDTO.cs">
+// <copyright company="Aspose" file="EditMetadataRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -22,44 +22,34 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace Aspose.CAD.Cloud.Sdk.Model 
+namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
 {
-  using System;  
-  using System.Collections;
-  using System.Collections.Generic;
-  using System.Runtime.Serialization;
-  using System.Text;
-  using Newtonsoft.Json;
-  using Newtonsoft.Json.Converters;
+  using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Export options for PDF format
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.EditMetadata" /> operation.
   /// </summary>  
-  public class PdfOptionsDTO : DrawingOptionsBaseDTO 
-  {                       
+  public class EditMetadataRequest  
+  {
         /// <summary>
-        /// Document metadata
-        /// </summary>  
-        public PdfDocumentInfo PdfDocumentInfo { get; set; }
-
-        /// <summary>
-        /// Core PDF rendering options
-        /// </summary>  
-        public PdfDocumentOptionsDTO CorePdfOptions { get; set; }
-
-        /// <summary>
-        /// Get the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()  
+        /// Initializes a new instance of the <see cref="EditMetadataRequest"/> class.
+        /// </summary>        
+        public EditMetadataRequest()
         {
-          var sb = new StringBuilder();
-          sb.Append("class PdfOptionsDTO {\n");
-          sb.Append("  PdfDocumentInfo: ").Append(this.PdfDocumentInfo).Append("\n");
-          sb.Append("  CorePdfOptions: ").Append(this.CorePdfOptions).Append("\n");
-          sb.Append("}\n");
-          return sb.ToString();
         }
-    }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditMetadataRequest"/> class.
+        /// </summary>
+        /// <param name="drawing"></param>
+        public EditMetadataRequest(System.IO.Stream drawing = null)             
+        {
+            this.Drawing = drawing;
+        }
+
+        /// <summary>
+        /// Gets or sets drawing
+        /// </summary>  
+        public System.IO.Stream Drawing { get; set; }
+  }
 }

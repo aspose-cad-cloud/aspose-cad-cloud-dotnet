@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PdfOptionsDTO.cs">
+// <copyright company="Aspose" file="PdfDocumentOptionsDTO.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,19 +34,41 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Export options for PDF format
+  /// Export document options.
   /// </summary>  
-  public class PdfOptionsDTO : DrawingOptionsBaseDTO 
+  public class PdfDocumentOptionsDTO 
   {                       
         /// <summary>
-        /// Document metadata
-        /// </summary>  
-        public PdfDocumentInfo PdfDocumentInfo { get; set; }
+        /// Gets or sets Compliance
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ComplianceEnum
+        { 
+            /// <summary>
+            /// Enum Pdf15 for "Pdf15"
+            /// </summary>            
+            Pdf15,
+            
+            /// <summary>
+            /// Enum PdfA1a for "PdfA1a"
+            /// </summary>            
+            PdfA1a,
+            
+            /// <summary>
+            /// Enum PdfA1b for "PdfA1b"
+            /// </summary>            
+            PdfA1b            
+        }
 
         /// <summary>
-        /// Core PDF rendering options
+        /// Gets or sets Compliance
+        /// </summary>
+        public ComplianceEnum? Compliance { get; set; }
+
+        /// <summary>
+        /// Gets or sets a digital signature details. If not set, then no signing will be performed.
         /// </summary>  
-        public PdfDocumentOptionsDTO CorePdfOptions { get; set; }
+        public PdfDigitalSignatureDetailsCoreDTO DigitalSignatureDetails { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -55,9 +77,9 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class PdfOptionsDTO {\n");
-          sb.Append("  PdfDocumentInfo: ").Append(this.PdfDocumentInfo).Append("\n");
-          sb.Append("  CorePdfOptions: ").Append(this.CorePdfOptions).Append("\n");
+          sb.Append("class PdfDocumentOptionsDTO {\n");
+          sb.Append("  Compliance: ").Append(this.Compliance).Append("\n");
+          sb.Append("  DigitalSignatureDetails: ").Append(this.DigitalSignatureDetails).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }
