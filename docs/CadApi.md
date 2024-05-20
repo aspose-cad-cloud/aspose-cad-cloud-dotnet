@@ -188,7 +188,7 @@ Name | Type | Description  | Notes
 
 <a name="editmetadata"></a>
 ## **EditMetadata**
-> byte[] EditMetadata(EditMetadataRequest request)
+> System.IO.Stream EditMetadata(EditMetadataRequest request)
 
 Get Metadata info
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**byte[]**
+**System.IO.Stream**
 
 [[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
 

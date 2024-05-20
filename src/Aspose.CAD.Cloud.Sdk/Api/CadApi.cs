@@ -163,13 +163,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (System.IO.Stream)SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
         }
         
         /// <summary>
@@ -379,8 +374,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         /// Get Metadata info 
         /// </summary>
         /// <param name="request">Specific request.<see cref="EditMetadataRequest" /></param>
-        /// <returns><see cref="byte[]"/></returns>            
-        public byte[] EditMetadata(EditMetadataRequest request)
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream EditMetadata(EditMetadataRequest request)
         {
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/EditMetadata";
@@ -400,13 +395,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (byte[])SerializationHelper.Deserialize<byte[]>(StreamHelper.ToString(response));
         }
         
         /// <summary>
@@ -441,13 +431,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (System.IO.Stream)SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
         }
         
         /// <summary>
@@ -475,13 +460,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (System.IO.Stream)SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
         }
         
         /// <summary>
@@ -925,13 +905,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (System.IO.Stream)SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
         }
         
         /// <summary>
@@ -2960,13 +2935,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (System.IO.Stream)SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
         }
         
         /// <summary>
@@ -3086,13 +3056,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (System.IO.Stream)SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
         }
         
         /// <summary>
@@ -3132,13 +3097,8 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                 null, 
                 null, 
                 formParams);
+            return response;
             
-            if (response == null)
-            {
-                return null;
-            }
-      
-            return (System.IO.Stream)SerializationHelper.Deserialize<System.IO.Stream>(StreamHelper.ToString(response));
         }
         
         #endregion
