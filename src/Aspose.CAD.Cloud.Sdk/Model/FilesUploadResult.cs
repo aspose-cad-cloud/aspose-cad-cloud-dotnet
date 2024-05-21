@@ -46,7 +46,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         /// <summary>
         /// List of errors.
         /// </summary>  
-        public List<Error> Errors { get; set; }
+        public List<ErrorModel> Errors { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object

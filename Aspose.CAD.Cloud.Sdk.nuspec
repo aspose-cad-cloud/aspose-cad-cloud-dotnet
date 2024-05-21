@@ -3,7 +3,7 @@
     <metadata>
         <id>Aspose.CAD-Cloud</id>
         <title>Aspose.CAD Cloud</title>
-        <version>20.11</version>
+        <version>24.1</version>
         <authors>Aspose</authors>
         <owners>Aspose</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -32,12 +32,13 @@ To use this SDK, you will need App SID and App Key which can be looked up at Asp
         <copyright>Aspose 2002-2020. All Rights Reserved.</copyright>
         <dependencies>
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="Newtonsoft.Json" version="12.0.2" exclude="Build,Analyzers" />
+				<dependency id="Newtonsoft.Json" version="13.0.2" exclude="Build,Analyzers" />
 			</group>
         </dependencies>
     </metadata>
 	<files>
-	  <file src="./Publish/Aspose.CAD.Cloud.Sdk.dll" target="lib\netstandard20" />
-	  <file src="./LICENSE.txt" target="" />
+        <file src="LICENSE.txt" target="" />
+        <file src="README.md" target="" />
+        <file src="src\Aspose.CAD.Cloud.Sdk\bin\Release\netstandard2.0\Aspose.CAD.Cloud.Sdk.dll" target="lib\netstandard2.0" />
     </files>
 </package>

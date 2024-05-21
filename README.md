@@ -54,17 +54,20 @@ From within Visual Studio:
 
 ```csharp
 	// Get your ClientId and ClientSecret from https://dashboard.aspose.cloud (free registration required).
-	var config = new Configuration
+	var cadApi = new CadApi("MY_CLIENT_ID", "MY_CLIENT_SECRET");
+	using (FileStream file = new FileStream(@"C:\files\drawing.dxf", FileMode.Open, System.IO.FileAccess.Read))
 	{
-		AppSid = "MY_CLIENT_ID",
-		AppKey = "MY_CLIENT_SECRET",
-		ApiBaseUrl = baseUrl,
-	};
-
-	var cadApi = new CadApi(config);
-	var getSaveRequest = new GetDrawingSaveAsRequest("inputImage.dwg", "png", "InputFolder", "ResultFolder/resultImage.png", "Your storage");
-
-	Stream cadApi.GetDrawingSaveAs(getSaveRequest);
+	    var msFile = new MemoryStream();
+	    await file.CopyToAsync(msFile);
+	    msFile.Seek(0, System.IO.SeekOrigin.Begin);
+	
+	    var request = new PutDrawingBmpRequest(msFile);
+	    var res = cadApi.PutDrawingBmp(request);
+	    using (FileStream fileStream = new FileStream("result.bmp", FileMode.Create, FileAccess.Write))
+	    {
+	        res.CopyTo(fileStream);
+	    }
+	}
 ```
 [Tests](https://github.com/aspose-cad-cloud/aspose-cad-cloud-dotnet/tree/master/src/Aspose.CAD.Cloud.Sdk.Test) contain various examples of using the SDK.
 
