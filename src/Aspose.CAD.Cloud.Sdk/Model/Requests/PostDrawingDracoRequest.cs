@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="ConvertRequest.cs">
+// <copyright company="Aspose" file="PostDrawingDracoRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -27,43 +27,57 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.Convert" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostDrawingDraco" /> operation.
   /// </summary>  
-  public class ConvertRequest  
+  public class PostDrawingDracoRequest  
   {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConvertRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingDracoRequest"/> class.
         /// </summary>        
-        public ConvertRequest()
+        public PostDrawingDracoRequest()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConvertRequest"/> class.
+        /// Initializes a new instance of the <see cref="PostDrawingDracoRequest"/> class.
         /// </summary>
-        /// <param name="outputFormat">Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format.</param>
-        /// <param name="drawing">Form-data file</param>
-        /// <param name="outputTypeExt">For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format</param>
-        public ConvertRequest(string outputFormat, System.IO.Stream drawing = null, string outputTypeExt = null)             
+        /// <param name="name">Filename of an input drawing on a storage.</param>
+        /// <param name="options">Export Draco options passed as a JSON on a request body.</param>
+        /// <param name="folder">Folder with a drawing to process.</param>
+        /// <param name="outPath">Path to updated file (if this is empty, response contains streamed file).</param>
+        /// <param name="storage">Your Aspose Cloud Storage name.</param>
+        public PostDrawingDracoRequest(string name, DracoOptionsDTO options, string folder = null, string outPath = null, string storage = null)             
         {
-            this.OutputFormat = outputFormat;
-            this.Drawing = drawing;
-            this.OutputTypeExt = outputTypeExt;
+            this.Name = name;
+            this.Options = options;
+            this.Folder = folder;
+            this.OutPath = outPath;
+            this.Storage = storage;
         }
 
         /// <summary>
-        /// Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format.
+        /// Filename of an input drawing on a storage.
         /// </summary>  
-        public string OutputFormat { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Form-data file
+        /// Export Draco options passed as a JSON on a request body.
         /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
+        public DracoOptionsDTO Options { get; set; }
 
         /// <summary>
-        /// For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format
+        /// Folder with a drawing to process.
         /// </summary>  
-        public string OutputTypeExt { get; set; }
+        public string Folder { get; set; }
+
+        /// <summary>
+        /// Path to updated file (if this is empty, response contains streamed file).
+        /// </summary>  
+        public string OutPath { get; set; }
+
+        /// <summary>
+        /// Your Aspose Cloud Storage name.
+        /// </summary>  
+        public string Storage { get; set; }
   }
 }

@@ -4,7 +4,7 @@
 ## **Convert**
 > System.IO.Stream Convert(ConvertRequest request)
 
-Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
+Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
 
 ### **ConvertRequest** Parameters
 ```csharp
@@ -16,7 +16,7 @@ ConvertRequest(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **outputFormat** | **string**| Output DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format. | 
+ **outputFormat** | **string**| Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format. | 
  **drawing** | **System.IO.Stream**| Form-data file | [optional] 
  **outputTypeExt** | **string**| For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format | [optional] 
 
@@ -534,7 +534,7 @@ Name | Type | Description  | Notes
 ## **PaperToCad**
 > System.IO.Stream PaperToCad(PaperToCadRequest request)
 
-Convert bitmap image to DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG format.
+Convert bitmap image to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG format.
 
 ### **PaperToCadRequest** Parameters
 ```csharp
@@ -545,7 +545,7 @@ PaperToCadRequest(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **outputFormat** | **string**| Output DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG file format. | 
+ **outputFormat** | **string**| Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG file format. | 
  **drawing** | **System.IO.Stream**| Form-data file | [optional] 
 
 ### Return type
@@ -664,6 +664,36 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string**| Filename of an input drawing on a storage. | 
  **options** | [**DicomOptionsDTO**](DicomOptionsDTO.md)| Export Dicom options passed as a JSON on a request body. | 
+ **folder** | **string**| Folder with a drawing to process. | [optional] 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="postdrawingdraco"></a>
+## **PostDrawingDraco**
+> System.IO.Stream PostDrawingDraco(PostDrawingDracoRequest request)
+
+Export an existing drawing to Draco format with export settings specified.
+
+### **PostDrawingDracoRequest** Parameters
+```csharp
+PostDrawingDracoRequest(
+    string name, 
+    DracoOptionsDTO options, 
+    string folder = null, 
+    string outPath = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| Filename of an input drawing on a storage. | 
+ **options** | [**DracoOptionsDTO**](DracoOptionsDTO.md)| Export Draco options passed as a JSON on a request body. | 
  **folder** | **string**| Folder with a drawing to process. | [optional] 
  **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
  **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
@@ -1430,6 +1460,34 @@ Name | Type | Description  | Notes
  **drawingData** | **System.IO.Stream**| Input drawing | 
  **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
  **exportOptions** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/DicomOptionsDTO model definition. | [optional] 
+ **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
+
+### Return type
+
+**System.IO.Stream**
+
+[[Back to top]](#) [[Back to API list]](API_README.md#documentation-for-api-endpoints) [[Back to Model list]](API_README.md#documentation-for-models) [[Back to API_README]](API_README.md)
+
+<a name="putdrawingdraco"></a>
+## **PutDrawingDraco**
+> System.IO.Stream PutDrawingDraco(PutDrawingDracoRequest request)
+
+Export drawing to Draco format. Drawing data is passed as zero-indexed multipart/form-data as well as export Draco options serialized as JSON. Order of drawing data and Draco options could vary.
+
+### **PutDrawingDracoRequest** Parameters
+```csharp
+PutDrawingDracoRequest(
+    System.IO.Stream drawingData, 
+    string outPath = null, 
+    string exportOptions = null, 
+    string storage = null)
+```
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
+ **outPath** | **string**| Path to updated file (if this is empty, response contains streamed file). | [optional] 
+ **exportOptions** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/DracoOptionsDTO model definition. | [optional] 
  **storage** | **string**| Your Aspose Cloud Storage name. | [optional] 
 
 ### Return type
