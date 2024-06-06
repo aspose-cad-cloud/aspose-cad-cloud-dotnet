@@ -5,7 +5,7 @@ All URIs are relative to *https://api.aspose.cloud/v3.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CadApi* | [**Convert**](CadApi.md#convert) | **POST** /cad/Convert | Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
+*CadApi* | [**Convert**](CadApi.md#convert) | **POST** /cad/Convert | Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
 *CadApi* | [**CopyFile**](CadApi.md#copyfile) | **PUT** /cad/storage/file/copy/{srcPath} | Copy file
 *CadApi* | [**CopyFolder**](CadApi.md#copyfolder) | **PUT** /cad/storage/folder/copy/{srcPath} | Copy folder
 *CadApi* | [**CreateFolder**](CadApi.md#createfolder) | **PUT** /cad/storage/folder/{path} | Create the folder
@@ -25,11 +25,12 @@ Class | Method | HTTP request | Description
 *CadApi* | [**MoveFile**](CadApi.md#movefile) | **PUT** /cad/storage/file/move/{srcPath} | Move file
 *CadApi* | [**MoveFolder**](CadApi.md#movefolder) | **PUT** /cad/storage/folder/move/{srcPath} | Move folder
 *CadApi* | [**ObjectExists**](CadApi.md#objectexists) | **GET** /cad/storage/exist/{path} | Check if file or folder exists
-*CadApi* | [**PaperToCad**](CadApi.md#papertocad) | **POST** /cad/paper-to-cad | Convert bitmap image to DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG format.
+*CadApi* | [**PaperToCad**](CadApi.md#papertocad) | **POST** /cad/paper-to-cad | Convert bitmap image to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG format.
 *CadApi* | [**PostDrawingBmp**](CadApi.md#postdrawingbmp) | **POST** /cad/{name}/bmp | Export an existing drawing to BMP format with export settings specified.
 *CadApi* | [**PostDrawingCgm**](CadApi.md#postdrawingcgm) | **POST** /cad/{name}/cgm | Export an existing drawing to CGM format with export settings specified.
 *CadApi* | [**PostDrawingDXF**](CadApi.md#postdrawingdxf) | **POST** /cad/{name}/dxf | Export an existing drawing to DXF format with export settings specified.
 *CadApi* | [**PostDrawingDicom**](CadApi.md#postdrawingdicom) | **POST** /cad/{name}/dicom | Export an existing drawing to Dicom format with export settings specified.
+*CadApi* | [**PostDrawingDraco**](CadApi.md#postdrawingdraco) | **POST** /cad/{name}/drc | Export an existing drawing to Draco format with export settings specified.
 *CadApi* | [**PostDrawingDwf**](CadApi.md#postdrawingdwf) | **POST** /cad/{name}/dwf | Export an existing drawing to Dwf format with export settings specified.
 *CadApi* | [**PostDrawingFbx**](CadApi.md#postdrawingfbx) | **POST** /cad/{name}/fbx | Export an existing drawing to Fbx format with export settings specified.
 *CadApi* | [**PostDrawingGif**](CadApi.md#postdrawinggif) | **POST** /cad/{name}/gif | Export an existing drawing into GIF format with export settings specified.
@@ -56,6 +57,7 @@ Class | Method | HTTP request | Description
 *CadApi* | [**PutDrawingCgm**](CadApi.md#putdrawingcgm) | **PUT** /cad/cgm | Export drawing to CGM format. Drawing data is passed as zero-indexed multipart/form-data as well as export CGM options serialized as JSON. Order of drawing data and CGM options could vary.
 *CadApi* | [**PutDrawingDXF**](CadApi.md#putdrawingdxf) | **PUT** /cad/dxf | Export drawing to DXF format. Drawing data is passed as zero-indexed multipart/form-data as well as export DXF options serialized as JSON. Order of drawing data and DXF options could vary.
 *CadApi* | [**PutDrawingDicom**](CadApi.md#putdrawingdicom) | **PUT** /cad/dicom | Export drawing to Dicom format. Drawing data is passed as zero-indexed multipart/form-data as well as export Dicom options serialized as JSON. Order of drawing data and Dicom options could vary.
+*CadApi* | [**PutDrawingDraco**](CadApi.md#putdrawingdraco) | **PUT** /cad/drc | Export drawing to Draco format. Drawing data is passed as zero-indexed multipart/form-data as well as export Draco options serialized as JSON. Order of drawing data and Draco options could vary.
 *CadApi* | [**PutDrawingDwf**](CadApi.md#putdrawingdwf) | **PUT** /cad/dwf | Export drawing to Dwf format. Drawing data is passed as zero-indexed multipart/form-data as well as export Dwf options serialized as JSON. Order of drawing data and Dwf options could vary.
 *CadApi* | [**PutDrawingFbx**](CadApi.md#putdrawingfbx) | **PUT** /cad/fbx | Export drawing to Fbx format. Drawing data is passed as zero-indexed multipart/form-data as well as export Fbx options serialized as JSON. Order of drawing data and Fbx options could vary.
 *CadApi* | [**PutDrawingGif**](CadApi.md#putdrawinggif) | **PUT** /cad/gif | Export drawing to GIF format. Drawing data is passed as zero-indexed multipart/form-data as well as export GIF options serialized as JSON. Order of drawing data and GIF options could vary.
@@ -142,6 +144,7 @@ Class | Method | HTTP request | Description
  - [Model.CadRasterizationOptionsDTO](CadRasterizationOptionsDTO.md)
  - [Model.CgmOptionsDTO](CgmOptionsDTO.md)
  - [Model.DicomOptionsDTO](DicomOptionsDTO.md)
+ - [Model.DracoOptionsDTO](DracoOptionsDTO.md)
  - [Model.DwfOptionsDTO](DwfOptionsDTO.md)
  - [Model.DxfOptionsDTO](DxfOptionsDTO.md)
  - [Model.FbxOptionsDTO](FbxOptionsDTO.md)

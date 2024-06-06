@@ -131,7 +131,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         #region Methods
         
         /// <summary>
-        /// Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format. 
+        /// Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format. 
         /// </summary>
         /// <param name="request">Specific request.<see cref="ConvertRequest" /></param>
         /// <returns><see cref="System.IO.Stream"/></returns>            
@@ -874,7 +874,7 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         }
         
         /// <summary>
-        /// Convert bitmap image to DXF, DWG, DGN, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG format. 
+        /// Convert bitmap image to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG format. 
         /// </summary>
         /// <param name="request">Specific request.<see cref="PaperToCadRequest" /></param>
         /// <returns><see cref="System.IO.Stream"/></returns>            
@@ -1053,6 +1053,47 @@ namespace Aspose.CAD.Cloud.Sdk.Api
 
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/dicom";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddPathParameter(resourcePath, "name", request.Name);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "folder", request.Folder);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            var postBody = SerializationHelper.Serialize(request.Options);
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "POST", 
+                postBody, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export an existing drawing to Draco format with export settings specified. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PostDrawingDracoRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PostDrawingDraco(PostDrawingDracoRequest request)
+        {
+            // verify the required parameter 'name' is set
+            if (request.Name == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'name' when calling PostDrawingDraco");
+            }
+
+            // verify the required parameter 'options' is set
+            if (request.Options == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'options' when calling PostDrawingDraco");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/{name}/drc";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")
@@ -2142,6 +2183,47 @@ namespace Aspose.CAD.Cloud.Sdk.Api
 
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/dicom";
+            resourcePath = Regex
+                        .Replace(resourcePath, "\\*", string.Empty)
+                        .Replace("&amp;", "&")
+                        .Replace("/?", "?");
+            var formParams = new Dictionary<string, object>();
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outPath", request.OutPath);
+            resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "storage", request.Storage);
+            
+            if (request.DrawingData != null) 
+            {
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
+            }
+            if (request.ExportOptions != null) 
+            {
+                formParams.Add("exportOptions", request.ExportOptions);
+            }
+            var response = this.apiInvoker.InvokeBinaryApi(
+                resourcePath, 
+                "PUT", 
+                null, 
+                null, 
+                formParams);
+            return response;
+            
+        }
+        
+        /// <summary>
+        /// Export drawing to Draco format. Drawing data is passed as zero-indexed multipart/form-data as well as export Draco options serialized as JSON. Order of drawing data and Draco options could vary. 
+        /// </summary>
+        /// <param name="request">Specific request.<see cref="PutDrawingDracoRequest" /></param>
+        /// <returns><see cref="System.IO.Stream"/></returns>            
+        public System.IO.Stream PutDrawingDraco(PutDrawingDracoRequest request)
+        {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PutDrawingDraco");
+            }
+
+            // create path and map variables
+            var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/drc";
             resourcePath = Regex
                         .Replace(resourcePath, "\\*", string.Empty)
                         .Replace("&amp;", "&")

@@ -3,10 +3,11 @@
     <metadata>
         <id>Aspose.CAD-Cloud</id>
         <title>Aspose.CAD Cloud</title>
-        <version>24.1</version>
+        <version>24.5</version>
         <authors>Aspose</authors>
         <owners>Aspose</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <readme>README.md</readme>
         <developmentDependency>false</developmentDependency>
 		<iconUrl>https://www.aspose.cloud/templates/aspose/App_Themes/V3/images/cad/272x272/aspose_cad-for-net-min.png</iconUrl> 
 		<summary>New generation of Aspose Cloud SDK that allows to manipulate, edit or convert CAD and BIM drawings (10+ file formats) in Aspose Cloud from .NET applications.</summary>

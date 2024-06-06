@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="PaperToCadRequest.cs">
+// <copyright company="Aspose" file="DracoOptionsDTO.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -22,41 +22,32 @@
 //  SOFTWARE.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Aspose.CAD.Cloud.Sdk.Model.Requests 
+
+namespace Aspose.CAD.Cloud.Sdk.Model 
 {
-  using Aspose.CAD.Cloud.Sdk.Model; 
+  using System;  
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Runtime.Serialization;
+  using System.Text;
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PaperToCad" /> operation.
+  /// Export options for Draco format
   /// </summary>  
-  public class PaperToCadRequest  
-  {
+  public class DracoOptionsDTO : DrawingOptionsBaseDTO 
+  {                       
         /// <summary>
-        /// Initializes a new instance of the <see cref="PaperToCadRequest"/> class.
-        /// </summary>        
-        public PaperToCadRequest()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PaperToCadRequest"/> class.
+        /// Get the string presentation of the object
         /// </summary>
-        /// <param name="outputFormat">Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG file format.</param>
-        /// <param name="drawing">Form-data file</param>
-        public PaperToCadRequest(string outputFormat, System.IO.Stream drawing = null)             
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()  
         {
-            this.OutputFormat = outputFormat;
-            this.Drawing = drawing;
+          var sb = new StringBuilder();
+          sb.Append("class DracoOptionsDTO {\n");
+          sb.Append("}\n");
+          return sb.ToString();
         }
-
-        /// <summary>
-        /// Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG file format.
-        /// </summary>  
-        public string OutputFormat { get; set; }
-
-        /// <summary>
-        /// Form-data file
-        /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
-  }
+    }
 }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="ConvertRequest.cs">
+// <copyright company="Aspose" file="PutDrawingDracoRequest.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -27,43 +27,50 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.Convert" /> operation.
+  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PutDrawingDraco" /> operation.
   /// </summary>  
-  public class ConvertRequest  
+  public class PutDrawingDracoRequest  
   {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConvertRequest"/> class.
+        /// Initializes a new instance of the <see cref="PutDrawingDracoRequest"/> class.
         /// </summary>        
-        public ConvertRequest()
+        public PutDrawingDracoRequest()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConvertRequest"/> class.
+        /// Initializes a new instance of the <see cref="PutDrawingDracoRequest"/> class.
         /// </summary>
-        /// <param name="outputFormat">Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format.</param>
-        /// <param name="drawing">Form-data file</param>
-        /// <param name="outputTypeExt">For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format</param>
-        public ConvertRequest(string outputFormat, System.IO.Stream drawing = null, string outputTypeExt = null)             
+        /// <param name="drawingData">Input drawing</param>
+        /// <param name="outPath">Path to updated file (if this is empty, response contains streamed file).</param>
+        /// <param name="exportOptions">JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/DracoOptionsDTO model definition.</param>
+        /// <param name="storage">Your Aspose Cloud Storage name.</param>
+        public PutDrawingDracoRequest(System.IO.Stream drawingData, string outPath = null, string exportOptions = null, string storage = null)             
         {
-            this.OutputFormat = outputFormat;
-            this.Drawing = drawing;
-            this.OutputTypeExt = outputTypeExt;
+            this.DrawingData = drawingData;
+            this.OutPath = outPath;
+            this.ExportOptions = exportOptions;
+            this.Storage = storage;
         }
 
         /// <summary>
-        /// Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format.
+        /// Input drawing
         /// </summary>  
-        public string OutputFormat { get; set; }
+        public System.IO.Stream DrawingData { get; set; }
 
         /// <summary>
-        /// Form-data file
+        /// Path to updated file (if this is empty, response contains streamed file).
         /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
+        public string OutPath { get; set; }
 
         /// <summary>
-        /// For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format
+        /// JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/DracoOptionsDTO model definition.
         /// </summary>  
-        public string OutputTypeExt { get; set; }
+        public string ExportOptions { get; set; }
+
+        /// <summary>
+        /// Your Aspose Cloud Storage name.
+        /// </summary>  
+        public string Storage { get; set; }
   }
 }
