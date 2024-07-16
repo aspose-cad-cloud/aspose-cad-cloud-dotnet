@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="FilesUploadResult.cs">
+// <copyright company="Aspose" file="WatermarkRGB.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,19 +34,29 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// File upload result
+  /// Watermark text with RGB values
   /// </summary>  
-  public class FilesUploadResult 
+  public class WatermarkRGB 
   {                       
         /// <summary>
-        /// List of uploaded file names
+        /// Watermark text.
         /// </summary>  
-        public List<string> Uploaded { get; set; }
+        public string Text { get; set; }
 
         /// <summary>
-        /// List of errors.
+        /// Red light(0-255).
         /// </summary>  
-        public List<Error> Errors { get; set; }
+        public int? R { get; set; }
+
+        /// <summary>
+        /// Green light(0-255).
+        /// </summary>  
+        public int? G { get; set; }
+
+        /// <summary>
+        /// Blue light(0-255).
+        /// </summary>  
+        public int? B { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -55,9 +65,11 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class FilesUploadResult {\n");
-          sb.Append("  Uploaded: ").Append(this.Uploaded).Append("\n");
-          sb.Append("  Errors: ").Append(this.Errors).Append("\n");
+          sb.Append("class WatermarkRGB {\n");
+          sb.Append("  Text: ").Append(this.Text).Append("\n");
+          sb.Append("  R: ").Append(this.R).Append("\n");
+          sb.Append("  G: ").Append(this.G).Append("\n");
+          sb.Append("  B: ").Append(this.B).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }

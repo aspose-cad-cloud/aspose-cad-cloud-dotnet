@@ -1,4 +1,4 @@
-# Aspose.CAD.Cloud.Sdk.Model.ErrorModel
+# Aspose.CAD.Cloud.Sdk.Model.Error
 ## Properties
 
 Name | Type | Description | Notes

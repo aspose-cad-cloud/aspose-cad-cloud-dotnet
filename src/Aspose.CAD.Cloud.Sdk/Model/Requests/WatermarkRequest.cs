@@ -41,17 +41,22 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="WatermarkRequest"/> class.
         /// </summary>
+        /// <param name="drawingData">Input drawing</param>
         /// <param name="outputFormat"></param>
-        /// <param name="drawing"></param>
-        /// <param name="watermarkRgb"></param>
+        /// <param name="watermark">JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/WatermarkRGB model definition.</param>
         /// <param name="outputTypeExt"></param>
-        public WatermarkRequest(string outputFormat, System.IO.Stream drawing = null, string watermarkRgb = null, string outputTypeExt = null)             
+        public WatermarkRequest(System.IO.Stream drawingData, string outputFormat, string watermark, string outputTypeExt = null)             
         {
+            this.DrawingData = drawingData;
             this.OutputFormat = outputFormat;
-            this.Drawing = drawing;
-            this.WatermarkRgb = watermarkRgb;
+            this.Watermark = watermark;
             this.OutputTypeExt = outputTypeExt;
         }
+
+        /// <summary>
+        /// Input drawing
+        /// </summary>  
+        public System.IO.Stream DrawingData { get; set; }
 
         /// <summary>
         /// Gets or sets outputFormat
@@ -59,14 +64,9 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         public string OutputFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets drawing
+        /// JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/WatermarkRGB model definition.
         /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
-
-        /// <summary>
-        /// Gets or sets watermarkRgb
-        /// </summary>  
-        public string WatermarkRgb { get; set; }
+        public string Watermark { get; set; }
 
         /// <summary>
         /// Gets or sets outputTypeExt

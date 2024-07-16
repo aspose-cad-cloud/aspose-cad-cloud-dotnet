@@ -41,15 +41,15 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="EditMetadataRequest"/> class.
         /// </summary>
-        /// <param name="drawing"></param>
-        public EditMetadataRequest(System.IO.Stream drawing = null)             
+        /// <param name="drawingData">Input drawing</param>
+        public EditMetadataRequest(System.IO.Stream drawingData)             
         {
-            this.Drawing = drawing;
+            this.DrawingData = drawingData;
         }
 
         /// <summary>
-        /// Gets or sets drawing
+        /// Input drawing
         /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
+        public System.IO.Stream DrawingData { get; set; }
   }
 }

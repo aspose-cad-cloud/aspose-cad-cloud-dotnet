@@ -131,12 +131,18 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         #region Methods
         
         /// <summary>
-        /// Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format. 
+        /// Convert CAD drawing to DXF, DWG, DGN, DRC, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format. 
         /// </summary>
         /// <param name="request">Specific request.<see cref="ConvertRequest" /></param>
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream Convert(ConvertRequest request)
         {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling Convert");
+            }
+
             // verify the required parameter 'outputFormat' is set
             if (request.OutputFormat == null) 
             {
@@ -153,9 +159,9 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outputFormat", request.OutputFormat);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outputTypeExt", request.OutputTypeExt);
             
-            if (request.Drawing != null) 
+            if (request.DrawingData != null) 
             {
-                formParams.Add("drawing", this.apiInvoker.ToFileInfo(request.Drawing, "drawing"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
             }
             var response = this.apiInvoker.InvokeBinaryApi(
                 resourcePath, 
@@ -377,6 +383,12 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream EditMetadata(EditMetadataRequest request)
         {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling EditMetadata");
+            }
+
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/EditMetadata";
             resourcePath = Regex
@@ -385,9 +397,9 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                         .Replace("/?", "?");
             var formParams = new Dictionary<string, object>();
             
-            if (request.Drawing != null) 
+            if (request.DrawingData != null) 
             {
-                formParams.Add("drawing", this.apiInvoker.ToFileInfo(request.Drawing, "drawing"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
             }
             var response = this.apiInvoker.InvokeBinaryApi(
                 resourcePath, 
@@ -406,6 +418,12 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream ExtractMetadata(ExtractMetadataRequest request)
         {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling ExtractMetadata");
+            }
+
             // verify the required parameter 'outputFormat' is set
             if (request.OutputFormat == null) 
             {
@@ -421,9 +439,9 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outputFormat", request.OutputFormat);
             
-            if (request.Drawing != null) 
+            if (request.DrawingData != null) 
             {
-                formParams.Add("drawing", this.apiInvoker.ToFileInfo(request.Drawing, "drawing"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
             }
             var response = this.apiInvoker.InvokeBinaryApi(
                 resourcePath, 
@@ -442,6 +460,12 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream ExtractText(ExtractTextRequest request)
         {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling ExtractText");
+            }
+
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/ExtractText";
             resourcePath = Regex
@@ -450,9 +474,9 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                         .Replace("/?", "?");
             var formParams = new Dictionary<string, object>();
             
-            if (request.Drawing != null) 
+            if (request.DrawingData != null) 
             {
-                formParams.Add("drawing", this.apiInvoker.ToFileInfo(request.Drawing, "drawing"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
             }
             var response = this.apiInvoker.InvokeBinaryApi(
                 resourcePath, 
@@ -880,6 +904,12 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream PaperToCad(PaperToCadRequest request)
         {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PaperToCad");
+            }
+
             // verify the required parameter 'outputFormat' is set
             if (request.OutputFormat == null) 
             {
@@ -895,9 +925,9 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             var formParams = new Dictionary<string, object>();
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outputFormat", request.OutputFormat);
             
-            if (request.Drawing != null) 
+            if (request.DrawingData != null) 
             {
-                formParams.Add("drawing", this.apiInvoker.ToFileInfo(request.Drawing, "drawing"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
             }
             var response = this.apiInvoker.InvokeBinaryApi(
                 resourcePath, 
@@ -2995,6 +3025,18 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream PutEditMetadata(PutEditMetadataRequest request)
         {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling PutEditMetadata");
+            }
+
+            // verify the required parameter 'metadataComponent' is set
+            if (request.MetadataComponent == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'metadataComponent' when calling PutEditMetadata");
+            }
+
             // create path and map variables
             var resourcePath = this.Configuration.GetApiRootUrl() + "/cad/EditMetadata";
             resourcePath = Regex
@@ -3003,9 +3045,9 @@ namespace Aspose.CAD.Cloud.Sdk.Api
                         .Replace("/?", "?");
             var formParams = new Dictionary<string, object>();
             
-            if (request.Drawing != null) 
+            if (request.DrawingData != null) 
             {
-                formParams.Add("drawing", this.apiInvoker.ToFileInfo(request.Drawing, "drawing"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
             }
             if (request.MetadataComponent != null) 
             {
@@ -3149,10 +3191,22 @@ namespace Aspose.CAD.Cloud.Sdk.Api
         /// <returns><see cref="System.IO.Stream"/></returns>            
         public System.IO.Stream Watermark(WatermarkRequest request)
         {
+            // verify the required parameter 'drawingData' is set
+            if (request.DrawingData == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'drawingData' when calling Watermark");
+            }
+
             // verify the required parameter 'outputFormat' is set
             if (request.OutputFormat == null) 
             {
                 throw new ApiException(400, "Missing required parameter 'outputFormat' when calling Watermark");
+            }
+
+            // verify the required parameter 'watermark' is set
+            if (request.Watermark == null) 
+            {
+                throw new ApiException(400, "Missing required parameter 'watermark' when calling Watermark");
             }
 
             // create path and map variables
@@ -3165,13 +3219,13 @@ namespace Aspose.CAD.Cloud.Sdk.Api
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outputFormat", request.OutputFormat);
             resourcePath = UrlHelper.AddQueryParameterToUrl(resourcePath, "outputTypeExt", request.OutputTypeExt);
             
-            if (request.Drawing != null) 
+            if (request.DrawingData != null) 
             {
-                formParams.Add("drawing", this.apiInvoker.ToFileInfo(request.Drawing, "drawing"));
+                formParams.Add("drawingData", this.apiInvoker.ToFileInfo(request.DrawingData, "drawingData"));
             }
-            if (request.WatermarkRgb != null) 
+            if (request.Watermark != null) 
             {
-                formParams.Add("watermarkRgb", request.WatermarkRgb);
+                formParams.Add("watermark", request.Watermark);
             }
             var response = this.apiInvoker.InvokeBinaryApi(
                 resourcePath, 

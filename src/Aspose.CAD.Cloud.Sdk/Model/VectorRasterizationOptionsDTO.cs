@@ -183,12 +183,12 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         /// <summary>
         /// Gets or sets a background color.
         /// </summary>  
-        public Color BackgroundColor { get; set; }
+        public ColorDTO BackgroundColor { get; set; }
 
         /// <summary>
         /// Gets or sets a foreground color.
         /// </summary>  
-        public Color DrawColor { get; set; }
+        public ColorDTO DrawColor { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether content of a drawing is represented as image inside Pdf. Applicable only for CAD to Pdf export. Default is false.

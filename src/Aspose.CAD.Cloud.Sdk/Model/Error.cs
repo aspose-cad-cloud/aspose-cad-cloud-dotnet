@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="ErrorModel.cs">
+// <copyright company="Aspose" file="Error.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -36,7 +36,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   /// <summary>
   /// Error
   /// </summary>  
-  public class ErrorModel 
+  public class Error 
   {                       
         /// <summary>
         /// Code             
@@ -65,7 +65,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class ErrorModel {\n");
+          sb.Append("class Error {\n");
           sb.Append("  Code: ").Append(this.Code).Append("\n");
           sb.Append("  Message: ").Append(this.Message).Append("\n");
           sb.Append("  Description: ").Append(this.Description).Append("\n");

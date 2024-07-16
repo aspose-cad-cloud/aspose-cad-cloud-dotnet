@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Aspose" file="Color.cs">
+// <copyright company="Aspose" file="ColorDTO.cs">
 //   Copyright (c) 2018 Aspose.CAD Cloud
 // </copyright>
 // <summary>
@@ -34,49 +34,24 @@ namespace Aspose.CAD.Cloud.Sdk.Model
   using Newtonsoft.Json.Converters;
 
   /// <summary>
-  /// 
+  /// RGB color values
   /// </summary>  
-  public class Color 
+  public class ColorDTO 
   {                       
         /// <summary>
-        /// Gets or sets R
+        /// Red light(0-255).
         /// </summary>  
         public int? R { get; set; }
 
         /// <summary>
-        /// Gets or sets G
+        /// Green light(0-255).
         /// </summary>  
         public int? G { get; set; }
 
         /// <summary>
-        /// Gets or sets B
+        /// Blue light(0-255).
         /// </summary>  
         public int? B { get; set; }
-
-        /// <summary>
-        /// Gets or sets A
-        /// </summary>  
-        public int? A { get; set; }
-
-        /// <summary>
-        /// Gets or sets IsKnownColor
-        /// </summary>  
-        public bool? IsKnownColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets IsEmpty
-        /// </summary>  
-        public bool? IsEmpty { get; set; }
-
-        /// <summary>
-        /// Gets or sets IsNamedColor
-        /// </summary>  
-        public bool? IsNamedColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets Name
-        /// </summary>  
-        public string Name { get; set; }
 
         /// <summary>
         /// Get the string presentation of the object
@@ -85,15 +60,10 @@ namespace Aspose.CAD.Cloud.Sdk.Model
         public override string ToString()  
         {
           var sb = new StringBuilder();
-          sb.Append("class Color {\n");
+          sb.Append("class ColorDTO {\n");
           sb.Append("  R: ").Append(this.R).Append("\n");
           sb.Append("  G: ").Append(this.G).Append("\n");
           sb.Append("  B: ").Append(this.B).Append("\n");
-          sb.Append("  A: ").Append(this.A).Append("\n");
-          sb.Append("  IsKnownColor: ").Append(this.IsKnownColor).Append("\n");
-          sb.Append("  IsEmpty: ").Append(this.IsEmpty).Append("\n");
-          sb.Append("  IsNamedColor: ").Append(this.IsNamedColor).Append("\n");
-          sb.Append("  Name: ").Append(this.Name).Append("\n");
           sb.Append("}\n");
           return sb.ToString();
         }
