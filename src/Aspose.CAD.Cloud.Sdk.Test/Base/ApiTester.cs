@@ -307,7 +307,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
 
             foreach (var file in Directory.GetFiles(Path.GetFullPath(localFolder), "*.*", SearchOption.TopDirectoryOnly))
             {
-                if (file != ServerAccessFile)
+                if (file.ToLower().EndsWith(ServerAccessFile.ToLower()))
                 {
                     continue;
                 }
@@ -739,6 +739,9 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                     }
 
 #if DEBUG
+                    if (download.Position != 0)
+                        download.Seek(0, SeekOrigin.Begin);
+
                     if (!string.IsNullOrEmpty(resultFileName) && download != null)
                     {
                         using (var fs = File.OpenWrite(Path.Combine(LocalReferenceFolderFullPath, resultFileName)))
