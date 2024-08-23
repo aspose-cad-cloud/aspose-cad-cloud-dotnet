@@ -206,7 +206,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
         /// <typeparam name="T">response type</typeparam>
         /// <param name="response">typed response</param>
         /// <param name="referenceInfo">etalon file info</param>
-        protected delegate void ResponseValidatorDelegate<T>(T response, Stream resultStream, StorageFile referenceInfo);
+        protected delegate void ResponseValidatorDelegate<T>(T response, Stream resultStream, FileInfo referenceInfo);
 
         #endregion
 
@@ -294,7 +294,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
             {
                 Directory.CreateDirectory(LocalReferenceFolderFullPath);
                 EnsureFilesExists(CloudTestFolder, DefaultStorage, LocalTestFolderFullPath, forceOverride);
-                EnsureFilesExists(CloudReferencesFolder, DefaultStorage, LocalReferenceFolderFullPath, forceOverride);
             }
         }
 
@@ -414,13 +413,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
             {
                 CadApi.CreateFolder(new CreateFolderRequest(CloudTestFolder, DefaultStorage));
             }
-
-            if (CadApi.ObjectExists(
-                    new ObjectExistsRequest(CloudReferencesFolder, DefaultStorage)).Exists != true)
-            {
-                CadApi.CreateFolder(new CreateFolderRequest(CloudReferencesFolder, DefaultStorage));
-            }
-
 #if LOCAL
             if (!Directory.Exists(LocalReferenceFolderFullPath))
             {
@@ -500,7 +492,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo?.Size;
+                    var referenceLength = refInfo?.Length;
                     CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
@@ -541,7 +533,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo?.Size;
+                    var referenceLength = refInfo?.Length;
                     CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
@@ -581,7 +573,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo.Size;
+                    var referenceLength = refInfo?.Length;
                     CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
@@ -628,7 +620,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                 },
                 (_, stream, refInfo) =>
                 {
-                    var referenceLength = refInfo.Size;
+                    var referenceLength = refInfo?.Length;
                     CheckSizeDiff(referenceLength ?? 0, stream.Length);
                 },
                 folder,
@@ -698,7 +690,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
 
             bool passed = false;
             string outPath = null;
-            string referencePath = CloudReferencesFolder;
+            string referencePath = LocalReferenceFolder;
             try
             {
                 Console.WriteLine(parametersLine);
@@ -722,23 +714,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
 
                 if (AutoRecoverReference && download != null)
                 {
-                    var hasToUpload = ForceReferenceOverride;
-                    if (!CadApi.ObjectExists(new ObjectExistsRequest(referencePath + "/" + resultFileName, storage)).Exists ?? false)
-                    {
-                        hasToUpload = true;
-                    }
-                    else if (ForceReferenceOverride)
-                    {
-                        hasToUpload = true;
-                        CadApi.DeleteFile(new DeleteFileRequest(referencePath + "/" + resultFileName, storage));
-                    }
-
-                    if (hasToUpload)
-                    {
-                        CadApi.UploadFile(new UploadFileRequest(referencePath + "/" + resultFileName, download, storage));
-                    }
-
-#if DEBUG
                     if (download.Position != 0)
                         download.Seek(0, SeekOrigin.Begin);
 
@@ -749,7 +724,6 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                             download.CopyTo(fs);
                         }
                     }
-#endif
                 }
 
                 if (saveResultToStorage)
@@ -762,7 +736,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Base
                     }
                 }
 
-                var referenceInfo = GetStorageFileInfo(referencePath, resultFileName, storage);
+                var referenceInfo = new FileInfo(Path.Combine(referencePath, resultFileName ?? string.Empty));
                 if (!string.IsNullOrEmpty(outPath) && referenceInfo == null)
                 {
                     throw new ArgumentException(
