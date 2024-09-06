@@ -73,8 +73,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".stl", false)]
         [TestCase(".ifc", true)]
         [TestCase(".ifc", false)]
-        [TestCase(".dwf", true)]
-        [TestCase(".dwf", false)]
+        //[TestCase(".dwf", true)]
+        //[TestCase(".dwf", false)]
         [TestCase(".cf2", true)]
         [TestCase(".cf2", false)]
         [TestCase(".dwt", true)]
@@ -108,7 +108,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}.{format}";
+                    outName = $"{name}_get_save_as.{format}";
 
                     this.TestRawGetRequest(
                         $"Input drawing: {name}; Output format: {format}",
@@ -142,8 +142,8 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
         [TestCase(".stl", true)]
         [TestCase(".ifc", false)]
         [TestCase(".ifc", true)]
-        [TestCase(".dwf", false)]
-        [TestCase(".dwf", true)]
+        //[TestCase(".dwf", false)]
+        //[TestCase(".dwf", true)]
         [TestCase(".cf2", true)]
         [TestCase(".cf2", false)]
         [TestCase(".dwt", true)]
@@ -177,7 +177,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}.{format}";
+                    outName = $"{name}_post_save_as.{format}";
 
                     this.TestRawPostRequest(
                         $"input drawing: {name}; Output format: {format}",

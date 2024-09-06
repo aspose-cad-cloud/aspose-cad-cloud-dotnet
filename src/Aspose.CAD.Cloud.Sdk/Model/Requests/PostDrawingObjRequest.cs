@@ -27,7 +27,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PostDrawingObj" /> operation.
+  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.Api.CadApi.PostDrawingObj" /> operation.
   /// </summary>  
   public class PostDrawingObjRequest  
   {

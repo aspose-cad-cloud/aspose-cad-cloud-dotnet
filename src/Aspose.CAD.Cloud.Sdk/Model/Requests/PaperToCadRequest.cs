@@ -27,7 +27,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PaperToCad" /> operation.
+  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.Api.CadApi.PaperToCad" /> operation.
   /// </summary>  
   public class PaperToCadRequest  
   {
@@ -41,22 +41,22 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="PaperToCadRequest"/> class.
         /// </summary>
+        /// <param name="drawingData">Input drawing</param>
         /// <param name="outputFormat">Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG file format.</param>
-        /// <param name="drawing">Form-data file</param>
-        public PaperToCadRequest(string outputFormat, System.IO.Stream drawing = null)             
+        public PaperToCadRequest(System.IO.Stream drawingData, string outputFormat)             
         {
+            this.DrawingData = drawingData;
             this.OutputFormat = outputFormat;
-            this.Drawing = drawing;
         }
+
+        /// <summary>
+        /// Input drawing
+        /// </summary>  
+        public System.IO.Stream DrawingData { get; set; }
 
         /// <summary>
         /// Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG file format.
         /// </summary>  
         public string OutputFormat { get; set; }
-
-        /// <summary>
-        /// Form-data file
-        /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
   }
 }

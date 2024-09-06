@@ -27,7 +27,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.Convert" /> operation.
+  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.Api.CadApi.Convert" /> operation.
   /// </summary>  
   public class ConvertRequest  
   {
@@ -41,25 +41,25 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvertRequest"/> class.
         /// </summary>
+        /// <param name="drawingData">Input drawing</param>
         /// <param name="outputFormat">Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format.</param>
-        /// <param name="drawing">Form-data file</param>
         /// <param name="outputTypeExt">For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format</param>
-        public ConvertRequest(string outputFormat, System.IO.Stream drawing = null, string outputTypeExt = null)             
+        public ConvertRequest(System.IO.Stream drawingData, string outputFormat, string outputTypeExt = null)             
         {
+            this.DrawingData = drawingData;
             this.OutputFormat = outputFormat;
-            this.Drawing = drawing;
             this.OutputTypeExt = outputTypeExt;
         }
+
+        /// <summary>
+        /// Input drawing
+        /// </summary>  
+        public System.IO.Stream DrawingData { get; set; }
 
         /// <summary>
         /// Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format.
         /// </summary>  
         public string OutputFormat { get; set; }
-
-        /// <summary>
-        /// Form-data file
-        /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
 
         /// <summary>
         /// For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format

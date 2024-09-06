@@ -28,7 +28,7 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
     using System.Collections.Generic;
     using System.IO;
     using System.Net;    
-    
+    using System.Text.RegularExpressions;
     using Newtonsoft.Json;
 
     internal class OAuthRequestHandler : IRequestHandler
@@ -105,7 +105,9 @@ namespace Aspose.CAD.Cloud.Sdk.RequestHandlers
 
         private void RequestToken()
         {
-            var baseUrl = this.configuration.ApiBaseUrl;
+            var pattern = @"api(-qa)?";
+            var replacement = "id$1";
+            var baseUrl = Regex.Replace(this.configuration.ApiBaseUrl, pattern, replacement);
             if (baseUrl.StartsWith("http:"))
             {
                 baseUrl = baseUrl.Replace("http:", "https:");

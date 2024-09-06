@@ -245,13 +245,14 @@ namespace Aspose.CAD.Cloud.Sdk
         {
             var client = WebRequest.Create(path);
             client.Method = method;
-
+            
+            string formDataBoundary = "Something";
+            
             byte[] formData = null;
             if (formParams.Count > 0)
             {
                 if (formParams.Count > 1 || forceMultipart)
                 {
-                    string formDataBoundary = "Something";
                     client.ContentType = "multipart/form-data; boundary=" + formDataBoundary;
                     formData = GetMultipartFormData(formParams, formDataBoundary);
                 }

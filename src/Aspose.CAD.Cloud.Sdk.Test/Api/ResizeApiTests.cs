@@ -95,7 +95,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}_resize.{format}";
+                    outName = $"{name}_get_resize.{format}";
 
                     this.TestRawGetRequest(
                         $"input drawing: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",
@@ -156,7 +156,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}_resize.{format}";
+                    outName = $"{name}_post_resize.{format}";
 
                     this.TestRawPostRequest(
                         $"input drawing: {name}; Output format: {format}; New width: {newWidth}; New height: {newHeight}",

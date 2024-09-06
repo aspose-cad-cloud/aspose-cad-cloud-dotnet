@@ -4,20 +4,20 @@
 ## **Convert**
 > System.IO.Stream Convert(ConvertRequest request)
 
-Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
+Convert CAD drawing to DXF, DWG, DGN, DRC, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
 
 ### **ConvertRequest** Parameters
 ```csharp
 ConvertRequest(
+    System.IO.Stream drawingData, 
     string outputFormat, 
-    System.IO.Stream drawing = null, 
     string outputTypeExt = null)
 ```
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
  **outputFormat** | **string**| Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG, PNG, BMP, DIB, TIFF, TIF, JPEG, GIF, PSD, JPG, JPE, JIF, JFIF, PSD, WEBP, DCM, DICOM, JP2, J2K, JPF, JPM, JPG2, J2C, JPC, JPX, MJ2 , DJVU file format. | 
- **drawing** | **System.IO.Stream**| Form-data file | [optional] 
  **outputTypeExt** | **string**| For output pdf format: PDF_15, PDFa_1a OR PDFa_1b. Null for another format | [optional] 
 
 ### Return type
@@ -195,12 +195,12 @@ Get Metadata info
 ### **EditMetadataRequest** Parameters
 ```csharp
 EditMetadataRequest(
-    System.IO.Stream drawing = null)
+    System.IO.Stream drawingData)
 ```
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **drawing** | **System.IO.Stream**|  | [optional] 
+ **drawingData** | **System.IO.Stream**| Input drawing | 
 
 ### Return type
 
@@ -217,14 +217,14 @@ Extract Metadata from CAD drawing to txt, xml or json file.
 ### **ExtractMetadataRequest** Parameters
 ```csharp
 ExtractMetadataRequest(
-    string outputFormat, 
-    System.IO.Stream drawing = null)
+    System.IO.Stream drawingData, 
+    string outputFormat)
 ```
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
  **outputFormat** | **string**| Output TXT, XML or JSON file format. | 
- **drawing** | **System.IO.Stream**| Form-data file | [optional] 
 
 ### Return type
 
@@ -241,12 +241,12 @@ Extract Text from CAD drawing to txt file
 ### **ExtractTextRequest** Parameters
 ```csharp
 ExtractTextRequest(
-    System.IO.Stream drawing = null)
+    System.IO.Stream drawingData)
 ```
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **drawing** | **System.IO.Stream**|  | [optional] 
+ **drawingData** | **System.IO.Stream**| Input drawing | 
 
 ### Return type
 
@@ -539,14 +539,14 @@ Convert bitmap image to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM,
 ### **PaperToCadRequest** Parameters
 ```csharp
 PaperToCadRequest(
-    string outputFormat, 
-    System.IO.Stream drawing = null)
+    System.IO.Stream drawingData, 
+    string outputFormat)
 ```
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
  **outputFormat** | **string**| Output DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, SVG file format. | 
- **drawing** | **System.IO.Stream**| Form-data file | [optional] 
 
 ### Return type
 
@@ -2009,14 +2009,14 @@ Save Metadata
 ### **PutEditMetadataRequest** Parameters
 ```csharp
 PutEditMetadataRequest(
-    System.IO.Stream drawing = null, 
-    string metadataComponent = null)
+    System.IO.Stream drawingData, 
+    string metadataComponent)
 ```
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **drawing** | **System.IO.Stream**|  | [optional] 
- **metadataComponent** | **string**|  | [optional] 
+ **drawingData** | **System.IO.Stream**| Input drawing | 
+ **metadataComponent** | **string**| Metadata string json from POST/EditMetadata | 
 
 ### Return type
 
@@ -2105,17 +2105,17 @@ Add watermark to drawing
 ### **WatermarkRequest** Parameters
 ```csharp
 WatermarkRequest(
+    System.IO.Stream drawingData, 
     string outputFormat, 
-    System.IO.Stream drawing = null, 
-    string watermarkRgb = null, 
+    string watermark, 
     string outputTypeExt = null)
 ```
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **drawingData** | **System.IO.Stream**| Input drawing | 
  **outputFormat** | **string**|  | 
- **drawing** | **System.IO.Stream**|  | [optional] 
- **watermarkRgb** | **string**|  | [optional] 
+ **watermark** | **string**| JSON-serialized export options passed as zero-indexed multipart/form-data. Follow #/definitions/WatermarkRGB model definition. | 
  **outputTypeExt** | **string**|  | [optional] 
 
 ### Return type

@@ -5,7 +5,7 @@ All URIs are relative to *https://api.aspose.cloud/v3.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CadApi* | [**Convert**](CadApi.md#convert) | **POST** /cad/Convert | Convert CAD drawing to DXF, DWG, DGN, DWF, DWFX, DRC, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
+*CadApi* | [**Convert**](CadApi.md#convert) | **POST** /cad/Convert | Convert CAD drawing to DXF, DWG, DGN, DRC, DWF, DWFX, IFC, STL, STP, STEP, CGM, GLB, GLTF, DWT, IGES, PLT, CF2, OBJ, HPGL, IGS, PCL, FBX, PDF, SVG format.
 *CadApi* | [**CopyFile**](CadApi.md#copyfile) | **PUT** /cad/storage/file/copy/{srcPath} | Copy file
 *CadApi* | [**CopyFolder**](CadApi.md#copyfolder) | **PUT** /cad/storage/folder/copy/{srcPath} | Copy folder
 *CadApi* | [**CreateFolder**](CadApi.md#createfolder) | **PUT** /cad/storage/folder/{path} | Create the folder
@@ -90,7 +90,7 @@ Class | Method | HTTP request | Description
  - [Model.CadDrawTypeMode](CadDrawTypeMode.md)
  - [Model.CadResponse](CadResponse.md)
  - [Model.Cf2Properties](Cf2Properties.md)
- - [Model.Color](Color.md)
+ - [Model.ColorDTO](ColorDTO.md)
  - [Model.ColorModes](ColorModes.md)
  - [Model.CompressionMethod](CompressionMethod.md)
  - [Model.DgnProperties](DgnProperties.md)
@@ -99,8 +99,8 @@ Class | Method | HTTP request | Description
  - [Model.DwfProperties](DwfProperties.md)
  - [Model.DwgProperties](DwgProperties.md)
  - [Model.DxfProperties](DxfProperties.md)
+ - [Model.Error](Error.md)
  - [Model.ErrorDetails](ErrorDetails.md)
- - [Model.ErrorModel](ErrorModel.md)
  - [Model.FbxProperties](FbxProperties.md)
  - [Model.FileVersions](FileVersions.md)
  - [Model.FilesList](FilesList.md)
@@ -140,6 +140,7 @@ Class | Method | HTTP request | Description
  - [Model.TiffPhotometrics](TiffPhotometrics.md)
  - [Model.UnitType](UnitType.md)
  - [Model.VectorRasterizationOptionsDTO](VectorRasterizationOptionsDTO.md)
+ - [Model.WatermarkRGB](WatermarkRGB.md)
  - [Model.BmpOptionsDTO](BmpOptionsDTO.md)
  - [Model.CadRasterizationOptionsDTO](CadRasterizationOptionsDTO.md)
  - [Model.CgmOptionsDTO](CgmOptionsDTO.md)

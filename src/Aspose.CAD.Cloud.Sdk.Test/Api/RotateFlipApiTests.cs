@@ -108,7 +108,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 {
                     foreach (var method in _rotateFlipMethods)
                     {
-                        outName = $"{name}_{method}.{format}";
+                        outName = $"{name}_get_{method}.{format}";
 
                         this.TestRawGetRequest(
                             $"input drawing: {name}; Output format: {format}; Method: {method}",
@@ -167,7 +167,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api
                 {
                     foreach (var method in _rotateFlipMethods)
                     {
-                        outName = $"{name}_{method}.{format}";
+                        outName = $"{name}_post_{method}.{format}";
 
                         this.TestRawPostRequest(
                             $"input drawing: {name}; Output format: {format}; Method: {method}",

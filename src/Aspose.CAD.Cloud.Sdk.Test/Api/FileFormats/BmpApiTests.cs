@@ -83,7 +83,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api.FileFormats
         [TestCase(".cf2", true)]
         [TestCase(".dwt", false)]
         [TestCase(".dwt", true)]
-        public void PostDrawingSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void PostDrawingBmpTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             string folder = CloudTestFolder;
@@ -114,7 +114,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api.FileFormats
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}_opts.{format}";
+                    outName = $"{name}_post_bmp_opts.{format}";
 
                     this.TestPostWithOptionsRequest(
                         $"Input drawing: {name}; Output format: {format}",
@@ -155,7 +155,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api.FileFormats
         [TestCase(".cf2", true)]
         [TestCase(".dwt", false)]
         [TestCase(".dwt", true)]
-        public void PutDrawingSaveAsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        public void PutDrawingBmpTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
         {
             string name = null;
             string folder = CloudTestFolder;
@@ -186,7 +186,7 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api.FileFormats
 
                 foreach (string format in formatsToExport)
                 {
-                    outName = $"{name}_opts.{format}";
+                    outName = $"{name}_put_bmp_opts.{format}";
 
                     this.TestRawPutRequest(
                         $"Input drawing: {name}; Output format: {format}",
@@ -197,6 +197,70 @@ namespace Aspose.CAD.Cloud.Sdk.Test.Api.FileFormats
                         delegate (Stream inputStream, DrawingOptionsBaseDTO options, string outPath)
                         {
                             var request = new PutDrawingBmpRequest(inputStream, outPath, JsonConvert.SerializeObject(exportOptions), storage);
+                            return CadApi.PutDrawingBmp(request);
+                        },
+                        folder,
+                        storage);
+                }
+            }
+        }
+        
+        
+        /// <summary>
+        /// Performs Bmp (export to BMP format) operation test with PUT method, sending input data and export options serialized as JSON as multipart/form-data.
+        /// </summary>
+        /// <param name="formatExtension">Format extension to search for input drawings in the test folder</param>
+        /// <param name="saveResultToStorage">If resulting image should be saved to storage</param>
+        /// <param name="additionalExportFormats">Additional formats to export to</param>
+        [TestCase(".dwg", false)]
+        [TestCase(".dwg", true)]
+        [TestCase(".dxf", false)]
+        [TestCase(".dxf", true)]
+        [TestCase(".dgn", false)]
+        [TestCase(".dgn", true)]
+        [TestCase(".stl", false)]
+        [TestCase(".stl", true)]
+        [TestCase(".ifc", false)]
+        [TestCase(".ifc", true)]
+        [TestCase(".dwf", false)]
+        [TestCase(".dwf", true)]
+        [TestCase(".cf2", false)]
+        [TestCase(".cf2", true)]
+        [TestCase(".dwt", false)]
+        [TestCase(".dwt", true)]
+        public void PutDrawingBmpWithOutOptionsTest(string formatExtension, bool saveResultToStorage, params string[] additionalExportFormats)
+        {
+            string name = null;
+            string folder = CloudTestFolder;
+            string storage = DefaultStorage;
+            string outName = null;
+
+            List<string> formatsToExport = new List<string>() { OutputFormatExtension };
+
+            foreach (var inputFile in InputTestFiles)
+            {
+                if (inputFile.Name.EndsWith(formatExtension))
+                {
+                    name = inputFile.Name;
+                }
+                else
+                {
+                    continue;
+                }
+
+                foreach (string format in formatsToExport)
+                {
+                    outName = $"{name}_put_bmp_with_out_opts.{format}";
+
+                    this.TestRawPutRequest(
+                        $"Input drawing: {name}; Output format: {format}",
+                        name,
+                        outName,
+                        saveResultToStorage,
+                        null,
+                        delegate (Stream inputStream, DrawingOptionsBaseDTO options, string outPath)
+                        {
+                            var request = new PutDrawingBmpRequest(inputStream, outPath, null, storage);
                             return CadApi.PutDrawingBmp(request);
                         },
                         folder,

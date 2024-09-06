@@ -43,6 +43,9 @@
     <ProjectReference Include="..\Aspose.CAD.Cloud.Sdk\Aspose.CAD.Cloud.Sdk.csproj" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy  &quot;..\..\TestData&quot; $(OutDir)TestData\ /K /D /H /Y /s" />
+    <!-- Windows copy command -->
+    <Exec Condition=" '$(OS)' == 'Windows_NT' " Command="xcopy  &quot;..\..\TestData&quot; $(OutDir)TestData\ /K /D /H /Y /s" />
+    <!-- Linux/Mac copy command -->
+    <Exec Condition=" '$(OS)' != 'Windows_NT' " Command="cp -r ../../TestData $(OutDir)TestData/" />
   </Target>
 </Project>

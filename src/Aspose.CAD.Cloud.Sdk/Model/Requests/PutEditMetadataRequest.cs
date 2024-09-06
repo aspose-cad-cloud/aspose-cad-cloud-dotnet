@@ -27,7 +27,7 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
   using Aspose.CAD.Cloud.Sdk.Model; 
 
   /// <summary>
-  /// Request model for <see cref="Aspose.Cad.Cloud.Sdk.Api.CadApi.PutEditMetadata" /> operation.
+  /// Request model for <see cref="Aspose.CAD.Cloud.Sdk.Api.CadApi.PutEditMetadata" /> operation.
   /// </summary>  
   public class PutEditMetadataRequest  
   {
@@ -41,21 +41,21 @@ namespace Aspose.CAD.Cloud.Sdk.Model.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="PutEditMetadataRequest"/> class.
         /// </summary>
-        /// <param name="drawing"></param>
-        /// <param name="metadataComponent"></param>
-        public PutEditMetadataRequest(System.IO.Stream drawing = null, string metadataComponent = null)             
+        /// <param name="drawingData">Input drawing</param>
+        /// <param name="metadataComponent">Metadata string json from POST/EditMetadata</param>
+        public PutEditMetadataRequest(System.IO.Stream drawingData, string metadataComponent)             
         {
-            this.Drawing = drawing;
+            this.DrawingData = drawingData;
             this.MetadataComponent = metadataComponent;
         }
 
         /// <summary>
-        /// Gets or sets drawing
+        /// Input drawing
         /// </summary>  
-        public System.IO.Stream Drawing { get; set; }
+        public System.IO.Stream DrawingData { get; set; }
 
         /// <summary>
-        /// Gets or sets metadataComponent
+        /// Metadata string json from POST/EditMetadata
         /// </summary>  
         public string MetadataComponent { get; set; }
   }

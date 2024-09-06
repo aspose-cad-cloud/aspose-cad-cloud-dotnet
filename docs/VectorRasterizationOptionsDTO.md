@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **BorderY** | **double?** | Gets or sets the border Y. | 
 **PageHeight** | **double?** | Gets or sets the page height. | 
 **PageWidth** | **double?** | Gets or sets the page width. | 
-**BackgroundColor** | [**Color**](Color.md) | Gets or sets a background color. | 
-**DrawColor** | [**Color**](Color.md) | Gets or sets a foreground color. | 
+**BackgroundColor** | [**ColorDTO**](ColorDTO.md) | Gets or sets a background color. | [optional] 
+**DrawColor** | [**ColorDTO**](ColorDTO.md) | Gets or sets a foreground color. | [optional] 
 **UnitType** | **string** |  | 
 **ContentAsBitmap** | **bool?** | Gets or sets a value indicating whether content of a drawing is represented as image inside Pdf. Applicable only for CAD to Pdf export. Default is false. | 
 **GraphicsOptions** | [**GraphicsOptions**](GraphicsOptions.md) | Gets or sets options to render bitmap inside pdf (if ContentAsBitmap is set to true). | [optional] 
